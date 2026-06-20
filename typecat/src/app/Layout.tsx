@@ -118,7 +118,7 @@ export function Layout({ children }: LayoutProps) {
       </header>
 
       <div className="flex flex-1 min-h-0">
-        <Sidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
+        <Sidebar collapsed={sidebarCollapsed} />
 
         <main
           className={`flex-1 overflow-y-auto transition-all duration-300 ${

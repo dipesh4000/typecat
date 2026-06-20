@@ -88,13 +88,15 @@ export function CatKeyboard() {
   const [showMessage, setShowMessage] = useState(false)
   const [handSprite, setHandSprite] = useState<string | null>(null)
   const [spritePosition, setSpritePosition] = useState<SpritePosition | null>(null)
+  const [isTypingBounce, setIsTypingBounce] = useState(false)
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const bounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const character = getCharacter(characterId)
-  const isTyping = animationState === 'typing' || animationState === 'focused'
-  const isError = animationState === 'error'
   const isIdle = animationState === 'idle'
+  const isError = animationState === 'error'
   const isCelebrating = animationState === 'celebrating'
+  const isSleeping = animationState === 'sleeping'
 
   useEffect(() => {
     const msgs = stateMessages[animationState] || stateMessages.idle
@@ -103,6 +105,18 @@ export function CatKeyboard() {
     const timer = setTimeout(() => setShowMessage(false), 2500)
     return () => clearTimeout(timer)
   }, [animationState])
+
+  // Trigger bounce on each keystroke (not continuous)
+  useEffect(() => {
+    if (activeKey && animationState !== 'error' && animationState !== 'celebrating') {
+      setIsTypingBounce(true)
+      if (bounceTimerRef.current) clearTimeout(bounceTimerRef.current)
+      bounceTimerRef.current = setTimeout(() => setIsTypingBounce(false), 200)
+    }
+    return () => {
+      if (bounceTimerRef.current) clearTimeout(bounceTimerRef.current)
+    }
+  }, [activeKey, animationState])
 
   // Show hand sprite immediately on keydown at the key's position
   useEffect(() => {
@@ -152,11 +166,11 @@ export function CatKeyboard() {
       <div
         className="relative mb-0"
         style={{
-          animation: isIdle ? 'catFloat 3s ease-in-out infinite' :
-                     isTyping ? 'catType 0.15s ease-in-out infinite' :
+          animation: isIdle ? 'catFloat 4s ease-in-out infinite' :
+                     isTypingBounce ? 'catBounce 0.2s ease-out' :
                      isError ? 'catShake 0.4s ease-in-out, errorFlash 0.4s ease-in-out' :
-                     isCelebrating ? 'catCelebrate 0.5s ease-in-out' :
-                     animationState === 'sleeping' ? 'catSleep 4s ease-in-out infinite' : 'none'
+                     isCelebrating ? 'catCelebrate 0.6s ease-out' :
+                     isSleeping ? 'catSleep 4s ease-in-out infinite' : 'none'
         }}
       >
         <img
@@ -231,13 +245,12 @@ export function CatKeyboard() {
       <style>{`
         @keyframes catFloat {
           0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-6px) scale(1.02); }
+          50% { transform: translateY(-4px) scale(1.01); }
         }
-        @keyframes catType {
-          0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
-          25% { transform: translateY(-3px) rotate(0.5deg) scale(1.02); }
-          50% { transform: translateY(-5px) rotate(-0.5deg) scale(1.01); }
-          75% { transform: translateY(-2px) rotate(1deg) scale(1.02); }
+        @keyframes catBounce {
+          0% { transform: translateY(0) scale(1); }
+          40% { transform: translateY(-8px) scale(1.05); }
+          100% { transform: translateY(0) scale(1); }
         }
         @keyframes catShake {
           0%, 100% { transform: translateX(0) rotate(0); }
@@ -263,14 +276,6 @@ export function CatKeyboard() {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(-8px) scale(0.9); }
           to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
         }
         @keyframes errorFlash {
           0% { filter: brightness(1); }

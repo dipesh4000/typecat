@@ -10,7 +10,6 @@ const DAILY_GOAL = 5
 
 interface SidebarProps {
   collapsed: boolean
-  onToggle: () => void
 }
 
 function ProgressRing({ progress }: { progress: number }) {
@@ -97,7 +96,7 @@ function getSidebarKeySpritePath(characterId: string, key: string, hasRightKeys:
   return `/characters/${characterId}/${side}/${spriteName}.png`
 }
 
-export function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export function Sidebar({ collapsed }: SidebarProps) {
   const bestWPM = useStatsStore((s) => s.bestWPM)
   const getAverageAccuracy = useStatsStore((s) => s.getAverageAccuracy)
   const sessionHistory = useStatsStore((s) => s.sessionHistory)
@@ -191,14 +190,6 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
-      <button
-        onClick={onToggle}
-        className="absolute -right-3 top-4 w-6 h-6 bg-surface border border-outline-variant rounded-full flex items-center justify-center shadow-sm hover:bg-surface-container-high transition-colors z-50"
-      >
-        <span className="material-symbols-outlined text-xs" style={{ transform: collapsed ? 'rotate(180deg)' : 'none' }}>
-          chevron_left
-        </span>
-      </button>
 
       {collapsed ? (
         <div className="flex flex-col items-center gap-3 pt-4">
@@ -300,9 +291,9 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 alt={character.name}
                 className="w-24 h-auto select-none pointer-events-none"
                 style={{
-                  animation: status === 'active' ? 'catType 0.15s ease-in-out infinite' :
+                  animation: status === 'active' ? 'catFloat 4s ease-in-out infinite' :
                              status === 'paused' ? 'none' :
-                             status === 'complete' ? 'catCelebrate 0.5s ease-in-out' :
+                             status === 'complete' ? 'catCelebrate 0.6s ease-out' :
                              'catFloat 4s ease-in-out infinite'
                 }}
                 draggable={false}
@@ -352,13 +343,12 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
       <style>{`
         @keyframes catFloat {
           0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-6px) scale(1.02); }
+          50% { transform: translateY(-4px) scale(1.01); }
         }
-        @keyframes catType {
-          0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
-          25% { transform: translateY(-3px) rotate(0.5deg) scale(1.02); }
-          50% { transform: translateY(-5px) rotate(-0.5deg) scale(1.01); }
-          75% { transform: translateY(-2px) rotate(1deg) scale(1.02); }
+        @keyframes catBounce {
+          0% { transform: translateY(0) scale(1); }
+          40% { transform: translateY(-8px) scale(1.05); }
+          100% { transform: translateY(0) scale(1); }
         }
         @keyframes catCelebrate {
           0%, 100% { transform: translateY(0) rotate(0) scale(1); }
