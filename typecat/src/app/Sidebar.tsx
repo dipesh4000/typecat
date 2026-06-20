@@ -155,7 +155,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 <img
                   src={pawSprite}
                   alt=""
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-auto pointer-events-none drop-shadow-lg"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-auto pointer-events-none drop-shadow-lg hand-sprite-enter"
                   draggable={false}
                 />
               )}
@@ -183,6 +183,16 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
           </div>
         </>
       )}
+
+      <style>{`
+        @keyframes handSpriteIn {
+          from { opacity: 0; transform: translate(-50%, 10px) scale(0.8); }
+          to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+        }
+        .hand-sprite-enter {
+          animation: handSpriteIn 0.1s ease-out;
+        }
+      `}</style>
     </aside>
   )
 }

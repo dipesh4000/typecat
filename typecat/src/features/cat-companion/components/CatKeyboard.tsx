@@ -118,7 +118,7 @@ export function CatKeyboard() {
           <img
             src={handSprite}
             alt=""
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-auto pointer-events-none drop-shadow-lg transition-opacity duration-75"
+            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-auto pointer-events-none drop-shadow-lg hand-sprite-enter"
             draggable={false}
           />
         )}
@@ -191,6 +191,13 @@ export function CatKeyboard() {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(-5px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes handSpriteIn {
+          from { opacity: 0; transform: translate(-50%, 10px) scale(0.8); }
+          to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+        }
+        .hand-sprite-enter {
+          animation: handSpriteIn 0.1s ease-out;
         }
       `}</style>
     </div>
