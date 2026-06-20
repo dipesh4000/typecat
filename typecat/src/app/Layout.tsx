@@ -73,39 +73,41 @@ export function Layout({ children }: LayoutProps) {
     <div className="h-screen bg-surface text-on-surface flex flex-col overflow-hidden transition-colors duration-200">
       {/* Top Nav */}
       <header className="w-full bg-surface border-b border-outline-variant z-50 flex-shrink-0 transition-colors duration-200">
-        <nav className="flex justify-between items-center px-container-padding h-14">
-          <div className="flex items-center gap-3">
+        <nav className="flex justify-between items-center h-14">
+          {/* Left: Logo + Menu */}
+          <div className="flex items-center gap-4 pl-4">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 lg:block hidden"
             >
               {sidebarCollapsed ? 'menu_open' : 'menu'}
             </button>
-            <Link to="/" className="font-bold text-lg text-primary">TypeCat</Link>
+            <Link to="/" className="font-bold text-xl text-primary tracking-tight">TypeCat</Link>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-body-md">
+
+          {/* Center: Nav Links */}
+          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`transition-colors cursor-pointer active:scale-95 ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   location.pathname === link.href
-                    ? 'text-primary border-b-2 border-primary pb-1'
-                    : 'text-on-secondary-container hover:text-primary'
+                    ? 'text-primary bg-primary/10'
+                    : 'text-on-surface-variant hover:text-primary hover:bg-surface-container'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
-          <div className="flex items-center gap-4">
-            <button className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95">
-              notifications
-            </button>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-2 pr-4">
             <button
               onClick={() => navigate('/settings')}
               aria-label="Settings"
-              className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center cursor-pointer active:scale-95 hover:ring-2 hover:ring-primary transition-all"
+              className="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center cursor-pointer active:scale-95 hover:ring-2 hover:ring-primary transition-all"
             >
               <span className="material-symbols-outlined text-on-secondary-container text-[20px]">
                 person

@@ -215,66 +215,26 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
             </div>
             <span>Today</span>
           </div>
-          <div className="flex flex-col items-center gap-1">
-            <button
-              onClick={cycleTheme}
-              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors"
-              title={themeLabel}
-            >
-              <span className="material-symbols-outlined text-sm text-on-surface-variant">{themeIcon}</span>
-            </button>
-            <button
-              onClick={toggleSound}
-              className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors"
-              title={soundEnabled ? 'Mute' : 'Unmute'}
-            >
-              <span className="material-symbols-outlined text-sm text-on-surface-variant">
-                {soundEnabled ? 'volume_up' : 'volume_off'}
-              </span>
-            </button>
+          {/* Collapsed character at bottom */}
+          <div className="mt-auto pb-4">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-outline-variant">
+              <img src={character.cover} alt={character.name} className="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
       ) : (
         <>
-          {/* Mini Character with Paw Sprites */}
-          <div className="p-3 border-b border-outline-variant">
-            <div className="relative mx-auto w-20 h-24 flex items-center justify-center">
-              <img
-                src={character.cover}
-                alt={character.name}
-                className="w-20 h-auto select-none pointer-events-none"
-                draggable={false}
-              />
-              {handSprite && (
-                <img
-                  src={handSprite}
-                  alt=""
-                  className="absolute w-12 h-auto pointer-events-none drop-shadow-md"
-                  style={{
-                    left: `${spritePosition?.x ?? 50}%`,
-                    top: `${spritePosition?.y ?? 50}%`,
-                    transform: 'translate(-50%, -50%)',
-                    transition: 'left 0.05s ease-out, top 0.05s ease-out',
-                  }}
-                  draggable={false}
-                />
-              )}
-            </div>
-          </div>
-
           {/* Daily Progress */}
           <div className="p-4 pb-3 border-b border-outline-variant">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Today</span>
               <span className="text-xs text-on-surface-variant">{todaySessions}/{DAILY_GOAL}</span>
             </div>
-            <div className="relative">
-              <div className="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary rounded-full transition-all duration-500"
-                  style={{ width: `${todayProgress * 100}%` }}
-                />
-              </div>
+            <div className="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-500"
+                style={{ width: `${todayProgress * 100}%` }}
+              />
             </div>
           </div>
 
@@ -307,7 +267,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
           {/* Session Summary (shown briefly after completion) */}
           {showSessionSummary && lastResult && (
-            <div className="px-4 py-3 border-b border-outline-variant animate-in slide-in-from-top-2 duration-300">
+            <div className="px-4 py-3 border-b border-outline-variant bg-success-container/20">
               <div className="flex items-center gap-2 mb-2">
                 <span className="material-symbols-outlined text-sm text-success">check_circle</span>
                 <span className="text-xs font-semibold text-on-surface uppercase tracking-wider">Session Complete</span>
@@ -332,8 +292,39 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
           {/* Spacer */}
           <div className="flex-1" />
 
+          {/* Character at Bottom with Hand Sprites */}
+          <div className="p-3 border-t border-outline-variant">
+            <div className="relative mx-auto w-24 h-28 flex items-center justify-center">
+              <img
+                src={character.cover}
+                alt={character.name}
+                className="w-24 h-auto select-none pointer-events-none"
+                style={{
+                  animation: status === 'active' ? 'catType 0.3s ease-in-out infinite' :
+                             status === 'paused' ? 'none' : 'catFloat 4s ease-in-out infinite'
+                }}
+                draggable={false}
+              />
+              {handSprite && (
+                <img
+                  src={handSprite}
+                  alt=""
+                  className="absolute w-14 h-auto pointer-events-none drop-shadow-lg"
+                  style={{
+                    left: `${spritePosition?.x ?? 50}%`,
+                    top: `${spritePosition?.y ?? 50}%`,
+                    transform: 'translate(-50%, -50%)',
+                    transition: 'left 0.08s ease-out, top 0.08s ease-out',
+                  }}
+                  draggable={false}
+                />
+              )}
+            </div>
+            <p className="text-center text-[10px] font-medium text-on-surface-variant mt-1">{character.name}</p>
+          </div>
+
           {/* Quick Actions */}
-          <div className="p-4 border-t border-outline-variant">
+          <div className="p-3 border-t border-outline-variant">
             <div className="flex gap-2">
               <button
                 onClick={cycleTheme}

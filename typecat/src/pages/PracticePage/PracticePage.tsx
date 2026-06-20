@@ -183,6 +183,38 @@ export default function PracticePage() {
   const progress = passage ? (input.length / passage.text.length) * 100 : 0
   const isActive = status === 'active' || status === 'paused'
 
+  // Live WPM and accuracy calculation with continuous update
+  const [liveStats, setLiveStats] = useState({ wpm: 0, accuracy: 100, correctChars: 0, totalChars: 0 })
+
+  useEffect(() => {
+    if (!isActive || !passage) return
+
+    const updateStats = () => {
+      const keystrokes = useTypingStore.getState().keystrokes
+      const startedAt = useTypingStore.getState().startedAt
+      const totalPausedTime = useTypingStore.getState().totalPausedTime
+      const currentStatus = useTypingStore.getState().status
+
+      if (keystrokes.length === 0 || !startedAt || currentStatus !== 'active') {
+        setLiveStats({ wpm: 0, accuracy: 100, correctChars: 0, totalChars: 0 })
+        return
+      }
+
+      const elapsed = Date.now() - startedAt - totalPausedTime
+      const elapsedMinutes = elapsed / 60000
+      const correctChars = keystrokes.filter(k => k.correct).length
+      const totalChars = keystrokes.length
+      const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100
+      const wpm = elapsedMinutes > 0.05 ? Math.round((correctChars / 5) / elapsedMinutes) : 0
+
+      setLiveStats({ wpm, accuracy, correctChars, totalChars })
+    }
+
+    updateStats()
+    const interval = setInterval(updateStats, 500)
+    return () => clearInterval(interval)
+  }, [isActive, passage, input])
+
   const allPassages = passageProvider.getPassages(
     category === 'all' ? undefined : category,
     { difficulty }
@@ -234,13 +266,28 @@ export default function PracticePage() {
           <h3 className="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
             {status === 'idle' ? 'PRACTICE' : status === 'paused' ? 'PAUSED' : category.toUpperCase()}
           </h3>
-          <span className="text-[10px] font-semibold text-primary">
-            {Math.round(progress)}%
-          </span>
+          {isActive && (
+            <div className="flex items-center gap-4">
+              <span className="text-[10px] font-bold text-primary">
+                {liveStats.wpm} WPM
+              </span>
+              <span className="text-[10px] font-bold text-success">
+                {liveStats.accuracy}%
+              </span>
+              <span className="text-[10px] font-semibold text-on-surface-variant">
+                {Math.round(progress)}%
+              </span>
+            </div>
+          )}
+          {!isActive && (
+            <span className="text-[10px] font-semibold text-primary">
+              {Math.round(progress)}%
+            </span>
+          )}
         </div>
         <div className="h-1.5 bg-surface-container-highest w-full rounded-full overflow-hidden">
           <div
-            className="h-full bg-primary transition-all duration-500"
+            className="h-full bg-primary transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
