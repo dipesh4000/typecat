@@ -1,30 +1,6 @@
 export interface CharacterTheme {
-  light: {
-    primary: string
-    'on-primary': string
-    'primary-container': string
-    'on-primary-container': string
-    secondary: string
-    'secondary-container': string
-    'on-secondary-container': string
-    tertiary: string
-    'tertiary-container': string
-    surface: string
-    'surface-container-lowest': string
-  }
-  dark: {
-    primary: string
-    'on-primary': string
-    'primary-container': string
-    'on-primary-container': string
-    secondary: string
-    'secondary-container': string
-    'on-secondary-container': string
-    tertiary: string
-    'tertiary-container': string
-    surface: string
-    'surface-container-lowest': string
-  }
+  light: Record<string, string>
+  dark: Record<string, string>
 }
 
 export interface Character {
@@ -47,16 +23,28 @@ export const characters: Character[] = [
     keyCount: { left: 3, right: 4 },
     theme: {
       light: {
-        primary: '#000000', 'on-primary': '#ffffff', 'primary-container': '#1b1b1b',
-        'on-primary-container': '#848484', secondary: '#505f76', 'secondary-container': '#d0e1fb',
-        'on-secondary-container': '#54647a', tertiary: '#000000', 'tertiary-container': '#1b1b1b',
-        surface: '#f9f9f9', 'surface-container-lowest': '#ffffff',
+        primary: '#1a1a1a', 'on-primary': '#ffffff', 'primary-container': '#e8e8e8',
+        'on-primary-container': '#1a1a1a', secondary: '#505f76', 'secondary-container': '#d0e1fb',
+        'on-secondary-container': '#3a4a60', tertiary: '#6a7a6a', 'tertiary-container': '#d0e0d0',
+        'on-tertiary-container': '#2a3a2a', surface: '#f5f5f5', 'surface-dim': '#e0e0e0',
+        'surface-bright': '#ffffff', 'surface-container-lowest': '#ffffff',
+        'surface-container-low': '#f0f0f0', 'surface-container': '#e8e8e8',
+        'surface-container-high': '#e0e0e0', 'surface-container-highest': '#d8d8d8',
+        'on-surface': '#1a1a1a', 'on-surface-variant': '#5a5a5a',
+        outline: '#8a8a8a', 'outline-variant': '#c8c8c8',
+        error: '#ba1a1a', 'on-error': '#ffffff', 'error-container': '#ffdad6',
       },
       dark: {
-        primary: '#ffffff', 'on-primary': '#000000', 'primary-container': '#e8e8e8',
-        'on-primary-container': '#1b1b1b', secondary: '#a0b4cc', 'secondary-container': '#2a3a4a',
-        'on-secondary-container': '#a0b4cc', tertiary: '#ffffff', 'tertiary-container': '#e8e8e8',
-        surface: '#121212', 'surface-container-lowest': '#0a0a0a',
+        primary: '#e0e0e0', 'on-primary': '#1a1a1a', 'primary-container': '#3a3a3a',
+        'on-primary-container': '#e0e0e0', secondary: '#a0b4cc', 'secondary-container': '#2a3a4a',
+        'on-secondary-container': '#c0d8f0', tertiary: '#90b090', 'tertiary-container': '#1a2a1a',
+        'on-tertiary-container': '#b0d0b0', surface: '#141414', 'surface-dim': '#0a0a0a',
+        'surface-bright': '#1e1e1e', 'surface-container-lowest': '#0a0a0a',
+        'surface-container-low': '#1a1a1a', 'surface-container': '#222222',
+        'surface-container-high': '#2a2a2a', 'surface-container-highest': '#333333',
+        'on-surface': '#e0e0e0', 'on-surface-variant': '#a0a0a0',
+        outline: '#6a6a6a', 'outline-variant': '#3a3a3a',
+        error: '#ff6b6b', 'on-error': '#1a1a1a', 'error-container': '#3a1a1a',
       },
     },
   },
@@ -69,16 +57,28 @@ export const characters: Character[] = [
     keyCount: { left: 40, right: 0 },
     theme: {
       light: {
-        primary: '#2d2d2d', 'on-primary': '#ffffff', 'primary-container': '#1a1a1a',
-        'on-primary-container': '#a0a0a0', secondary: '#4a6fa5', 'secondary-container': '#c8daf0',
-        'on-secondary-container': '#3a5a8a', tertiary: '#1a1a1a', 'tertiary-container': '#2d2d2d',
-        surface: '#f5f5f5', 'surface-container-lowest': '#ffffff',
+        primary: '#2d2d2d', 'on-primary': '#ffffff', 'primary-container': '#e0e0e0',
+        'on-primary-container': '#1a1a1a', secondary: '#4a6fa5', 'secondary-container': '#d0e0f8',
+        'on-secondary-container': '#2a4a7a', tertiary: '#5a7a8a', 'tertiary-container': '#d0e0e8',
+        'on-tertiary-container': '#1a3a4a', surface: '#f0f2f5', 'surface-dim': '#dcdfe5',
+        'surface-bright': '#ffffff', 'surface-container-lowest': '#ffffff',
+        'surface-container-low': '#eef0f3', 'surface-container': '#e6e8ec',
+        'surface-container-high': '#dde0e5', 'surface-container-highest': '#d4d7dc',
+        'on-surface': '#1a1c20', 'on-surface-variant': '#4a4c50',
+        outline: '#7a7c80', 'outline-variant': '#c4c6ca',
+        error: '#ba1a1a', 'on-error': '#ffffff', 'error-container': '#ffdad6',
       },
       dark: {
-        primary: '#b0c4de', 'on-primary': '#0a0a0a', 'primary-container': '#2a3a4a',
+        primary: '#c0d0e0', 'on-primary': '#0a1a2a', 'primary-container': '#2a3a4a',
         'on-primary-container': '#d0e0f0', secondary: '#7aa0cc', 'secondary-container': '#1a2a3a',
-        'on-secondary-container': '#90b8e0', tertiary: '#b0c4de', 'tertiary-container': '#1a2a3a',
-        surface: '#0a0a0a', 'surface-container-lowest': '#050505',
+        'on-secondary-container': '#90b8e0', tertiary: '#80a0b0', 'tertiary-container': '#1a2a30',
+        'on-tertiary-container': '#a0c0d0', surface: '#0c0e12', 'surface-dim': '#060808',
+        'surface-bright': '#161820', 'surface-container-lowest': '#060808',
+        'surface-container-low': '#121418', 'surface-container': '#1a1c22',
+        'surface-container-high': '#222428', 'surface-container-highest': '#2a2c30',
+        'on-surface': '#d0d2d6', 'on-surface-variant': '#a0a2a6',
+        outline: '#6a6c70', 'outline-variant': '#3a3c40',
+        error: '#ff6b6b', 'on-error': '#1a1a1a', 'error-container': '#3a1a1a',
       },
     },
   },

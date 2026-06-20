@@ -18,13 +18,21 @@
   {
     "id": "anime-003",
     "category": "anime",
-    "difficulty": "medium",
+    "difficulty": "easy",
+    "text": "I am going to be the very best, like no one ever was. To catch them is my real test, to train them is my cause.",
+    "source": "Pokemon",
+    "tags": ["adventure", "shonen"]
+  },
+  {
+    "id": "anime-004",
+    "category": "anime",
+    "difficulty": "easy",
     "text": "The world isn't perfect. But it's there for us, doing the best it can, and that's what makes it so damn beautiful.",
     "source": "Hunter x Hunter",
     "tags": ["adventure", "philosophy"]
   },
   {
-    "id": "anime-004",
+    "id": "anime-005",
     "category": "anime",
     "difficulty": "medium",
     "text": "Whatever you lose, you'll find it again. But whatever you give away, you'll keep forever.",
@@ -32,7 +40,31 @@
     "tags": ["friendship", "adventure"]
   },
   {
-    "id": "anime-005",
+    "id": "anime-006",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I will become the Hokage! That is my dream! I never go back on my word because that is my ninja way!",
+    "source": "Naruto",
+    "tags": ["shonen", "determination"]
+  },
+  {
+    "id": "anime-007",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "To know what you prefer instead of humbly saying Amen to what the world tells you you ought to prefer, is to have kept your soul alive.",
+    "source": "Mushishi",
+    "tags": ["philosophy", "life"]
+  },
+  {
+    "id": "anime-008",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The moment you give up is the moment you let someone else win. But the moment you keep trying is the moment you win.",
+    "source": "Haikyuu",
+    "tags": ["sports", "determination"]
+  },
+  {
+    "id": "anime-009",
     "category": "anime",
     "difficulty": "hard",
     "text": "The pain of being alone is completely out of this world, isn't it? I don't know why, but I understand your feelings so much.",
@@ -40,11 +72,51 @@
     "tags": ["emotion", "loneliness"]
   },
   {
-    "id": "anime-006",
+    "id": "anime-010",
     "category": "anime",
     "difficulty": "hard",
     "text": "I hate so many things about the way that you treat me. You never take anything seriously. You treat everything like a game.",
     "source": "Fullmetal Alchemist",
     "tags": ["drama", "philosophy"]
+  },
+  {
+    "id": "anime-011",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "If you only face forward, you cannot see what is behind you. But if you look back, you cannot move forward. So keep moving ahead.",
+    "source": "Attack on Titan",
+    "tags": ["action", "philosophy"]
+  },
+  {
+    "id": "anime-012",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing I hate the most is not being able to protect the people I care about. That is why I will become stronger.",
+    "source": "My Hero Academia",
+    "tags": ["shonen", "heroism"]
+  },
+  {
+    "id": "anime-013",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I'm not a hero because I want people to praise me. I'm a hero because I want to save people who are crying.",
+    "source": "My Hero Academia",
+    "tags": ["heroism", "inspiration"]
+  },
+  {
+    "id": "anime-014",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The scariest thing about death is that it comes without warning. One day you are alive, and the next you are gone forever.",
+    "source": "One Piece",
+    "tags": ["adventure", "philosophy"]
+  },
+  {
+    "id": "anime-015",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "Even if I am not strong enough, I will still fight. Because that is what it means to be a swordsman.",
+    "source": "Demon Slayer",
+    "tags": ["action", "determination"]
   }
 ]

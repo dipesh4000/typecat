@@ -19,17 +19,49 @@
     "id": "prog-js-003",
     "category": "programming",
     "subcategory": "javascript",
-    "difficulty": "medium",
-    "text": "const debounce = (fn, delay) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n};",
-    "tags": ["closures", "functions"]
+    "difficulty": "easy",
+    "text": "const add = (a, b) => a + b;\nconst multiply = (a, b) => a * b;\n\nconsole.log(add(2, 3));\nconsole.log(multiply(4, 5));",
+    "tags": ["functions", "arrow-functions"]
   },
   {
     "id": "prog-js-004",
     "category": "programming",
     "subcategory": "javascript",
+    "difficulty": "easy",
+    "text": "const fruits = ['apple', 'banana', 'cherry'];\nfruits.push('date');\nconsole.log(fruits.length);",
+    "tags": ["arrays", "methods"]
+  },
+  {
+    "id": "prog-js-005",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "medium",
+    "text": "const debounce = (fn, delay) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n};",
+    "tags": ["closures", "functions"]
+  },
+  {
+    "id": "prog-js-006",
+    "category": "programming",
+    "subcategory": "javascript",
     "difficulty": "medium",
     "text": "const fetchData = async (url) => {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error('Network error');\n    return await response.json();\n  } catch (error) {\n    console.error('Fetch failed:', error);\n    throw error;\n  }\n};",
     "tags": ["async", "error-handling"]
+  },
+  {
+    "id": "prog-js-007",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "medium",
+    "text": "const groupBy = (arr, key) => {\n  return arr.reduce((result, item) => {\n    const group = item[key];\n    if (!result[group]) result[group] = [];\n    result[group].push(item);\n    return result;\n  }, {});\n};",
+    "tags": ["arrays", "reduce"]
+  },
+  {
+    "id": "prog-js-008",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "hard",
+    "text": "const deepClone = (obj) => {\n  if (obj === null || typeof obj !== 'object') return obj;\n  if (Array.isArray(obj)) return obj.map(item => deepClone(item));\n  return Object.fromEntries(\n    Object.entries(obj).map(([key, val]) => [key, deepClone(val)])\n  );\n};",
+    "tags": ["recursion", "objects"]
   },
   {
     "id": "prog-py-001",
@@ -43,9 +75,25 @@
     "id": "prog-py-002",
     "category": "programming",
     "subcategory": "python",
+    "difficulty": "easy",
+    "text": "numbers = [1, 2, 3, 4, 5]\nsquared = [n ** 2 for n in numbers]\nprint(squared)",
+    "tags": ["list-comprehension", "basics"]
+  },
+  {
+    "id": "prog-py-003",
+    "category": "programming",
+    "subcategory": "python",
     "difficulty": "medium",
     "text": "def fibonacci(n):\n    if n <= 1:\n        return n\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
     "tags": ["algorithms", "loops"]
+  },
+  {
+    "id": "prog-py-004",
+    "category": "programming",
+    "subcategory": "python",
+    "difficulty": "medium",
+    "text": "class Animal:\n    def __init__(self, name):\n        self.name = name\n    def speak(self):\n        raise NotImplementedError\n\nclass Dog(Animal):\n    def speak(self):\n        return f\"{self.name} says Woof!\"",
+    "tags": ["classes", "inheritance"]
   },
   {
     "id": "prog-sql-001",
@@ -57,6 +105,14 @@
   },
   {
     "id": "prog-sql-002",
+    "category": "programming",
+    "subcategory": "sql",
+    "difficulty": "easy",
+    "text": "INSERT INTO users (name, email, created_at)\nVALUES ('Alice', 'alice@example.com', NOW());",
+    "tags": ["insert", "basics"]
+  },
+  {
+    "id": "prog-sql-003",
     "category": "programming",
     "subcategory": "sql",
     "difficulty": "medium",
@@ -73,6 +129,14 @@
   },
   {
     "id": "prog-react-002",
+    "category": "programming",
+    "subcategory": "react",
+    "difficulty": "medium",
+    "text": "const TodoList = ({ items }) => {\n  return (\n    <ul>\n      {items.map(item => (\n        <li key={item.id}>{item.text}</li>\n      ))}\n    </ul>\n  );\n};",
+    "tags": ["components", "lists"]
+  },
+  {
+    "id": "prog-react-003",
     "category": "programming",
     "subcategory": "react",
     "difficulty": "hard",

@@ -6,6 +6,7 @@ import { useCatStore } from '../../stores/catStore'
 import { onSessionComplete } from '../../stores'
 import { passageProvider } from '../../services/content'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { useSound } from '../../shared/hooks/useSound'
 import type { Passage } from '../../shared/types'
 
 const categories = [
@@ -42,6 +43,8 @@ export default function PracticePage() {
   const difficulty = useSettingsStore((s) => s.difficulty)
   const setCategory = useSettingsStore((s) => s.setCategory)
   const setDifficulty = useSettingsStore((s) => s.setDifficulty)
+
+  const { playKeySound, playErrorSound, playCompleteSound } = useSound()
 
   const [previewPassage, setPreviewPassage] = useState<Passage | null>(null)
   const [browseOpen, setBrowseOpen] = useState(false)
@@ -104,12 +107,14 @@ export default function PracticePage() {
 
       if (e.key === expected) {
         setAnimationState('typing')
+        playKeySound()
       } else {
         setAnimationState('error')
+        playErrorSound()
         setTimeout(() => setAnimationState('typing'), 500)
       }
     },
-    [status, passage, input, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey, pauseSession, resumeSession]
+    [status, passage, input, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey, pauseSession, resumeSession, playKeySound, playErrorSound]
   )
 
   useEffect(() => {
@@ -122,8 +127,9 @@ export default function PracticePage() {
       const result = endSession()
       const xp = onSessionComplete(result)
       setSessionXP(xp.xpEarned)
+      playCompleteSound()
     }
-  }, [passage, status, input, endSession])
+  }, [passage, status, input, endSession, playCompleteSound])
 
   const handleStart = (passageToUse?: Passage) => {
     const p = passageToUse || previewPassage

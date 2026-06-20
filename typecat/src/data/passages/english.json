@@ -16,29 +16,92 @@
   {
     "id": "eng-003",
     "category": "english",
+    "difficulty": "easy",
+    "text": "Learning to type is like learning to play a musical instrument. It takes time and dedication, but the reward is worth it.",
+    "tags": ["motivation", "typing"]
+  },
+  {
+    "id": "eng-004",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The early bird catches the worm, but the second mouse gets the cheese. Always think before you act.",
+    "tags": ["wisdom", "proverb"]
+  },
+  {
+    "id": "eng-005",
+    "category": "english",
     "difficulty": "medium",
     "text": "Success is not final, failure is not fatal: it is the courage to continue that counts. Every expert was once a beginner.",
     "tags": ["motivation", "quote"]
   },
   {
-    "id": "eng-004",
+    "id": "eng-006",
     "category": "english",
     "difficulty": "medium",
     "text": "The only way to do great work is to love what you do. If you have not found it yet, keep looking.",
     "tags": ["motivation", "quote"]
   },
   {
-    "id": "eng-005",
+    "id": "eng-007",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "In the middle of difficulty lies opportunity. The greatest glory in living lies not in never falling, but in rising every time we fall.",
+    "tags": ["motivation", "resilience"]
+  },
+  {
+    "id": "eng-008",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Your time is limited, so do not waste it living someone else's life. Have the courage to follow your heart and intuition.",
+    "tags": ["inspiration", "life"]
+  },
+  {
+    "id": "eng-009",
     "category": "english",
     "difficulty": "hard",
     "text": "In the beginning, there was nothing, which exploded. The universe is not only queerer than we suppose, but queerer than we can suppose.",
     "tags": ["science", "quote"]
   },
   {
-    "id": "eng-006",
+    "id": "eng-010",
     "category": "english",
     "difficulty": "hard",
     "text": "The computer was born to solve problems that did not exist before. Technology is a useful servant but a dangerous master.",
     "tags": ["technology", "quote"]
+  },
+  {
+    "id": "eng-011",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "We are what we repeatedly do. Excellence, then, is not an act, but a habit. The product of repeated effort and practice.",
+    "tags": ["philosophy", "habit"]
+  },
+  {
+    "id": "eng-012",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "It is during our darkest moments that we must focus to see the light. The impediment to action advances action.",
+    "tags": ["philosophy", "stoicism"]
+  },
+  {
+    "id": "eng-013",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Type fast, type accurate. Speed comes with practice. Accuracy comes with focus. Together they make you unstoppable.",
+    "tags": ["typing", "motivation"]
+  },
+  {
+    "id": "eng-014",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The best time to plant a tree was twenty years ago. The second best time is now. Start your typing journey today.",
+    "tags": ["wisdom", "proverb"]
+  },
+  {
+    "id": "eng-015",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Every keyboard has a story. Every keystroke is a step forward. Keep typing, keep growing, keep learning.",
+    "tags": ["typing", "growth"]
   }
 ]
