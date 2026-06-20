@@ -116,7 +116,7 @@ export default function PracticePage() {
     if (!p) return
     reset()
     startSession(p)
-    setAnimationState('idle')
+    setAnimationState('typing')
   }
 
   const handleCategoryChange = (newCategory: typeof category) => {
@@ -133,6 +133,14 @@ export default function PracticePage() {
 
   const handleNewPassage = () => {
     loadPassage()
+  }
+
+  const handleNext = () => {
+    loadPassage()
+    if (status === 'active') {
+      reset()
+      setAnimationState('idle')
+    }
   }
 
   const displayPassage = passage || previewPassage
@@ -256,24 +264,26 @@ export default function PracticePage() {
           <SimpleKeyboard />
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex-shrink-0 mt-2 flex justify-between items-center text-on-surface-variant text-[10px]">
-          <span>ESC pause • Backspace correct</span>
-          <div className="flex gap-2">
-            <button
-              onClick={() => handleStart()}
-              className="px-2 py-1 border border-outline-variant rounded hover:bg-surface-container transition-all active:scale-95"
-            >
-              Restart
-            </button>
-            <button
-              onClick={handleNewPassage}
-              className="px-2 py-1 bg-primary text-on-primary rounded hover:opacity-90 transition-all active:scale-95"
-            >
-              Next
-            </button>
+        {/* Bottom Bar — only show during active/complete sessions */}
+        {status !== 'idle' && (
+          <div className="flex-shrink-0 mt-2 flex justify-between items-center text-on-surface-variant text-[10px]">
+            <span>ESC pause • Backspace correct</span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleStart()}
+                className="px-2 py-1 border border-outline-variant rounded hover:bg-surface-container transition-all active:scale-95"
+              >
+                Restart
+              </button>
+              <button
+                onClick={handleNext}
+                className="px-2 py-1 bg-primary text-on-primary rounded hover:opacity-90 transition-all active:scale-95"
+              >
+                Next
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
