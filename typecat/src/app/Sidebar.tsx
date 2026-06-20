@@ -300,8 +300,10 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                 alt={character.name}
                 className="w-24 h-auto select-none pointer-events-none"
                 style={{
-                  animation: status === 'active' ? 'catType 0.3s ease-in-out infinite' :
-                             status === 'paused' ? 'none' : 'catFloat 4s ease-in-out infinite'
+                  animation: status === 'active' ? 'catType 0.15s ease-in-out infinite' :
+                             status === 'paused' ? 'none' :
+                             status === 'complete' ? 'catCelebrate 0.5s ease-in-out' :
+                             'catFloat 4s ease-in-out infinite'
                 }}
                 draggable={false}
               />
@@ -346,6 +348,34 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
           </div>
         </>
       )}
+
+      <style>{`
+        @keyframes catFloat {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-6px) scale(1.02); }
+        }
+        @keyframes catType {
+          0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+          25% { transform: translateY(-3px) rotate(0.5deg) scale(1.02); }
+          50% { transform: translateY(-5px) rotate(-0.5deg) scale(1.01); }
+          75% { transform: translateY(-2px) rotate(1deg) scale(1.02); }
+        }
+        @keyframes catCelebrate {
+          0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+          15% { transform: translateY(-15px) rotate(-8deg) scale(1.1); }
+          30% { transform: translateY(-20px) rotate(0deg) scale(1.15); }
+          45% { transform: translateY(-15px) rotate(8deg) scale(1.1); }
+          60% { transform: translateY(-10px) rotate(-5deg) scale(1.05); }
+          75% { transform: translateY(-5px) rotate(5deg) scale(1.02); }
+        }
+        @keyframes handSpriteIn {
+          from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+          to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        .hand-sprite-enter {
+          animation: handSpriteIn 0.08s ease-out;
+        }
+      `}</style>
     </aside>
   )
 }

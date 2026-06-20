@@ -153,9 +153,10 @@ export function CatKeyboard() {
         className="relative mb-0"
         style={{
           animation: isIdle ? 'catFloat 3s ease-in-out infinite' :
-                     isTyping ? 'catType 0.2s ease-in-out infinite' :
-                     isError ? 'catShake 0.3s ease-in-out' :
-                     isCelebrating ? 'catCelebrate 0.4s ease-in-out 3' : 'none'
+                     isTyping ? 'catType 0.15s ease-in-out infinite' :
+                     isError ? 'catShake 0.4s ease-in-out, errorFlash 0.4s ease-in-out' :
+                     isCelebrating ? 'catCelebrate 0.5s ease-in-out' :
+                     animationState === 'sleeping' ? 'catSleep 4s ease-in-out infinite' : 'none'
         }}
       >
         <img
@@ -229,26 +230,54 @@ export function CatKeyboard() {
 
       <style>{`
         @keyframes catFloat {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-3px); }
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-6px) scale(1.02); }
         }
         @keyframes catType {
-          0%, 100% { transform: translateY(0) rotate(-0.5deg); }
-          50% { transform: translateY(-2px) rotate(0.5deg); }
+          0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+          25% { transform: translateY(-3px) rotate(0.5deg) scale(1.02); }
+          50% { transform: translateY(-5px) rotate(-0.5deg) scale(1.01); }
+          75% { transform: translateY(-2px) rotate(1deg) scale(1.02); }
         }
         @keyframes catShake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-4px); }
-          75% { transform: translateX(4px); }
+          0%, 100% { transform: translateX(0) rotate(0); }
+          10% { transform: translateX(-6px) rotate(-3deg); }
+          20% { transform: translateX(6px) rotate(3deg); }
+          30% { transform: translateX(-5px) rotate(-2deg); }
+          40% { transform: translateX(5px) rotate(2deg); }
+          50% { transform: translateX(-3px) rotate(-1deg); }
+          60% { transform: translateX(3px) rotate(1deg); }
         }
         @keyframes catCelebrate {
+          0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+          15% { transform: translateY(-15px) rotate(-8deg) scale(1.1); }
+          30% { transform: translateY(-20px) rotate(0deg) scale(1.15); }
+          45% { transform: translateY(-15px) rotate(8deg) scale(1.1); }
+          60% { transform: translateY(-10px) rotate(-5deg) scale(1.05); }
+          75% { transform: translateY(-5px) rotate(5deg) scale(1.02); }
+        }
+        @keyframes catSleep {
           0%, 100% { transform: translateY(0) rotate(0); }
-          25% { transform: translateY(-8px) rotate(-5deg); }
-          75% { transform: translateY(-8px) rotate(5deg); }
+          50% { transform: translateY(2px) rotate(2deg); }
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-5px); }
-          to { opacity: 1; transform: translateY(0); }
+          from { opacity: 0; transform: translateY(-8px) scale(0.9); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes errorFlash {
+          0% { filter: brightness(1); }
+          25% { filter: brightness(1.3) hue-rotate(-10deg); }
+          50% { filter: brightness(0.9) hue-rotate(10deg); }
+          75% { filter: brightness(1.2) hue-rotate(-5deg); }
+          100% { filter: brightness(1); }
         }
       `}</style>
     </div>
