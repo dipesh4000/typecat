@@ -20,6 +20,36 @@ const stateMessages: Record<string, string[]> = {
   focused: ['In the zone!', 'Flow state!'],
 }
 
+function getKeySpritePath(characterId: string, key: string, hasRightKeys: boolean): string | null {
+  const upper = key.toUpperCase()
+  const keyMap: Record<string, string> = {
+    'A': 'KeyA', 'B': 'KeyB', 'C': 'KeyC', 'D': 'KeyD', 'E': 'KeyE',
+    'F': 'KeyF', 'G': 'KeyG', 'H': 'KeyH', 'I': 'KeyI', 'J': 'KeyJ',
+    'K': 'KeyK', 'L': 'KeyL', 'M': 'KeyM', 'N': 'KeyN', 'O': 'KeyO',
+    'P': 'KeyP', 'Q': 'KeyQ', 'R': 'KeyR', 'S': 'KeyS', 'T': 'KeyT',
+    'U': 'KeyU', 'V': 'KeyV', 'W': 'KeyW', 'X': 'KeyX', 'Y': 'KeyY',
+    'Z': 'KeyZ', ' ': 'Space', 'SHIFT': 'Shift', 'BACKSPACE': 'Backspace',
+    '1': 'Num1', '2': 'Num2', '3': 'Num3', '4': 'Num4', '5': 'Num5',
+    '6': 'Num6', '7': 'Num7', '8': 'Num8', '9': 'Num9', '0': 'Num0',
+  }
+
+  const spriteName = keyMap[upper]
+  if (!spriteName) return null
+
+  // Right hand covers right side of keyboard (H-L, U-P, 7-0, arrows)
+  const rightHandKeys = new Set([
+    'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'KeyN', 'KeyM',
+    'KeyU', 'KeyI', 'KeyO', 'KeyP', 'KeyY',
+    'Num7', 'Num8', 'Num9', 'Num0',
+    'UpArrow', 'DownArrow', 'LeftArrow', 'RightArrow',
+    'Backspace', 'Return', 'Slash', 'SemiColon', 'Quote',
+    'LeftBracket', 'RightBracket', 'BackSlash', 'Comma', 'Dot', 'Minus', 'Equal',
+  ])
+
+  const side = hasRightKeys && rightHandKeys.has(spriteName) ? 'right-keys' : 'left-keys'
+  return `/characters/${characterId}/${side}/${spriteName}.png`
+}
+
 export function CatKeyboard() {
   const activeKey = useCatStore((s) => s.activeKey)
   const animationState = useCatStore((s) => s.animationState)
@@ -27,6 +57,7 @@ export function CatKeyboard() {
 
   const [message, setMessage] = useState('')
   const [showMessage, setShowMessage] = useState(false)
+  const [handSprite, setHandSprite] = useState<string | null>(null)
 
   const character = getCharacter(characterId)
   const isTyping = animationState === 'typing' || animationState === 'focused'
@@ -42,6 +73,18 @@ export function CatKeyboard() {
     return () => clearTimeout(timer)
   }, [animationState])
 
+  // Show hand sprite when key is pressed
+  useEffect(() => {
+    if (activeKey) {
+      const sprite = getKeySpritePath(characterId, activeKey, character.hasRightKeys)
+      if (sprite) {
+        setHandSprite(sprite)
+      }
+      const timer = setTimeout(() => setHandSprite(null), 120)
+      return () => clearTimeout(timer)
+    }
+  }, [activeKey, characterId, character.hasRightKeys])
+
   return (
     <div className="w-full flex flex-col items-center">
       {/* Speech Bubble */}
@@ -53,7 +96,7 @@ export function CatKeyboard() {
         )}
       </div>
 
-      {/* Character Image */}
+      {/* Character Image with Hand Sprite */}
       <div
         className="relative mb-0"
         style={{
@@ -69,6 +112,16 @@ export function CatKeyboard() {
           className="w-40 h-auto select-none pointer-events-none"
           draggable={false}
         />
+
+        {/* Hand sprite overlay — shows when typing a key */}
+        {handSprite && (
+          <img
+            src={handSprite}
+            alt=""
+            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-auto pointer-events-none drop-shadow-lg transition-opacity duration-75"
+            draggable={false}
+          />
+        )}
 
         {isError && (
           <div className="absolute top-1 right-2 text-blue-400 text-xs animate-pulse">💧</div>
