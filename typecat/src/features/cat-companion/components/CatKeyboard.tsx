@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useCatStore } from '../../../stores/catStore'
 import { useSettingsStore } from '../../../stores/settingsStore'
 import { getCharacter } from '../characters'
@@ -18,6 +18,35 @@ const stateMessages: Record<string, string[]> = {
   celebrating: ['Amazing!', 'Purr-fect!', 'Well done!'],
   sleeping: ['Zzz...', '*purrs*'],
   focused: ['In the zone!', 'Flow state!'],
+}
+
+interface SpritePosition {
+  x: number
+  y: number
+}
+
+const keyPositions: Record<string, SpritePosition> = {
+  '1': { x: 28, y: 10 }, '2': { x: 33, y: 10 }, '3': { x: 38, y: 10 },
+  '4': { x: 43, y: 10 }, '5': { x: 48, y: 10 }, '6': { x: 55, y: 10 },
+  '7': { x: 60, y: 10 }, '8': { x: 65, y: 10 }, '9': { x: 70, y: 10 },
+  '0': { x: 75, y: 10 },
+
+  'q': { x: 28, y: 28 }, 'w': { x: 33, y: 28 }, 'e': { x: 38, y: 28 },
+  'r': { x: 43, y: 28 }, 't': { x: 48, y: 28 }, 'y': { x: 55, y: 28 },
+  'u': { x: 60, y: 28 }, 'i': { x: 65, y: 28 }, 'o': { x: 70, y: 28 },
+  'p': { x: 75, y: 28 },
+
+  'a': { x: 28, y: 44 }, 's': { x: 33, y: 44 }, 'd': { x: 38, y: 44 },
+  'f': { x: 43, y: 44 }, 'g': { x: 48, y: 44 }, 'h': { x: 55, y: 44 },
+  'j': { x: 60, y: 44 }, 'k': { x: 65, y: 44 }, 'l': { x: 70, y: 44 },
+
+  'z': { x: 30, y: 58 }, 'x': { x: 35, y: 58 }, 'c': { x: 40, y: 58 },
+  'v': { x: 45, y: 58 }, 'b': { x: 55, y: 58 }, 'n': { x: 60, y: 58 },
+  'm': { x: 65, y: 58 },
+
+  ' ': { x: 50, y: 72 },
+  'shift': { x: 28, y: 58 },
+  'backspace': { x: 72, y: 10 },
 }
 
 function getKeySpritePath(characterId: string, key: string, hasRightKeys: boolean): string | null {
@@ -58,6 +87,8 @@ export function CatKeyboard() {
   const [message, setMessage] = useState('')
   const [showMessage, setShowMessage] = useState(false)
   const [handSprite, setHandSprite] = useState<string | null>(null)
+  const [spritePosition, setSpritePosition] = useState<SpritePosition | null>(null)
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const character = getCharacter(characterId)
   const isTyping = animationState === 'typing' || animationState === 'focused'
@@ -73,17 +104,38 @@ export function CatKeyboard() {
     return () => clearTimeout(timer)
   }, [animationState])
 
-  // Show hand sprite when key is pressed
+  // Show hand sprite immediately on keydown at the key's position
   useEffect(() => {
     if (activeKey) {
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current)
+        hideTimerRef.current = null
+      }
       const sprite = getKeySpritePath(characterId, activeKey, character.hasRightKeys)
       if (sprite) {
         setHandSprite(sprite)
+        setSpritePosition(keyPositions[activeKey] || { x: 50, y: 50 })
       }
-      const timer = setTimeout(() => setHandSprite(null), 120)
-      return () => clearTimeout(timer)
     }
   }, [activeKey, characterId, character.hasRightKeys])
+
+  // Hide sprite 100ms after keyup (not fixed timeout from keydown)
+  useEffect(() => {
+    const handleKeyup = () => {
+      hideTimerRef.current = setTimeout(() => {
+        setHandSprite(null)
+        setSpritePosition(null)
+        hideTimerRef.current = null
+      }, 100)
+    }
+    window.addEventListener('keyup', handleKeyup)
+    return () => {
+      window.removeEventListener('keyup', handleKeyup)
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current)
+      }
+    }
+  }, [])
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -113,12 +165,18 @@ export function CatKeyboard() {
           draggable={false}
         />
 
-        {/* Hand sprite overlay — shows when typing a key */}
+        {/* Hand sprite overlay — positioned per key with smooth transition */}
         {handSprite && (
           <img
             src={handSprite}
             alt=""
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-auto pointer-events-none drop-shadow-lg hand-sprite-enter"
+            className="absolute w-20 h-auto pointer-events-none drop-shadow-lg"
+            style={{
+              left: `${spritePosition?.x ?? 50}%`,
+              top: `${spritePosition?.y ?? 50}%`,
+              transform: 'translate(-50%, -50%)',
+              transition: 'left 0.05s ease-out, top 0.05s ease-out',
+            }}
             draggable={false}
           />
         )}
@@ -191,13 +249,6 @@ export function CatKeyboard() {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(-5px); }
           to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes handSpriteIn {
-          from { opacity: 0; transform: translate(-50%, 10px) scale(0.8); }
-          to { opacity: 1; transform: translate(-50%, 0) scale(1); }
-        }
-        .hand-sprite-enter {
-          animation: handSpriteIn 0.1s ease-out;
         }
       `}</style>
     </div>

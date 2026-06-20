@@ -1,25 +1,46 @@
-import { useState, useEffect, type ReactNode } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useEffect, useCallback, type ReactNode } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import { useSettingsStore } from '../stores/settingsStore'
 import { applyCharacterTheme } from '../features/cat-companion/characters'
+import { AchievementToast } from '../features/progression/components/AchievementToast'
 
 interface LayoutProps {
   children: ReactNode
+}
+
+interface ToastAchievement {
+  id: string
+  name: string
+  description: string
 }
 
 const navLinks = [
   { href: '/', label: 'Practice' },
   { href: '/stats', label: 'Stats' },
   { href: '/achievements', label: 'Achievements' },
-  { href: '/settings', label: 'Settings' },
 ]
 
 export function Layout({ children }: LayoutProps) {
   const location = useLocation()
+  const navigate = useNavigate()
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [toasts, setToasts] = useState<ToastAchievement[]>([])
   const theme = useSettingsStore((s) => s.theme)
   const characterId = useSettingsStore((s) => s.characterId)
+
+  const dismissToast = useCallback(() => {
+    setToasts((prev) => prev.slice(1))
+  }, [])
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail as ToastAchievement[]
+      setToasts((prev) => [...prev, ...detail])
+    }
+    window.addEventListener('achievement-unlocked', handler)
+    return () => window.removeEventListener('achievement-unlocked', handler)
+  }, [])
 
   // Apply dark mode class and character theme to html element
   useEffect(() => {
@@ -81,11 +102,15 @@ export function Layout({ children }: LayoutProps) {
             <button className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95">
               notifications
             </button>
-            <div className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center cursor-pointer active:scale-95">
+            <button
+              onClick={() => navigate('/settings')}
+              aria-label="Settings"
+              className="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center cursor-pointer active:scale-95 hover:ring-2 hover:ring-primary transition-all"
+            >
               <span className="material-symbols-outlined text-on-secondary-container text-[20px]">
                 person
               </span>
-            </div>
+            </button>
           </div>
         </nav>
       </header>
@@ -103,6 +128,15 @@ export function Layout({ children }: LayoutProps) {
           </div>
         </main>
       </div>
+
+      {toasts.length > 0 && (
+        <AchievementToast
+          key={toasts[0].id}
+          name={toasts[0].name}
+          description={toasts[0].description}
+          onDismiss={dismissToast}
+        />
+      )}
     </div>
   )
 }

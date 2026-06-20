@@ -1,0 +1,50 @@
+[
+  {
+    "id": "anime-001",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I'm going to be King of the Pirates! - Monkey D. Luffy, One Piece",
+    "source": "One Piece",
+    "tags": ["adventure", "shonen"]
+  },
+  {
+    "id": "anime-002",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "Believe it! I never go back on my word, that is my nindo. - Naruto Uzumaki",
+    "source": "Naruto",
+    "tags": ["shonen", "ninja"]
+  },
+  {
+    "id": "anime-003",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The world isn't perfect. But it's there for us, doing the best it can, and that's what makes it so damn beautiful.",
+    "source": "Hunter x Hunter",
+    "tags": ["adventure", "philosophy"]
+  },
+  {
+    "id": "anime-004",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "Whatever you lose, you'll find it again. But whatever you give away, you'll keep forever.",
+    "source": "Fairy Tail",
+    "tags": ["friendship", "adventure"]
+  },
+  {
+    "id": "anime-005",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The pain of being alone is completely out of this world, isn't it? I don't know why, but I understand your feelings so much.",
+    "source": "Naruto",
+    "tags": ["emotion", "loneliness"]
+  },
+  {
+    "id": "anime-006",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I hate so many things about the way that you treat me. You never take anything seriously. You treat everything like a game.",
+    "source": "Fullmetal Alchemist",
+    "tags": ["drama", "philosophy"]
+  }
+]

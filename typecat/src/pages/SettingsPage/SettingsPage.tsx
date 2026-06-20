@@ -1,5 +1,7 @@
 import { useSettingsStore } from '../../stores/settingsStore'
-import { characters } from '../../features/cat-companion/characters'
+import { useProgressionStore } from '../../stores/progressionStore'
+import { useStatsStore } from '../../stores/statsStore'
+import { characters, getCharacter } from '../../features/cat-companion/characters'
 
 export default function SettingsPage() {
   const {
@@ -17,8 +19,45 @@ export default function SettingsPage() {
     setCharacter,
   } = useSettingsStore()
 
+  const { level, xp, getXPForNextLevel } = useProgressionStore()
+  const { totalSessionsCompleted } = useStatsStore()
+
+  const currentCharacter = getCharacter(characterId)
+
   return (
     <div className="w-full">
+      {/* Profile Section */}
+      <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-lg mb-gutter">
+        <h2 className="text-xl font-bold text-on-surface mb-6">Profile</h2>
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div className="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden flex-shrink-0">
+            <img
+              src={currentCharacter.cover}
+              alt={currentCharacter.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-lg font-bold text-on-surface">{currentCharacter.name}</h3>
+            <p className="text-sm text-on-surface-variant mb-3">{currentCharacter.nameCn}</p>
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-primary">{level}</p>
+                <p className="text-xs text-on-surface-variant">Level</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-primary">{xp}/{getXPForNextLevel()}</p>
+                <p className="text-xs text-on-surface-variant">XP</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold text-primary">{totalSessionsCompleted}</p>
+                <p className="text-xs text-on-surface-variant">Sessions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Character Selector */}
       <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-lg mb-gutter">
         <h3 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">

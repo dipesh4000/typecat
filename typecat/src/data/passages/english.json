@@ -1,0 +1,44 @@
+[
+  {
+    "id": "eng-001",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The quick brown fox jumps over the lazy dog. This sentence contains every letter of the alphabet at least once.",
+    "tags": ["pangram", "classic"]
+  },
+  {
+    "id": "eng-002",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Practice makes perfect. The more you type, the faster and more accurate you become.",
+    "tags": ["motivation"]
+  },
+  {
+    "id": "eng-003",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Success is not final, failure is not fatal: it is the courage to continue that counts. Every expert was once a beginner.",
+    "tags": ["motivation", "quote"]
+  },
+  {
+    "id": "eng-004",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The only way to do great work is to love what you do. If you have not found it yet, keep looking.",
+    "tags": ["motivation", "quote"]
+  },
+  {
+    "id": "eng-005",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "In the beginning, there was nothing, which exploded. The universe is not only queerer than we suppose, but queerer than we can suppose.",
+    "tags": ["science", "quote"]
+  },
+  {
+    "id": "eng-006",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The computer was born to solve problems that did not exist before. Technology is a useful servant but a dangerous master.",
+    "tags": ["technology", "quote"]
+  }
+]

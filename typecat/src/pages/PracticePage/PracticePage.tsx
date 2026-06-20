@@ -25,11 +25,14 @@ export default function PracticePage() {
   const passage = useTypingStore((s) => s.passage)
   const input = useTypingStore((s) => s.input)
   const status = useTypingStore((s) => s.status)
+  const lastResult = useTypingStore((s) => s.lastResult)
   const startSession = useTypingStore((s) => s.startSession)
   const endSession = useTypingStore((s) => s.endSession)
   const reset = useTypingStore((s) => s.reset)
   const handleKeystroke = useTypingStore((s) => s.handleKeystroke)
   const handleBackspace = useTypingStore((s) => s.handleBackspace)
+  const pauseSession = useTypingStore((s) => s.pauseSession)
+  const resumeSession = useTypingStore((s) => s.resumeSession)
 
   const setAnimationState = useCatStore((s) => s.setAnimationState)
   const setActiveKey = useCatStore((s) => s.setActiveKey)
@@ -41,6 +44,8 @@ export default function PracticePage() {
   const setDifficulty = useSettingsStore((s) => s.setDifficulty)
 
   const [previewPassage, setPreviewPassage] = useState<Passage | null>(null)
+  const [browseOpen, setBrowseOpen] = useState(false)
+  const [sessionXP, setSessionXP] = useState<number | null>(null)
 
   const loadPassage = useCallback(
     (cat?: typeof category, diff?: typeof difficulty) => {
@@ -64,8 +69,16 @@ export default function PracticePage() {
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (status === 'active') {
+          pauseSession()
+        } else if (status === 'paused') {
+          resumeSession()
+        }
+        return
+      }
+
       if (status !== 'active' || !passage) return
-      if (e.key === 'Escape') return
 
       if (e.key === 'Backspace') {
         e.preventDefault()
@@ -96,7 +109,7 @@ export default function PracticePage() {
         setTimeout(() => setAnimationState('typing'), 500)
       }
     },
-    [status, passage, input, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey]
+    [status, passage, input, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey, pauseSession, resumeSession]
   )
 
   useEffect(() => {
@@ -107,26 +120,41 @@ export default function PracticePage() {
   useEffect(() => {
     if (passage && status === 'active' && input.length >= passage.text.length) {
       const result = endSession()
-      onSessionComplete(result)
+      const xp = onSessionComplete(result)
+      setSessionXP(xp.xpEarned)
     }
   }, [passage, status, input, endSession])
 
   const handleStart = (passageToUse?: Passage) => {
     const p = passageToUse || previewPassage
     if (!p) return
+    setSessionXP(null)
     reset()
     startSession(p)
     setAnimationState('typing')
   }
 
+  const handleRestart = () => {
+    if (!passage) return
+    setSessionXP(null)
+    reset()
+    startSession(passage)
+    setAnimationState('typing')
+  }
+
+  const handleNext = () => {
+    setSessionXP(null)
+    reset()
+    loadPassage()
+    setAnimationState('idle')
+  }
+
   const handleCategoryChange = (newCategory: typeof category) => {
-    if (status === 'active') return
     setCategory(newCategory)
     loadPassage(newCategory, difficulty)
   }
 
   const handleDifficultyChange = (newDifficulty: typeof difficulty) => {
-    if (status === 'active') return
     setDifficulty(newDifficulty)
     loadPassage(category, newDifficulty)
   }
@@ -135,21 +163,29 @@ export default function PracticePage() {
     loadPassage()
   }
 
-  const handleNext = () => {
-    loadPassage()
-    if (status === 'active') {
-      reset()
-      setAnimationState('idle')
-    }
+  const handleResume = () => {
+    resumeSession()
+  }
+
+  const handleQuit = () => {
+    reset()
+    setSessionXP(null)
+    setAnimationState('idle')
   }
 
   const displayPassage = passage || previewPassage
   const progress = passage ? (input.length / passage.text.length) * 100 : 0
+  const isActive = status === 'active' || status === 'paused'
+
+  const allPassages = passageProvider.getPassages(
+    category === 'all' ? undefined : category,
+    { difficulty }
+  )
 
   return (
     <div className="w-full h-full flex flex-col">
       {/* Mode Selector */}
-      {status === 'idle' && (
+      {(status === 'idle' || status === 'complete') && (
         <div className="w-full mb-3 flex-shrink-0">
           <div className="flex justify-center gap-2 mb-2">
             {categories.map((cat) => (
@@ -190,7 +226,7 @@ export default function PracticePage() {
       <div className="w-full mb-3 flex-shrink-0">
         <div className="flex justify-between items-center mb-1">
           <h3 className="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
-            {status === 'idle' ? 'PRACTICE' : category.toUpperCase()}
+            {status === 'idle' ? 'PRACTICE' : status === 'paused' ? 'PAUSED' : category.toUpperCase()}
           </h3>
           <span className="text-[10px] font-semibold text-primary">
             {Math.round(progress)}%
@@ -207,7 +243,8 @@ export default function PracticePage() {
       {/* Main Content */}
       <div className="flex-1 min-h-0 flex flex-col">
         {/* Typing Area */}
-        <section className="flex-1 min-h-0 bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm overflow-hidden">
+        <section className="flex-1 min-h-0 bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm overflow-hidden relative">
+          {/* Idle - Passage Preview */}
           {status === 'idle' && displayPassage && (
             <div className="h-full flex flex-col items-center justify-center">
               <div className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full mb-2">
@@ -233,28 +270,90 @@ export default function PracticePage() {
                   <span className="material-symbols-outlined text-[16px]">shuffle</span>
                   New
                 </button>
+                <button
+                  onClick={() => setBrowseOpen(true)}
+                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                >
+                  <span className="material-symbols-outlined text-[16px]">menu</span>
+                  Browse
+                </button>
               </div>
             </div>
           )}
 
-          {(status === 'active' || status === 'complete') && passage && (
+          {/* Active / Paused - Typing */}
+          {(status === 'active' || status === 'paused') && passage && (
             <div className="h-full flex flex-col">
               <div className="flex-1 min-h-0 overflow-y-auto">
                 <TextDisplay passage={passage.text} input={input} showErrors={true} />
               </div>
+            </div>
+          )}
 
-              {status === 'complete' && (
-                <div className="mt-3 text-center py-3 border-t border-outline-variant flex-shrink-0">
-                  <p className="text-on-surface text-lg font-bold mb-2">Session Complete!</p>
+          {/* Complete - Results */}
+          {status === 'complete' && lastResult && (
+            <div className="h-full flex flex-col items-center justify-center">
+              <div className="bg-surface-container rounded-xl p-6 max-w-sm w-full border border-outline-variant">
+                <h2 className="text-lg font-bold text-on-surface text-center mb-4">Session Complete!</h2>
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-primary">{lastResult.wpm}</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase">WPM</p>
+                  </div>
+                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-primary">{lastResult.accuracy}%</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase">Accuracy</p>
+                  </div>
+                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-secondary">{sessionXP ?? 0}</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase">XP Earned</p>
+                  </div>
+                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-on-surface">{Math.round(lastResult.duration / 1000)}s</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase">Time</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 justify-center">
                   <button
                     onClick={() => handleStart()}
-                    className="px-6 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5 mx-auto"
+                    className="px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
                   >
                     <span className="material-symbols-outlined text-[16px]">replay</span>
                     Try Again
                   </button>
+                  <button
+                    onClick={handleNext}
+                    className="px-4 py-2 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">skip_next</span>
+                    New Passage
+                  </button>
                 </div>
-              )}
+              </div>
+            </div>
+          )}
+
+          {/* Pause Overlay */}
+          {status === 'paused' && (
+            <div className="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl z-10">
+              <span className="material-symbols-outlined text-[48px] text-on-surface-variant mb-3">pause_circle</span>
+              <p className="text-lg font-bold text-on-surface mb-4">Paused</p>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleResume}
+                  className="px-6 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
+                >
+                  <span className="material-symbols-outlined text-[16px]">play_arrow</span>
+                  Resume
+                </button>
+                <button
+                  onClick={handleQuit}
+                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                >
+                  <span className="material-symbols-outlined text-[16px]">close</span>
+                  Quit
+                </button>
+              </div>
             </div>
           )}
         </section>
@@ -264,13 +363,13 @@ export default function PracticePage() {
           <SimpleKeyboard />
         </div>
 
-        {/* Bottom Bar — only show during active/complete sessions */}
-        {status !== 'idle' && (
+        {/* Bottom Bar */}
+        {isActive && (
           <div className="flex-shrink-0 mt-2 flex justify-between items-center text-on-surface-variant text-[10px]">
-            <span>ESC pause • Backspace correct</span>
+            <span>ESC {status === 'paused' ? 'resume' : 'pause'} • Backspace correct</span>
             <div className="flex gap-2">
               <button
-                onClick={() => handleStart()}
+                onClick={handleRestart}
                 className="px-2 py-1 border border-outline-variant rounded hover:bg-surface-container transition-all active:scale-95"
               >
                 Restart
@@ -285,6 +384,47 @@ export default function PracticePage() {
           </div>
         )}
       </div>
+
+      {/* Browse Passages Modal */}
+      {browseOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 max-w-lg w-full mx-4 max-h-[80vh] flex flex-col">
+            <div className="flex justify-between items-center mb-3">
+              <h2 className="text-sm font-bold text-on-surface">Browse Passages</h2>
+              <button
+                onClick={() => setBrowseOpen(false)}
+                className="p-1 rounded hover:bg-surface-container transition-all"
+              >
+                <span className="material-symbols-outlined text-[18px]">close</span>
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto space-y-2">
+              {allPassages.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => {
+                    setBrowseOpen(false)
+                    handleStart(p)
+                  }}
+                  className="w-full text-left p-3 rounded-lg bg-surface-container hover:bg-surface-container-high transition-all border border-outline-variant/50"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] uppercase font-semibold text-primary">{p.category}</span>
+                    <span className="text-[10px] text-on-surface-variant">•</span>
+                    <span className="text-[10px] uppercase font-semibold text-secondary">{p.difficulty}</span>
+                  </div>
+                  <p className="text-xs text-on-surface-variant/70 line-clamp-2">
+                    {p.text.slice(0, 100)}...
+                  </p>
+                </button>
+              ))}
+              {allPassages.length === 0 && (
+                <p className="text-xs text-on-surface-variant text-center py-4">No passages found.</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

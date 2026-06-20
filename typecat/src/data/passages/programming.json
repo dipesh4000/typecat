@@ -1,0 +1,82 @@
+[
+  {
+    "id": "prog-js-001",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "easy",
+    "text": "const greeting = (name) => `Hello, ${name}!`;\nconsole.log(greeting('World'));",
+    "tags": ["functions", "template-literals"]
+  },
+  {
+    "id": "prog-js-002",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "easy",
+    "text": "const numbers = [1, 2, 3, 4, 5];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);",
+    "tags": ["arrays", "map"]
+  },
+  {
+    "id": "prog-js-003",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "medium",
+    "text": "const debounce = (fn, delay) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n};",
+    "tags": ["closures", "functions"]
+  },
+  {
+    "id": "prog-js-004",
+    "category": "programming",
+    "subcategory": "javascript",
+    "difficulty": "medium",
+    "text": "const fetchData = async (url) => {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error('Network error');\n    return await response.json();\n  } catch (error) {\n    console.error('Fetch failed:', error);\n    throw error;\n  }\n};",
+    "tags": ["async", "error-handling"]
+  },
+  {
+    "id": "prog-py-001",
+    "category": "programming",
+    "subcategory": "python",
+    "difficulty": "easy",
+    "text": "def greet(name):\n    return f\"Hello, {name}!\"\n\nprint(greet(\"World\"))",
+    "tags": ["functions", "f-strings"]
+  },
+  {
+    "id": "prog-py-002",
+    "category": "programming",
+    "subcategory": "python",
+    "difficulty": "medium",
+    "text": "def fibonacci(n):\n    if n <= 1:\n        return n\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+    "tags": ["algorithms", "loops"]
+  },
+  {
+    "id": "prog-sql-001",
+    "category": "programming",
+    "subcategory": "sql",
+    "difficulty": "easy",
+    "text": "SELECT name, email\nFROM users\nWHERE active = true\nORDER BY created_at DESC\nLIMIT 10;",
+    "tags": ["queries", "basics"]
+  },
+  {
+    "id": "prog-sql-002",
+    "category": "programming",
+    "subcategory": "sql",
+    "difficulty": "medium",
+    "text": "SELECT u.name, COUNT(o.id) as order_count\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nGROUP BY u.name\nHAVING COUNT(o.id) > 5\nORDER BY order_count DESC;",
+    "tags": ["joins", "aggregation"]
+  },
+  {
+    "id": "prog-react-001",
+    "category": "programming",
+    "subcategory": "react",
+    "difficulty": "medium",
+    "text": "const Counter = () => {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(c => c + 1)}>\n      Count: {count}\n    </button>\n  );\n};",
+    "tags": ["hooks", "state"]
+  },
+  {
+    "id": "prog-react-002",
+    "category": "programming",
+    "subcategory": "react",
+    "difficulty": "hard",
+    "text": "const useDebounce = (value, delay) => {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n  useEffect(() => {\n    const handler = setTimeout(() => setDebouncedValue(value), delay);\n    return () => clearTimeout(handler);\n  }, [value, delay]);\n  return debouncedValue;\n};",
+    "tags": ["hooks", "custom-hooks"]
+  }
+]
