@@ -183,7 +183,6 @@ export default function PracticePage() {
   const progress = passage ? (input.length / passage.text.length) * 100 : 0
   const isActive = status === 'active' || status === 'paused'
 
-  // Live WPM and accuracy calculation with continuous update
   const [liveStats, setLiveStats] = useState({ wpm: 0, accuracy: 100, correctChars: 0, totalChars: 0 })
 
   useEffect(() => {
@@ -219,30 +218,30 @@ export default function PracticePage() {
     <div className="w-full h-full flex flex-col">
       {/* Mode Selector */}
       {(status === 'idle' || status === 'complete') && (
-        <div className="w-full mb-3 flex-shrink-0">
-          <div className="flex justify-center gap-2 mb-2">
+        <div className="w-full mb-2 md:mb-3 flex-shrink-0">
+          <div className="flex justify-center gap-1.5 md:gap-2 mb-2 overflow-x-auto scrollbar-none">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => handleCategoryChange(cat.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium text-xs transition-all ${
+                className={`flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3 py-1.5 rounded-lg font-medium text-[11px] md:text-xs transition-all whitespace-nowrap shrink-0 ${
                   category === cat.id
                     ? 'bg-primary text-on-primary'
                     : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
                 }`}
               >
-                <span className="material-symbols-outlined text-[14px]">{cat.icon}</span>
+                <span className="material-symbols-outlined text-[12px] md:text-[14px]">{cat.icon}</span>
                 {cat.label}
               </button>
             ))}
           </div>
 
-          <div className="flex justify-center gap-2">
+          <div className="flex justify-center gap-1.5 md:gap-2">
             {difficulties.map((diff) => (
               <button
                 key={diff.id}
                 onClick={() => handleDifficultyChange(diff.id)}
-                className={`px-3 py-1 rounded-full text-[10px] font-semibold transition-all ${
+                className={`px-2.5 md:px-3 py-1 rounded-full text-[10px] font-semibold transition-all ${
                   difficulty === diff.id
                     ? 'bg-secondary-container text-on-secondary-container'
                     : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high'
@@ -256,13 +255,13 @@ export default function PracticePage() {
       )}
 
       {/* Progress Bar */}
-      <div className="w-full mb-3 flex-shrink-0">
+      <div className="w-full mb-2 md:mb-3 flex-shrink-0">
         <div className="flex justify-between items-center mb-1">
           <h3 className="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
             {status === 'idle' ? 'PRACTICE' : status === 'paused' ? 'PAUSED' : category.toUpperCase()}
           </h3>
           {isActive && (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4">
               <span className="text-[10px] font-bold text-primary">
                 {liveStats.wpm} WPM
               </span>
@@ -291,7 +290,7 @@ export default function PracticePage() {
       {/* Main Content */}
       <div className="flex-1 min-h-0 flex flex-col">
         {/* Typing Area */}
-        <section className="flex-1 min-h-0 bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-sm overflow-hidden relative">
+        <section className="flex-1 min-h-0 bg-surface-container-lowest border border-outline-variant rounded-lg md:rounded-xl p-3 md:p-4 shadow-sm overflow-hidden relative">
           {/* Idle - Passage Preview */}
           {status === 'idle' && displayPassage && (
             <div className="h-full flex flex-col items-center justify-center">
@@ -300,30 +299,30 @@ export default function PracticePage() {
                   {displayPassage.category} • {displayPassage.difficulty}
                 </span>
               </div>
-              <div className="font-typing-font text-base md:text-lg leading-relaxed text-on-surface-variant/50 mb-4 max-w-xl text-center">
+              <div className="font-typing-font text-sm md:text-lg leading-relaxed text-on-surface-variant/50 mb-3 md:mb-4 max-w-xl text-center px-2">
                 {displayPassage.text}
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2 md:gap-3">
                 <button
                   onClick={() => handleStart()}
-                  className="px-6 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
+                  className="px-4 md:px-6 py-2 bg-primary text-on-primary rounded-lg text-xs md:text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  <span className="material-symbols-outlined text-[16px]">play_arrow</span>
+                  <span className="material-symbols-outlined text-[14px] md:text-[16px]">play_arrow</span>
                   Start
                 </button>
                 <button
                   onClick={handleNewPassage}
-                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                  className="px-3 md:px-4 py-2 border border-outline-variant rounded-lg text-xs md:text-sm hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  <span className="material-symbols-outlined text-[16px]">shuffle</span>
-                  New
+                  <span className="material-symbols-outlined text-[14px] md:text-[16px]">shuffle</span>
+                  <span className="hidden sm:inline">New</span>
                 </button>
                 <button
                   onClick={() => setBrowseOpen(true)}
-                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                  className="px-3 md:px-4 py-2 border border-outline-variant rounded-lg text-xs md:text-sm hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  <span className="material-symbols-outlined text-[16px]">menu</span>
-                  Browse
+                  <span className="material-symbols-outlined text-[14px] md:text-[16px]">menu</span>
+                  <span className="hidden sm:inline">Browse</span>
                 </button>
               </div>
             </div>
@@ -341,39 +340,39 @@ export default function PracticePage() {
           {/* Complete - Results */}
           {status === 'complete' && lastResult && (
             <div className="h-full flex flex-col items-center justify-center">
-              <div className="bg-surface-container rounded-xl p-6 max-w-sm w-full border border-outline-variant">
-                <h2 className="text-lg font-bold text-on-surface text-center mb-4">Session Complete!</h2>
-                <div className="grid grid-cols-2 gap-3 mb-4">
-                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-primary">{lastResult.wpm}</p>
+              <div className="bg-surface-container rounded-lg md:rounded-xl p-4 md:p-6 max-w-sm w-full border border-outline-variant">
+                <h2 className="text-base md:text-lg font-bold text-on-surface text-center mb-3 md:mb-4">Session Complete!</h2>
+                <div className="grid grid-cols-2 gap-2 md:gap-3 mb-3 md:mb-4">
+                  <div className="bg-surface-container-low rounded-lg p-2 md:p-3 text-center">
+                    <p className="text-xl md:text-2xl font-bold text-primary">{lastResult.wpm}</p>
                     <p className="text-[10px] text-on-surface-variant uppercase">WPM</p>
                   </div>
-                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-primary">{lastResult.accuracy}%</p>
+                  <div className="bg-surface-container-low rounded-lg p-2 md:p-3 text-center">
+                    <p className="text-xl md:text-2xl font-bold text-primary">{lastResult.accuracy}%</p>
                     <p className="text-[10px] text-on-surface-variant uppercase">Accuracy</p>
                   </div>
-                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-secondary">{sessionXP ?? 0}</p>
+                  <div className="bg-surface-container-low rounded-lg p-2 md:p-3 text-center">
+                    <p className="text-xl md:text-2xl font-bold text-secondary">{sessionXP ?? 0}</p>
                     <p className="text-[10px] text-on-surface-variant uppercase">XP Earned</p>
                   </div>
-                  <div className="bg-surface-container-low rounded-lg p-3 text-center">
-                    <p className="text-2xl font-bold text-on-surface">{Math.round(lastResult.duration / 1000)}s</p>
+                  <div className="bg-surface-container-low rounded-lg p-2 md:p-3 text-center">
+                    <p className="text-xl md:text-2xl font-bold text-on-surface">{Math.round(lastResult.duration / 1000)}s</p>
                     <p className="text-[10px] text-on-surface-variant uppercase">Time</p>
                   </div>
                 </div>
                 <div className="flex gap-2 justify-center">
                   <button
                     onClick={() => handleStart()}
-                    className="px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
+                    className="px-3 md:px-4 py-2 bg-primary text-on-primary rounded-lg text-xs md:text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
                   >
-                    <span className="material-symbols-outlined text-[16px]">replay</span>
+                    <span className="material-symbols-outlined text-[14px] md:text-[16px]">replay</span>
                     Try Again
                   </button>
                   <button
                     onClick={handleNext}
-                    className="px-4 py-2 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                    className="px-3 md:px-4 py-2 border border-outline-variant rounded-lg text-xs md:text-sm font-bold hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
                   >
-                    <span className="material-symbols-outlined text-[16px]">skip_next</span>
+                    <span className="material-symbols-outlined text-[14px] md:text-[16px]">skip_next</span>
                     New Passage
                   </button>
                 </div>
@@ -383,22 +382,22 @@ export default function PracticePage() {
 
           {/* Pause Overlay */}
           {status === 'paused' && (
-            <div className="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-xl z-10">
-              <span className="material-symbols-outlined text-[48px] text-on-surface-variant mb-3">pause_circle</span>
-              <p className="text-lg font-bold text-on-surface mb-4">Paused</p>
-              <div className="flex gap-3">
+            <div className="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-lg md:rounded-xl z-10">
+              <span className="material-symbols-outlined text-[36px] md:text-[48px] text-on-surface-variant mb-2 md:mb-3">pause_circle</span>
+              <p className="text-base md:text-lg font-bold text-on-surface mb-3 md:mb-4">Paused</p>
+              <div className="flex gap-2 md:gap-3">
                 <button
                   onClick={handleResume}
-                  className="px-6 py-2 bg-primary text-on-primary rounded-lg text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
+                  className="px-4 md:px-6 py-2 bg-primary text-on-primary rounded-lg text-xs md:text-sm font-bold hover:bg-on-surface-variant transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  <span className="material-symbols-outlined text-[16px]">play_arrow</span>
+                  <span className="material-symbols-outlined text-[14px] md:text-[16px]">play_arrow</span>
                   Resume
                 </button>
                 <button
                   onClick={handleQuit}
-                  className="px-4 py-2 border border-outline-variant rounded-lg text-sm font-bold hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
+                  className="px-3 md:px-4 py-2 border border-outline-variant rounded-lg text-xs md:text-sm font-bold hover:bg-surface-container transition-all active:scale-95 flex items-center gap-1.5"
                 >
-                  <span className="material-symbols-outlined text-[16px]">close</span>
+                  <span className="material-symbols-outlined text-[14px] md:text-[16px]">close</span>
                   Quit
                 </button>
               </div>
@@ -407,13 +406,13 @@ export default function PracticePage() {
         </section>
 
         {/* Simple Keyboard */}
-        <div className="flex-shrink-0 mt-3">
+        <div className="flex-shrink-0 mt-2 md:mt-3">
           <SimpleKeyboard />
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar - desktop only */}
         {isActive && (
-          <div className="flex-shrink-0 mt-2 flex justify-between items-center text-on-surface-variant text-[10px]">
+          <div className="hidden md:flex flex-shrink-0 mt-2 justify-between items-center text-on-surface-variant text-[10px]">
             <span>ESC {status === 'paused' ? 'resume' : 'pause'} • Backspace correct</span>
             <div className="flex gap-2">
               <button
@@ -435,8 +434,8 @@ export default function PracticePage() {
 
       {/* Browse Passages Modal */}
       {browseOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 max-w-lg w-full mx-4 max-h-[80vh] flex flex-col">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center z-50">
+          <div className="bg-surface-container-lowest border border-outline-variant rounded-t-xl md:rounded-xl p-4 max-w-lg w-full max-h-[85vh] md:max-h-[80vh] flex flex-col">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-sm font-bold text-on-surface">Browse Passages</h2>
               <button

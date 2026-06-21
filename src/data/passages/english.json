@@ -103,5 +103,635 @@
     "difficulty": "easy",
     "text": "Every keyboard has a story. Every keystroke is a step forward. Keep typing, keep growing, keep learning.",
     "tags": ["typing", "growth"]
+  },
+  {
+    "id": "eng-016",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Good things come to those who wait, but better things come to those who work for it.",
+    "tags": ["motivation", "proverb"]
+  },
+  {
+    "id": "eng-017",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The sun always shines after the rain. Keep going, your breakthrough is near.",
+    "tags": ["motivation", "nature"]
+  },
+  {
+    "id": "eng-018",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "A journey of a thousand miles begins with a single step. Start typing today.",
+    "tags": ["wisdom", "motivation"]
+  },
+  {
+    "id": "eng-019",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
+    "tags": ["motivation", "belief"]
+  },
+  {
+    "id": "eng-020",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Stars cannot shine without darkness. Every struggle is preparing you for what is meant for you.",
+    "tags": ["motivation", "space"]
+  },
+  {
+    "id": "eng-021",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The only limit to our realization of tomorrow is our doubts of today. Move forward with confidence.",
+    "tags": ["motivation", "wisdom"]
+  },
+  {
+    "id": "eng-022",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Coffee is the drink that fuels creativity and powers late-night coding sessions around the world.",
+    "tags": ["food", "programming"]
+  },
+  {
+    "id": "eng-023",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Music is the universal language of mankind. It speaks where words fail and hearts understand.",
+    "tags": ["music", "art"]
+  },
+  {
+    "id": "eng-024",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The ocean stirs the heart, inspires the imagination, and brings eternal joy to the soul.",
+    "tags": ["ocean", "nature"]
+  },
+  {
+    "id": "eng-025",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Reading is to the mind what exercise is to the body. Feed your brain with knowledge daily.",
+    "tags": ["wisdom", "health"]
+  },
+  {
+    "id": "eng-026",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Every day is a new beginning. Take a deep breath, smile, and start typing with purpose.",
+    "tags": ["motivation", "life"]
+  },
+  {
+    "id": "eng-027",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The earth has music for those who listen. Nature is the best teacher of patience and beauty.",
+    "tags": ["nature", "wisdom"]
+  },
+  {
+    "id": "eng-028",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Laughter is the shortest distance between two people. Spread joy wherever you go today.",
+    "tags": ["wisdom", "life"]
+  },
+  {
+    "id": "eng-029",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Dream big, start small, act now. Your future self will thank you for every practice session.",
+    "tags": ["motivation", "wisdom"]
+  },
+  {
+    "id": "eng-030",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The best view comes after the hardest climb. Keep pushing through the challenges ahead.",
+    "tags": ["motivation", "nature"]
+  },
+  {
+    "id": "eng-031",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Innovation distinguishes between a leader and a follower. Stay curious, stay creative.",
+    "tags": ["technology", "wisdom"]
+  },
+  {
+    "id": "eng-032",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The only thing we have to fear is fear itself. Face your challenges with courage and determination.",
+    "tags": ["motivation", "wisdom"]
+  },
+  {
+    "id": "eng-033",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Water is the driving force of all nature. Protect our oceans, protect our future.",
+    "tags": ["ocean", "nature"]
+  },
+  {
+    "id": "eng-034",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The pen is mightier than the sword, but the keyboard is mightier than the pen.",
+    "tags": ["technology", "wisdom"]
+  },
+  {
+    "id": "eng-035",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Success usually comes to those who are too busy to be looking for it. Focus on the work.",
+    "tags": ["motivation", "business"]
+  },
+  {
+    "id": "eng-036",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Life is what happens when you are busy making other plans. Enjoy the journey, not just the destination.",
+    "tags": ["life", "wisdom"]
+  },
+  {
+    "id": "eng-037",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The only impossible journey is the one you never begin. Start typing, start living.",
+    "tags": ["motivation", "travel"]
+  },
+  {
+    "id": "eng-038",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Happiness is not something ready made. It comes from your own actions and choices.",
+    "tags": ["happiness", "life"]
+  },
+  {
+    "id": "eng-039",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The greatest wealth is health. Take care of your body, it is the only place you have to live.",
+    "tags": ["health", "wisdom"]
+  },
+  {
+    "id": "eng-040",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Be the change you wish to see in the world. Small actions create big ripples of impact.",
+    "tags": ["motivation", "wisdom"]
+  },
+  {
+    "id": "eng-041",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Home is where the heart is. Find comfort in the simple things that bring you joy every day.",
+    "tags": ["life", "wisdom"]
+  },
+  {
+    "id": "eng-042",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Creativity is intelligence having fun. Let your imagination run free and explore new possibilities.",
+    "tags": ["art", "creativity"]
+  },
+  {
+    "id": "eng-043",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "The journey of mastering a skill begins with the courage to be a beginner. Embrace the learning curve.",
+    "tags": ["motivation", "learning"]
+  },
+  {
+    "id": "eng-044",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Every moment is a fresh beginning. Leave yesterday behind and embrace the possibilities of today.",
+    "tags": ["motivation", "life"]
+  },
+  {
+    "id": "eng-045",
+    "category": "english",
+    "difficulty": "easy",
+    "text": "Kindness is a language which the deaf can hear and the blind can see. Share it generously.",
+    "tags": ["wisdom", "kindness"]
+  },
+  {
+    "id": "eng-046",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The mind is everything. What you think, you become. Train your thoughts to focus on growth and positivity.",
+    "tags": ["philosophy", "motivation"]
+  },
+  {
+    "id": "eng-047",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Programming is thinking about typing, structured thinking, and meticulous attention to detail.",
+    "tags": ["programming", "technology"]
+  },
+  {
+    "id": "eng-048",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The purpose of art is washing the dust of daily life off our souls. Find beauty in the ordinary.",
+    "tags": ["art", "life"]
+  },
+  {
+    "id": "eng-049",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The ocean is everything I want to be. Beautiful, mysterious, wild, and free. Embrace your nature.",
+    "tags": ["ocean", "nature"]
+  },
+  {
+    "id": "eng-050",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Adventure is worthwhile in itself. Travel opens minds, heals hearts, and creates lasting memories.",
+    "tags": ["travel", "adventure"]
+  },
+  {
+    "id": "eng-051",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Code is like humor. When you have to explain it, it is bad. Write clean, readable code every day.",
+    "tags": ["programming", "wisdom"]
+  },
+  {
+    "id": "eng-052",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Success is not about how high you have climbed, but how you make a positive difference to the world.",
+    "tags": ["motivation", "business"]
+  },
+  {
+    "id": "eng-053",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The earth does not belong to us. We belong to the earth. Treat every creature with respect and kindness.",
+    "tags": ["nature", "wisdom"]
+  },
+  {
+    "id": "eng-054",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Music gives a soul to the universe, wings to the mind, flight to the imagination, and life to everything.",
+    "tags": ["music", "art"]
+  },
+  {
+    "id": "eng-055",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The only person you are destined to become is the person you decide to be. Choose wisely today.",
+    "tags": ["motivation", "philosophy"]
+  },
+  {
+    "id": "eng-056",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "History is not the past. It is the present. We carry our history with us. We are our history.",
+    "tags": ["history", "philosophy"]
+  },
+  {
+    "id": "eng-057",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The true sign of intelligence is not knowledge but imagination. Let your mind explore uncharted territories.",
+    "tags": ["wisdom", "creativity"]
+  },
+  {
+    "id": "eng-058",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "In three words I can sum up everything I have learned about life: it goes on. Keep moving forward.",
+    "tags": ["wisdom", "life"]
+  },
+  {
+    "id": "eng-059",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The greatest glory in living lies not in never falling, but in rising every time we fall. Embrace resilience.",
+    "tags": ["motivation", "resilience"]
+  },
+  {
+    "id": "eng-060",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Education is the most powerful weapon which you can use to change the world. Knowledge is freedom.",
+    "tags": ["education", "wisdom"]
+  },
+  {
+    "id": "eng-061",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The function of education is to teach one to think intensively and to think critically. Intelligence plus character.",
+    "tags": ["education", "philosophy"]
+  },
+  {
+    "id": "eng-062",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "A ship in harbor is safe, but that is not what ships are built for. Sail towards your dreams fearlessly.",
+    "tags": ["travel", "motivation"]
+  },
+  {
+    "id": "eng-063",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The best way to predict the future is to create it. Your actions today shape your tomorrow.",
+    "tags": ["motivation", "business"]
+  },
+  {
+    "id": "eng-064",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Your body hears everything your mind says. Feed it positive thoughts and nourishing food every day.",
+    "tags": ["health", "wisdom"]
+  },
+  {
+    "id": "eng-065",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The difference between ordinary and extraordinary is that little extra. Go beyond what is expected.",
+    "tags": ["motivation", "excellence"]
+  },
+  {
+    "id": "eng-066",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "To live is the rarest thing in the world. Most people exist, that is all. Choose to truly live.",
+    "tags": ["philosophy", "life"]
+  },
+  {
+    "id": "eng-067",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The only limit to your impact is your imagination and commitment. Dream boldly, act purposefully.",
+    "tags": ["motivation", "business"]
+  },
+  {
+    "id": "eng-068",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Stars can only shine in the darkness. Your struggles are preparing you for something beautiful.",
+    "tags": ["space", "motivation"]
+  },
+  {
+    "id": "eng-069",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The more you know, the more you realize you know. Embrace lifelong learning as your greatest adventure.",
+    "tags": ["wisdom", "education"]
+  },
+  {
+    "id": "eng-070",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Success is walking from failure to failure with no loss of enthusiasm. Stay committed through challenges.",
+    "tags": ["motivation", "resilience"]
+  },
+  {
+    "id": "eng-071",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Logic will get you from A to B. Imagination will take you everywhere. Think creatively every day.",
+    "tags": ["wisdom", "creativity"]
+  },
+  {
+    "id": "eng-072",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The mind is not a vessel to be filled, but a fire to be kindled. Ignite your curiosity and passion.",
+    "tags": ["philosophy", "education"]
+  },
+  {
+    "id": "eng-073",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "Turn your wounds into wisdom. Every challenge is an opportunity to grow stronger and wiser.",
+    "tags": ["wisdom", "resilience"]
+  },
+  {
+    "id": "eng-074",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "A room without books is like a body without a soul. Fill your mind with knowledge and wonder.",
+    "tags": ["literature", "wisdom"]
+  },
+  {
+    "id": "eng-075",
+    "category": "english",
+    "difficulty": "medium",
+    "text": "The greatest wealth is contentment with little. Find happiness in simplicity and gratitude daily.",
+    "tags": ["wisdom", "life"]
+  },
+  {
+    "id": "eng-076",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The universe is under no obligation to make sense to you. Yet we persist in seeking understanding through science and mathematics.",
+    "tags": ["science", "space"]
+  },
+  {
+    "id": "eng-077",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "Any sufficiently advanced technology is indistinguishable from magic. We live in an age of wonders powered by human ingenuity.",
+    "tags": ["technology", "quote"]
+  },
+  {
+    "id": "eng-078",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "In the depth of winter, I finally learned that within me there lay an invincible summer. Our inner strength knows no bounds.",
+    "tags": ["philosophy", "resilience"]
+  },
+  {
+    "id": "eng-079",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The only true wisdom is in knowing you know nothing. Socrates reminds us that curiosity drives all meaningful discovery.",
+    "tags": ["philosophy", "wisdom"]
+  },
+  {
+    "id": "eng-080",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "Two things are infinite: the universe and human stupidity. And I am not sure about the universe. Einstein spoke truth with humor.",
+    "tags": ["science", "quote"]
+  },
+  {
+    "id": "eng-081",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The greatest enemy of clear language is insincerity. When one's mind is filled with pretense, words become a veil rather than a window.",
+    "tags": ["literature", "wisdom"]
+  },
+  {
+    "id": "eng-082",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "It is our choices that show what we truly are, far more than our abilities. Character is forged in the crucible of decision.",
+    "tags": ["philosophy", "wisdom"]
+  },
+  {
+    "id": "eng-083",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The purpose of computation is insight, not numbers. Mathematics is the language in which God has written the universe.",
+    "tags": ["programming", "science"]
+  },
+  {
+    "id": "eng-084",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "We are all in the gutter, but some of us are looking at the stars. Oscar Wilde understood the beauty of persistent dreaming.",
+    "tags": ["literature", "quote"]
+  },
+  {
+    "id": "eng-085",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The only way to do great work is to love what you do. Innovation distinguishes between a leader and a follower in business.",
+    "tags": ["business", "motivation"]
+  },
+  {
+    "id": "eng-086",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "We cannot solve our problems with the same thinking we used when we created them. Evolution of thought is essential for progress.",
+    "tags": ["philosophy", "science"]
+  },
+  {
+    "id": "eng-087",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The world is full of obvious things which nobody by any chance ever observes. Attention to detail separates the great from the good.",
+    "tags": ["wisdom", "observation"]
+  },
+  {
+    "id": "eng-088",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "I have not failed. I have just found ten thousand ways that will not work. Persistence is the mother of all invention.",
+    "tags": ["science", "motivation"]
+  },
+  {
+    "id": "eng-089",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The measure of intelligence is the ability to change. Adaptability is the key to survival in an ever-evolving world.",
+    "tags": ["philosophy", "wisdom"]
+  },
+  {
+    "id": "eng-090",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "In the middle of opportunity is difficulty. The impediment to action advances action. What stands in the way becomes the way.",
+    "tags": ["stoicism", "philosophy"]
+  },
+  {
+    "id": "eng-091",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "We do not see things as they are, we see them as we are. Our perception shapes our reality more than we realize.",
+    "tags": ["philosophy", "wisdom"]
+  },
+  {
+    "id": "eng-092",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The reasonable man adapts himself to the world. The unreasonable one persists in trying to adapt the world to himself.",
+    "tags": ["philosophy", "wisdom"]
+  },
+  {
+    "id": "eng-093",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "It is during our darkest moments that we must focus to see the light. Every shadow eventually yields to dawn.",
+    "tags": ["stoicism", "motivation"]
+  },
+  {
+    "id": "eng-094",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "Science is organized knowledge. Wisdom is organized life. The integration of both creates a meaningful existence.",
+    "tags": ["science", "philosophy"]
+  },
+  {
+    "id": "eng-095",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The important thing is not to stop questioning. Curiosity has its own reason for existing. Never lose your sense of wonder.",
+    "tags": ["science", "wisdom"]
+  },
+  {
+    "id": "eng-096",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "What we think, we become. The battlefield is in the mind, and victory is won through disciplined thought and persistent action.",
+    "tags": ["philosophy", "motivation"]
+  },
+  {
+    "id": "eng-097",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The greatest wealth is health, and the greatest wealth of all is a mind at peace. Mental clarity fuels every achievement.",
+    "tags": ["health", "wisdom"]
+  },
+  {
+    "id": "eng-098",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "A book must be the axe for the frozen sea within us. Literature has the power to transform consciousness and awaken dormant souls.",
+    "tags": ["literature", "art"]
+  },
+  {
+    "id": "eng-099",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The ocean is everything I want to be: beautiful, mysterious, wild, and free. There is wisdom in the waves.",
+    "tags": ["ocean", "nature"]
+  },
+  {
+    "id": "eng-100",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "Creativity takes courage. Art is not what you see, but what you make others see. Every canvas tells a story.",
+    "tags": ["art", "creativity"]
+  },
+  {
+    "id": "eng-101",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The function of prayer is not to influence God, but rather to change the nature of the one who prays. Inner transformation is the true miracle.",
+    "tags": ["philosophy", "wisdom"]
+  },
+  {
+    "id": "eng-102",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "Time you enjoy wasting is not wasted time. The wise person knows when to work hard and when to simply be present in the moment.",
+    "tags": ["wisdom", "life"]
+  },
+  {
+    "id": "eng-103",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The earth laughs in flowers. Nature's beauty is the ultimate artist, painting landscapes that inspire awe and humble the human spirit.",
+    "tags": ["nature", "art"]
+  },
+  {
+    "id": "eng-104",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "We are all made of stars, and to the stars we shall return. The cosmos is within us. We are a way for the universe to know itself.",
+    "tags": ["space", "philosophy"]
+  },
+  {
+    "id": "eng-105",
+    "category": "english",
+    "difficulty": "hard",
+    "text": "The only thing we have to fear is fear itself: nameless, unreasoning, unjustified terror which paralyzes needed efforts to convert retreat into advance.",
+    "tags": ["history", "wisdom"]
   }
 ]

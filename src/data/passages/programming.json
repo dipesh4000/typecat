@@ -1,146 +1,751 @@
 [
   {
-    "id": "prog-js-001",
+    "id": "prog-001",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "easy",
     "text": "const greeting = (name) => `Hello, ${name}!`;\nconsole.log(greeting('World'));",
-    "tags": ["functions", "template-literals"]
+    "tags": ["javascript", "functions", "template-literals"]
   },
   {
-    "id": "prog-js-002",
+    "id": "prog-002",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "easy",
     "text": "const numbers = [1, 2, 3, 4, 5];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled);",
-    "tags": ["arrays", "map"]
+    "tags": ["javascript", "arrays", "map"]
   },
   {
-    "id": "prog-js-003",
+    "id": "prog-003",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "easy",
-    "text": "const add = (a, b) => a + b;\nconst multiply = (a, b) => a * b;\n\nconsole.log(add(2, 3));\nconsole.log(multiply(4, 5));",
-    "tags": ["functions", "arrow-functions"]
+    "text": "const add = (a, b) => a + b;\nconst multiply = (a, b) => a * b;",
+    "tags": ["javascript", "functions", "arrow-functions"]
   },
   {
-    "id": "prog-js-004",
+    "id": "prog-004",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "easy",
     "text": "const fruits = ['apple', 'banana', 'cherry'];\nfruits.push('date');\nconsole.log(fruits.length);",
-    "tags": ["arrays", "methods"]
+    "tags": ["javascript", "arrays", "methods"]
   },
   {
-    "id": "prog-js-005",
+    "id": "prog-005",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "medium",
     "text": "const debounce = (fn, delay) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n};",
-    "tags": ["closures", "functions"]
+    "tags": ["javascript", "closures", "functions"]
   },
   {
-    "id": "prog-js-006",
+    "id": "prog-006",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "medium",
     "text": "const fetchData = async (url) => {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error('Network error');\n    return await response.json();\n  } catch (error) {\n    console.error('Fetch failed:', error);\n    throw error;\n  }\n};",
-    "tags": ["async", "error-handling"]
+    "tags": ["javascript", "async", "error-handling"]
   },
   {
-    "id": "prog-js-007",
+    "id": "prog-007",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "medium",
     "text": "const groupBy = (arr, key) => {\n  return arr.reduce((result, item) => {\n    const group = item[key];\n    if (!result[group]) result[group] = [];\n    result[group].push(item);\n    return result;\n  }, {});\n};",
-    "tags": ["arrays", "reduce"]
+    "tags": ["javascript", "arrays", "reduce"]
   },
   {
-    "id": "prog-js-008",
+    "id": "prog-008",
     "category": "programming",
-    "subcategory": "javascript",
     "difficulty": "hard",
     "text": "const deepClone = (obj) => {\n  if (obj === null || typeof obj !== 'object') return obj;\n  if (Array.isArray(obj)) return obj.map(item => deepClone(item));\n  return Object.fromEntries(\n    Object.entries(obj).map(([key, val]) => [key, deepClone(val)])\n  );\n};",
-    "tags": ["recursion", "objects"]
+    "tags": ["javascript", "recursion", "objects"]
   },
   {
-    "id": "prog-py-001",
+    "id": "prog-009",
     "category": "programming",
-    "subcategory": "python",
     "difficulty": "easy",
     "text": "def greet(name):\n    return f\"Hello, {name}!\"\n\nprint(greet(\"World\"))",
-    "tags": ["functions", "f-strings"]
+    "tags": ["python", "functions", "f-strings"]
   },
   {
-    "id": "prog-py-002",
+    "id": "prog-010",
     "category": "programming",
-    "subcategory": "python",
     "difficulty": "easy",
     "text": "numbers = [1, 2, 3, 4, 5]\nsquared = [n ** 2 for n in numbers]\nprint(squared)",
-    "tags": ["list-comprehension", "basics"]
+    "tags": ["python", "list-comprehension", "basics"]
   },
   {
-    "id": "prog-py-003",
+    "id": "prog-011",
     "category": "programming",
-    "subcategory": "python",
     "difficulty": "medium",
     "text": "def fibonacci(n):\n    if n <= 1:\n        return n\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "tags": ["algorithms", "loops"]
+    "tags": ["python", "algorithms", "loops"]
   },
   {
-    "id": "prog-py-004",
+    "id": "prog-012",
     "category": "programming",
-    "subcategory": "python",
     "difficulty": "medium",
     "text": "class Animal:\n    def __init__(self, name):\n        self.name = name\n    def speak(self):\n        raise NotImplementedError\n\nclass Dog(Animal):\n    def speak(self):\n        return f\"{self.name} says Woof!\"",
-    "tags": ["classes", "inheritance"]
+    "tags": ["python", "classes", "inheritance"]
   },
   {
-    "id": "prog-sql-001",
+    "id": "prog-013",
     "category": "programming",
-    "subcategory": "sql",
     "difficulty": "easy",
     "text": "SELECT name, email\nFROM users\nWHERE active = true\nORDER BY created_at DESC\nLIMIT 10;",
-    "tags": ["queries", "basics"]
+    "tags": ["sql", "queries", "basics"]
   },
   {
-    "id": "prog-sql-002",
+    "id": "prog-014",
     "category": "programming",
-    "subcategory": "sql",
     "difficulty": "easy",
     "text": "INSERT INTO users (name, email, created_at)\nVALUES ('Alice', 'alice@example.com', NOW());",
-    "tags": ["insert", "basics"]
+    "tags": ["sql", "insert", "basics"]
   },
   {
-    "id": "prog-sql-003",
+    "id": "prog-015",
     "category": "programming",
-    "subcategory": "sql",
     "difficulty": "medium",
     "text": "SELECT u.name, COUNT(o.id) as order_count\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nGROUP BY u.name\nHAVING COUNT(o.id) > 5\nORDER BY order_count DESC;",
-    "tags": ["joins", "aggregation"]
+    "tags": ["sql", "joins", "aggregation"]
   },
   {
-    "id": "prog-react-001",
+    "id": "prog-016",
     "category": "programming",
-    "subcategory": "react",
     "difficulty": "medium",
     "text": "const Counter = () => {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(c => c + 1)}>\n      Count: {count}\n    </button>\n  );\n};",
-    "tags": ["hooks", "state"]
+    "tags": ["react", "hooks", "state"]
   },
   {
-    "id": "prog-react-002",
+    "id": "prog-017",
     "category": "programming",
-    "subcategory": "react",
     "difficulty": "medium",
     "text": "const TodoList = ({ items }) => {\n  return (\n    <ul>\n      {items.map(item => (\n        <li key={item.id}>{item.text}</li>\n      ))}\n    </ul>\n  );\n};",
-    "tags": ["components", "lists"]
+    "tags": ["react", "components", "lists"]
   },
   {
-    "id": "prog-react-003",
+    "id": "prog-018",
     "category": "programming",
-    "subcategory": "react",
     "difficulty": "hard",
     "text": "const useDebounce = (value, delay) => {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n  useEffect(() => {\n    const handler = setTimeout(() => setDebouncedValue(value), delay);\n    return () => clearTimeout(handler);\n  }, [value, delay]);\n  return debouncedValue;\n};",
-    "tags": ["hooks", "custom-hooks"]
+    "tags": ["react", "hooks", "custom-hooks"]
+  },
+  {
+    "id": "prog-019",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "let x = 10;\nlet y = 20;\nlet sum = x + y;\nconsole.log(sum);",
+    "tags": ["javascript", "variables", "basics"]
+  },
+  {
+    "id": "prog-020",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "const isEven = (n) => n % 2 === 0;\nconsole.log(isEven(4));\nconsole.log(isEven(7));",
+    "tags": ["javascript", "functions", "conditionals"]
+  },
+  {
+    "id": "prog-021",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "const user = {\n  name: 'Alice',\n  age: 30,\n  email: 'alice@example.com'\n};\nconsole.log(user.name);",
+    "tags": ["javascript", "objects", "basics"]
+  },
+  {
+    "id": "prog-022",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "for (let i = 0; i < 5; i++) {\n  console.log(`Iteration ${i}`);\n}",
+    "tags": ["javascript", "loops", "for-loop"]
+  },
+  {
+    "id": "prog-023",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "const str = 'Hello World';\nconst upper = str.toUpperCase();\nconsole.log(upper);",
+    "tags": ["javascript", "strings", "methods"]
+  },
+  {
+    "id": "prog-024",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "const isPositive = (n) => n > 0;\nconst numbers = [-1, 2, -3, 4, 5];\nconst positive = numbers.filter(isPositive);",
+    "tags": ["javascript", "arrays", "filter"]
+  },
+  {
+    "id": "prog-025",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "def add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)",
+    "tags": ["python", "functions", "basics"]
+  },
+  {
+    "id": "prog-026",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "name = 'Alice'\nage = 25\nprint(f'{name} is {age} years old')",
+    "tags": ["python", "variables", "f-strings"]
+  },
+  {
+    "id": "prog-027",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "fruits = ['apple', 'banana', 'cherry']\nfor fruit in fruits:\n    print(fruit)",
+    "tags": ["python", "loops", "lists"]
+  },
+  {
+    "id": "prog-028",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "def is_even(n):\n    return n % 2 == 0\n\nprint(is_even(4))\nprint(is_even(7))",
+    "tags": ["python", "functions", "conditionals"]
+  },
+  {
+    "id": "prog-029",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "numbers = [1, 2, 3, 4, 5]\ntotal = sum(numbers)\nprint(total)",
+    "tags": ["python", "functions", "lists"]
+  },
+  {
+    "id": "prog-030",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "UPDATE users SET active = false\nWHERE last_login < '2024-01-01';",
+    "tags": ["sql", "update", "basics"]
+  },
+  {
+    "id": "prog-031",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "DELETE FROM logs\nWHERE created_at < '2023-01-01';",
+    "tags": ["sql", "delete", "basics"]
+  },
+  {
+    "id": "prog-032",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "SELECT DISTINCT category\nFROM products\nWHERE price > 100\nORDER BY category;",
+    "tags": ["sql", "queries", "distinct"]
+  },
+  {
+    "id": "prog-033",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(100) NOT NULL,\n  email VARCHAR(255) UNIQUE\n);",
+    "tags": ["sql", "ddl", "tables"]
+  },
+  {
+    "id": "prog-034",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "const Button = ({ label, onClick }) => {\n  return <button onClick={onClick}>{label}</button>;\n};",
+    "tags": ["react", "components", "props"]
+  },
+  {
+    "id": "prog-035",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "const [name, setName] = useState('');\nconst [email, setEmail] = useState('');",
+    "tags": ["react", "hooks", "state"]
+  },
+  {
+    "id": "prog-036",
+    "category": "programming",
+    "difficulty": "easy",
+    "text": "<div className=\"container\">\n  <h1>Hello</h1>\n  <p>Welcome to my app</p>\n</div>",
+    "tags": ["react", "jsx", "html"]
+  },
+  {
+    "id": "prog-037",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const pipe = (...fns) => (x) => fns.reduce((v, f) => f(v), x);\nconst add1 = x => x + 1;\nconst double = x => x * 2;\nconst result = pipe(add1, double)(3);",
+    "tags": ["javascript", "functional", "composition"]
+  },
+  {
+    "id": "prog-038",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const memoize = (fn) => {\n  const cache = new Map();\n  return (...args) => {\n    const key = JSON.stringify(args);\n    if (cache.has(key)) return cache.get(key);\n    const result = fn(...args);\n    cache.set(key, result);\n    return result;\n  };\n};",
+    "tags": ["javascript", "caching", "performance"]
+  },
+  {
+    "id": "prog-039",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const flatten = (arr) => {\n  return arr.reduce((acc, val) => {\n    return Array.isArray(val)\n      ? acc.concat(flatten(val))\n      : acc.concat(val);\n  }, []);\n};",
+    "tags": ["javascript", "recursion", "arrays"]
+  },
+  {
+    "id": "prog-040",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const throttle = (fn, limit) => {\n  let inThrottle;\n  return (...args) => {\n    if (!inThrottle) {\n      fn(...args);\n      inThrottle = true;\n      setTimeout(() => inThrottle = false, limit);\n    }\n  };\n};",
+    "tags": ["javascript", "performance", "timing"]
+  },
+  {
+    "id": "prog-041",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const deepMerge = (target, source) => {\n  const result = { ...target };\n  for (const key of Object.keys(source)) {\n    if (source[key] && typeof source[key] === 'object') {\n      result[key] = deepMerge(result[key] || {}, source[key]);\n    } else {\n      result[key] = source[key];\n    }\n  }\n  return result;\n};",
+    "tags": ["javascript", "objects", "recursion"]
+  },
+  {
+    "id": "prog-042",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const debounce = (fn, ms) => {\n  let timeout;\n  return function (...args) {\n    clearTimeout(timeout);\n    timeout = setTimeout(() => fn.apply(this, args), ms);\n  };\n};",
+    "tags": ["javascript", "closures", "performance"]
+  },
+  {
+    "id": "prog-043",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const partition = (arr, predicate) => {\n  return arr.reduce((result, item) => {\n    result[predicate(item) ? 0 : 1].push(item);\n    return result;\n  }, [[], []]);\n};",
+    "tags": ["javascript", "functional", "arrays"]
+  },
+  {
+    "id": "prog-044",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const capitalize = (str) => {\n  return str.replace(/\\b\\w/g, char => char.toUpperCase());\n};\n\nconsole.log(capitalize('hello world'));",
+    "tags": ["javascript", "strings", "regex"]
+  },
+  {
+    "id": "prog-045",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+    "tags": ["python", "algorithms", "search"]
+  },
+  {
+    "id": "prog-046",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)",
+    "tags": ["python", "algorithms", "sorting"]
+  },
+  {
+    "id": "prog-047",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def flatten(lst):\n    result = []\n    for item in lst:\n        if isinstance(item, list):\n            result.extend(flatten(item))\n        else:\n            result.append(item)\n    return result",
+    "tags": ["python", "recursion", "lists"]
+  },
+  {
+    "id": "prog-048",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "class Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, item):\n        self.items.append(item)\n    def pop(self):\n        return self.items.pop()\n    def is_empty(self):\n        return len(self.items) == 0",
+    "tags": ["python", "data-structure", "oop"]
+  },
+  {
+    "id": "prog-049",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def dict_comprehension_example():\n    words = ['hello', 'world', 'python']\n    lengths = {word: len(word) for word in words}\n    return lengths",
+    "tags": ["python", "comprehension", "dictionaries"]
+  },
+  {
+    "id": "prog-050",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  category,\n  AVG(price) as avg_price,\n  COUNT(*) as product_count\nFROM products\nGROUP BY category\nHAVING AVG(price) > 50\nORDER BY avg_price DESC;",
+    "tags": ["sql", "aggregation", "grouping"]
+  },
+  {
+    "id": "prog-051",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "WITH RECURSIVE category_tree AS (\n  SELECT id, name, parent_id\n  FROM categories\n  WHERE parent_id IS NULL\n  UNION ALL\n  SELECT c.id, c.name, c.parent_id\n  FROM categories c\n  JOIN category_tree ct ON c.parent_id = ct.id\n)\nSELECT * FROM category_tree;",
+    "tags": ["sql", "recursion", "hierarchical"]
+  },
+  {
+    "id": "prog-052",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  DATE_TRUNC('month', created_at) as month,\n  COUNT(*) as orders,\n  SUM(total) as revenue\nFROM orders\nWHERE created_at >= '2024-01-01'\nGROUP BY DATE_TRUNC('month', created_at)\nORDER BY month;",
+    "tags": ["sql", "date-functions", "analytics"]
+  },
+  {
+    "id": "prog-053",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  u.name,\n  u.email,\n  COUNT(o.id) as total_orders,\n  SUM(o.amount) as total_spent\nFROM users u\nJOIN orders o ON u.id = o.user_id\nWHERE o.created_at >= '2024-01-01'\nGROUP BY u.id, u.name, u.email\nHAVING SUM(o.amount) > 1000;",
+    "tags": ["sql", "joins", "analytics"]
+  },
+  {
+    "id": "prog-054",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "CREATE INDEX idx_orders_user_date\nON orders(user_id, created_at DESC)\nINCLUDE (amount);",
+    "tags": ["sql", "indexing", "performance"]
+  },
+  {
+    "id": "prog-055",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const useLocalStorage = (key, initialValue) => {\n  const [storedValue, setStoredValue] = useState(() => {\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch (error) {\n      return initialValue;\n    }\n  });\n  const setValue = (value) => {\n    setStoredValue(value);\n    window.localStorage.setItem(key, JSON.stringify(value));\n  };\n  return [storedValue, setValue];\n};",
+    "tags": ["react", "hooks", "local-storage"]
+  },
+  {
+    "id": "prog-056",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const ProtectedRoute = ({ children }) => {\n  const { user, loading } = useAuth();\n  if (loading) return <Spinner />;\n  if (!user) return <Navigate to=\"/login\" />;\n  return children;\n};",
+    "tags": ["react", "routing", "authentication"]
+  },
+  {
+    "id": "prog-057",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const useFetch = (url) => {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch(url)\n      .then(res => res.json())\n      .then(setData)\n      .catch(setError)\n      .finally(() => setLoading(false));\n  }, [url]);\n  return { data, loading, error };\n};",
+    "tags": ["react", "hooks", "data-fetching"]
+  },
+  {
+    "id": "prog-058",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const Form = () => {\n  const { register, handleSubmit, formState: { errors } } = useForm();\n  const onSubmit = (data) => console.log(data);\n  return (\n    <form onSubmit={handleSubmit(onSubmit)}>\n      <input {...register('name', { required: true })} />\n      {errors.name && <span>Name is required</span>}\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n};",
+    "tags": ["react", "forms", "validation"]
+  },
+  {
+    "id": "prog-059",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const App = () => {\n  return (\n    <QueryClientProvider client={queryClient}>\n      <AuthProvider>\n        <Router>\n          <Routes>\n            <Route path=\"/\" element={<Home />} />\n            <Route path=\"/about\" element={<About />} />\n          </Routes>\n        </Router>\n      </AuthProvider>\n    </QueryClientProvider>\n  );\n};",
+    "tags": ["react", "providers", "routing"]
+  },
+  {
+    "id": "prog-060",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "class EventEmitter {\n  constructor() {\n    this.events = {};\n  }\n  on(event, callback) {\n    if (!this.events[event]) this.events[event] = [];\n    this.events[event].push(callback);\n  }\n  emit(event, ...args) {\n    if (this.events[event]) {\n      this.events[event].forEach(cb => cb(...args));\n    }\n  }\n}",
+    "tags": ["javascript", "design-pattern", "oop"]
+  },
+  {
+    "id": "prog-061",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const retry = async (fn, retries = 3, delay = 1000) => {\n  for (let i = 0; i < retries; i++) {\n    try {\n      return await fn();\n    } catch (error) {\n      if (i === retries - 1) throw error;\n      await new Promise(r => setTimeout(r, delay * (i + 1)));\n    }\n  }\n};",
+    "tags": ["javascript", "async", "error-handling"]
+  },
+  {
+    "id": "prog-062",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "classLRUCache {\n  constructor(capacity) {\n    this.capacity = capacity;\n    this.cache = new Map();\n  }\n  get(key) {\n    if (!this.cache.has(key)) return -1;\n    const value = this.cache.get(key);\n    this.cache.delete(key);\n    this.cache.set(key, value);\n    return value;\n  }\n  put(key, value) {\n    if (this.cache.has(key)) this.cache.delete(key);\n    this.cache.set(key, value);\n    if (this.cache.size > this.capacity) {\n      this.cache.delete(this.cache.keys().next().value);\n    }\n  }\n}",
+    "tags": ["javascript", "data-structure", "caching"]
+  },
+  {
+    "id": "prog-063",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def quick_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    pivot = arr[len(arr) // 2]\n    left = [x for x in arr if x < pivot]\n    middle = [x for x in arr if x == pivot]\n    right = [x for x in arr if x > pivot]\n    return quick_sort(left) + middle + quick_sort(right)",
+    "tags": ["python", "algorithms", "sorting"]
+  },
+  {
+    "id": "prog-064",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "class Queue:\n    def __init__(self):\n        self.items = []\n    def enqueue(self, item):\n        self.items.insert(0, item)\n    def dequeue(self):\n        return self.items.pop()\n    def is_empty(self):\n        return len(self.items) == 0",
+    "tags": ["python", "data-structure", "oop"]
+  },
+  {
+    "id": "prog-065",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def decorator_example(func):\n    def wrapper(*args, **kwargs):\n        print(f\"Calling {func.__name__}\")\n        result = func(*args, **kwargs)\n        print(f\"Called {func.__name__}\")\n        return result\n    return wrapper",
+    "tags": ["python", "decorators", "functions"]
+  },
+  {
+    "id": "prog-066",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def fibonacci_generator(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\nfor num in fibonacci_generator(10):\n    print(num)",
+    "tags": ["python", "generators", "iteration"]
+  },
+  {
+    "id": "prog-067",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def dictionary_merge(base, override):\n    result = base.copy()\n    for key, value in override.items():\n        if isinstance(value, dict) and isinstance(result.get(key), dict):\n            result[key] = dictionary_merge(result[key], value)\n        else:\n            result[key] = value\n    return result",
+    "tags": ["python", "recursion", "dictionaries"]
+  },
+  {
+    "id": "prog-068",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  s.name as student_name,\n  AVG(g.grade) as average_grade,\n  CASE \n    WHEN AVG(g.grade) >= 90 THEN 'A'\n    WHEN AVG(g.grade) >= 80 THEN 'B'\n    WHEN AVG(g.grade) >= 70 THEN 'C'\n    ELSE 'F'\n  END as letter_grade\nFROM students s\nJOIN grades g ON s.id = g.student_id\nGROUP BY s.id, s.name;",
+    "tags": ["sql", "case-when", "aggregation"]
+  },
+  {
+    "id": "prog-069",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  p.product_name,\n  p.price,\n  c.category_name,\n  RANK() OVER (PARTITION BY c.category_name ORDER BY p.price DESC) as price_rank\nFROM products p\nJOIN categories c ON p.category_id = c.id;",
+    "tags": ["sql", "window-functions", "ranking"]
+  },
+  {
+    "id": "prog-070",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "CREATE OR REPLACE FUNCTION update_timestamp()\nRETURNS TRIGGER AS $$\nBEGIN\n  NEW.updated_at = NOW();\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER set_timestamp\nBEFORE UPDATE ON users\nFOR EACH ROW\nEXECUTE FUNCTION update_timestamp();",
+    "tags": ["sql", "triggers", "functions"]
+  },
+  {
+    "id": "prog-071",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  DATE_TRUNC('day', created_at) as day,\n  COUNT(*) as daily_orders,\n  SUM(amount) as daily_revenue,\n  AVG(amount) as avg_order_value\nFROM orders\nWHERE created_at >= CURRENT_DATE - INTERVAL '30 days'\nGROUP BY DATE_TRUNC('day', created_at)\nORDER BY day;",
+    "tags": ["sql", "time-series", "analytics"]
+  },
+  {
+    "id": "prog-072",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const useMediaQuery = (query) => {\n  const [matches, setMatches] = useState(false);\n  useEffect(() => {\n    const media = window.matchMedia(query);\n    setMatches(media.matches);\n    const listener = (e) => setMatches(e.matches);\n    media.addEventListener('change', listener);\n    return () => media.removeEventListener('change', listener);\n  }, [query]);\n  return matches;\n};",
+    "tags": ["react", "hooks", "responsive"]
+  },
+  {
+    "id": "prog-073",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const usePagination = (totalItems, itemsPerPage) => {\n  const [currentPage, setCurrentPage] = useState(1);\n  const totalPages = Math.ceil(totalItems / itemsPerPage);\n  const goToPage = (page) => setCurrentPage(Math.max(1, Math.min(page, totalPages)));\n  const goToNext = () => goToPage(currentPage + 1);\n  const goToPrev = () => goToPage(currentPage - 1);\n  return { currentPage, totalPages, goToPage, goToNext, goToPrev };\n};",
+    "tags": ["react", "hooks", "pagination"]
+  },
+  {
+    "id": "prog-074",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "class Subject {\n  constructor() {\n    this.observers = [];\n  }\n  subscribe(observer) {\n    this.observers.push(observer);\n  }\n  unsubscribe(observer) {\n    this.observers = this.observers.filter(o => o !== observer);\n  }\n  notify(data) {\n    this.observers.forEach(observer => observer.update(data));\n  }\n}",
+    "tags": ["javascript", "design-pattern", "observer"]
+  },
+  {
+    "id": "prog-075",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const createLogger = (prefix) => {\n  return {\n    log: (msg) => console.log(`[${prefix}] ${msg}`),\n    error: (msg) => console.error(`[${prefix}] ERROR: ${msg}`),\n    warn: (msg) => console.warn(`[${prefix}] WARN: ${msg}`)\n  };\n};",
+    "tags": ["javascript", "factory", "logging"]
+  },
+  {
+    "id": "prog-076",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const compose = (...fns) => {\n  return (x) => fns.reduceRight((acc, fn) => fn(acc), x);\n};\n\nconst add1 = x => x + 1;\nconst double = x => x * 2;\nconst square = x => x * x;\n\nconst transform = compose(square, double, add1);\nconsole.log(transform(3));",
+    "tags": ["javascript", "functional", "composition"]
+  },
+  {
+    "id": "prog-077",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const curry = (fn) => {\n  return function curried(...args) {\n    if (args.length >= fn.length) {\n      return fn.apply(this, args);\n    }\n    return (...args2) => curried(...args, ...args2);\n  };\n};",
+    "tags": ["javascript", "functional", "currying"]
+  },
+  {
+    "id": "prog-078",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def memoize(func):\n    cache = {}\n    def wrapper(*args):\n        if args not in cache:\n            cache[args] = func(*args)\n        return cache[args]\n    return wrapper\n\n@memoize\ndef expensive_calculation(n):\n    return sum(i ** 2 for i in range(n))",
+    "tags": ["python", "decorators", "caching"]
+  },
+  {
+    "id": "prog-079",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def context_manager_example():\n    class FileManager:\n        def __init__(self, filename, mode):\n            self.filename = filename\n            self.mode = mode\n            self.file = None\n        def __enter__(self):\n            self.file = open(self.filename, self.mode)\n            return self.file\n        def __exit__(self, exc_type, exc_val, exc_tb):\n            if self.file:\n                self.file.close()",
+    "tags": ["python", "context-manager", "oop"]
+  },
+  {
+    "id": "prog-080",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "SELECT \n  DATE(created_at) as signup_date,\n  COUNT(*) as signups,\n  SUM(CASE WHEN verified = true THEN 1 ELSE 0 END) as verified,\n  ROUND(100.0 * SUM(CASE WHEN verified = true THEN 1 ELSE 0 END) / COUNT(*), 1) as verification_rate\nFROM users\nWHERE created_at >= '2024-01-01'\nGROUP BY DATE(created_at)\nORDER BY signup_date;",
+    "tags": ["sql", "analytics", "conversion"]
+  },
+  {
+    "id": "prog-081",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "WITH monthly_revenue AS (\n  SELECT \n    DATE_TRUNC('month', created_at) as month,\n    SUM(amount) as revenue\n  FROM orders\n  GROUP BY 1\n)\nSELECT \n  month,\n  revenue,\n  LAG(revenue) OVER (ORDER BY month) as prev_month,\n  revenue - LAG(revenue) OVER (ORDER BY month) as growth\nFROM monthly_revenue;",
+    "tags": ["sql", "window-functions", "time-series"]
+  },
+  {
+    "id": "prog-082",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const useClickOutside = (ref, callback) => {\n  useEffect(() => {\n    const handleClick = (e) => {\n      if (ref.current && !ref.current.contains(e.target)) {\n        callback();\n      }\n    };\n    document.addEventListener('mousedown', handleClick);\n    return () => document.removeEventListener('mousedown', handleClick);\n  }, [ref, callback]);\n};",
+    "tags": ["react", "hooks", "events"]
+  },
+  {
+    "id": "prog-083",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "class Singleton {\n  static #instance;\n  static getInstance() {\n    if (!Singleton.#instance) {\n      Singleton.#instance = new Singleton();\n    }\n    return Singleton.#instance;\n  }\n  #data = [];\n  add(item) {\n    this.#data.push(item);\n  }\n  getAll() {\n    return [...this.#data];\n  }\n}",
+    "tags": ["javascript", "design-pattern", "singleton"]
+  },
+  {
+    "id": "prog-084",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "const memoize = (fn, maxSize = 100) => {\n  const cache = new Map();\n  return (...args) => {\n    const key = JSON.stringify(args);\n    if (cache.has(key)) return cache.get(key);\n    if (cache.size >= maxSize) cache.delete(cache.keys().next().value);\n    const result = fn(...args);\n    cache.set(key, result);\n    return result;\n  };\n};",
+    "tags": ["javascript", "caching", "performance"]
+  },
+  {
+    "id": "prog-085",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def tree_traversal(root):\n    if root is None:\n        return []\n    result = []\n    stack = [root]\n    while stack:\n        node = stack.pop()\n        result.append(node.value)\n        if node.right:\n            stack.append(node.right)\n        if node.left:\n            stack.append(node.left)\n    return result",
+    "tags": ["python", "data-structure", "tree"]
+  },
+  {
+    "id": "prog-086",
+    "category": "programming",
+    "difficulty": "medium",
+    "text": "def singleton(cls):\n    instances = {}\n    def get_instance(*args, **kwargs):\n        if cls not in instances:\n            instances[cls] = cls(*args, **kwargs)\n        return instances[cls]\n    return get_instance",
+    "tags": ["python", "design-pattern", "singleton"]
+  },
+  {
+    "id": "prog-087",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class EventBus {\n  constructor() {\n    this.listeners = new Map();\n  }\n  on(event, callback) {\n    if (!this.listeners.has(event)) {\n      this.listeners.set(event, new Set());\n    }\n    this.listeners.get(event).add(callback);\n    return () => this.listeners.get(event).delete(callback);\n  }\n  emit(event, data) {\n    if (this.listeners.has(event)) {\n      this.listeners.get(event).forEach(callback => callback(data));\n    }\n  }\n}",
+    "tags": ["javascript", "design-pattern", "pub-sub"]
+  },
+  {
+    "id": "prog-088",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createAsyncQueue = (concurrency = 3) => {\n  let running = 0;\n  const queue = [];\n  const processNext = () => {\n    if (running >= concurrency || queue.length === 0) return;\n    const { task, resolve, reject } = queue.shift();\n    running++;\n    task()\n      .then(resolve, reject)\n      .finally(() => {\n        running--;\n        processNext();\n      });\n  };\n  return (task) => {\n    return new Promise((resolve, reject) => {\n      queue.push({ task, resolve, reject });\n      processNext();\n    });\n  };\n};",
+    "tags": ["javascript", "async", "concurrency"]
+  },
+  {
+    "id": "prog-089",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const reactive = (obj) => {\n  const listeners = new Map();\n  const handler = {\n    get(target, prop, receiver) {\n      const value = Reflect.get(target, prop, receiver);\n      if (typeof value === 'object' && value !== null) {\n        return reactive(value);\n      }\n      return value;\n    },\n    set(target, prop, value, receiver) {\n      const oldValue = target[prop];\n      const result = Reflect.set(target, prop, value, receiver);\n      if (oldValue !== value && listeners.has(prop)) {\n        listeners.get(prop).forEach(cb => cb(value, oldValue));\n      }\n      return result;\n    }\n  };\n  return new Proxy(obj, handler);\n};",
+    "tags": ["javascript", "proxy", "reactive"]
+  },
+  {
+    "id": "prog-090",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class Trie {\n  constructor() {\n    this.root = { children: {}, isEnd: false };\n  }\n  insert(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children[char]) {\n        node.children[char] = { children: {}, isEnd: false };\n      }\n      node = node.children[char];\n    }\n    node.isEnd = true;\n  }\n  search(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children[char]) return false;\n      node = node.children[char];\n    }\n    return node.isEnd;\n  }\n}",
+    "tags": ["javascript", "data-structure", "trie"]
+  },
+  {
+    "id": "prog-091",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createEventEmitter = () => {\n  const events = {};\n  return {\n    on(event, callback) {\n      if (!events[event]) events[event] = [];\n      events[event].push(callback);\n    },\n    emit(event, ...args) {\n      if (events[event]) {\n        events[event].forEach(callback => callback(...args));\n      }\n    },\n    once(event, callback) {\n      const wrapper = (...args) => {\n        callback(...args);\n        this.off(event, wrapper);\n      };\n      this.on(event, wrapper);\n    },\n    off(event, callback) {\n      if (events[event]) {\n        events[event] = events[event].filter(cb => cb !== callback);\n      }\n    }\n  };\n};",
+    "tags": ["javascript", "design-pattern", "events"]
+  },
+  {
+    "id": "prog-092",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class PromisePool {\n  constructor(promises, concurrency) {\n    this.promises = promises;\n    this.concurrency = concurrency;\n  }\n  async run() {\n    const results = [];\n    const executing = new Set();\n    for (const promise of this.promises) {\n      const p = promise.then(result => {\n        executing.delete(p);\n        results.push(result);\n      });\n      executing.add(p);\n      if (executing.size >= this.concurrency) {\n        await Promise.race(executing);\n      }\n    }\n    await Promise.all(executing);\n    return results;\n  }\n}",
+    "tags": ["javascript", "async", "concurrency"]
+  },
+  {
+    "id": "prog-093",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createFSM = (states, transitions) => {\n  let currentState = states.initial;\n  const listeners = new Set();\n  return {\n    getState: () => currentState,\n    transition: (event) => {\n      const transition = transitions[currentState]?.[event];\n      if (transition) {\n        const oldState = currentState;\n        currentState = transition;\n        listeners.forEach(cb => cb(oldState, currentState, event));\n        return true;\n      }\n      return false;\n    },\n    subscribe: (cb) => {\n      listeners.add(cb);\n      return () => listeners.delete(cb);\n    }\n  };\n};",
+    "tags": ["javascript", "design-pattern", "state-machine"]
+  },
+  {
+    "id": "prog-094",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class BinarySearchTree {\n  constructor() {\n    this.root = null;\n  }\n  insert(value) {\n    const node = { value, left: null, right: null };\n    if (!this.root) {\n      this.root = node;\n      return;\n    }\n    let current = this.root;\n    while (true) {\n      if (value < current.value) {\n        if (!current.left) {\n          current.left = node;\n          return;\n        }\n        current = current.left;\n      } else {\n        if (!current.right) {\n          current.right = node;\n          return;\n        }\n        current = current.right;\n      }\n    }\n  }\n}",
+    "tags": ["javascript", "data-structure", "binary-tree"]
+  },
+  {
+    "id": "prog-095",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class Graph {\n  constructor() {\n    this.adjacencyList = {};\n  }\n  addVertex(vertex) {\n    if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n  }\n  addEdge(vertex1, vertex2) {\n    this.adjacencyList[vertex1].push(vertex2);\n    this.adjacencyList[vertex2].push(vertex1);\n  }\n  dfs(start, callback) {\n    const visited = new Set();\n    const stack = [start];\n    while (stack.length) {\n      const vertex = stack.pop();\n      if (!visited.has(vertex)) {\n        visited.add(vertex);\n        callback(vertex);\n        this.adjacencyList[vertex].forEach(neighbor => stack.push(neighbor));\n      }\n    }\n  }\n}",
+    "tags": ["javascript", "data-structure", "graph"]
+  },
+  {
+    "id": "prog-096",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createVirtualDOM = (type, props, ...children) => {\n  return {\n    type,\n    props: {\n      ...props,\n      children: children.map(child => \n        typeof child === 'object' ? child : createVirtualDOM('TEXT', { text: child })\n      )\n    }\n  };\n};",
+    "tags": ["javascript", "virtual-dom", "implementation"]
+  },
+  {
+    "id": "prog-097",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class LRUCache {\n  constructor(capacity) {\n    this.capacity = capacity;\n    this.cache = new Map();\n  }\n  get(key) {\n    if (!this.cache.has(key)) return -1;\n    const value = this.cache.get(key);\n    this.cache.delete(key);\n    this.cache.set(key, value);\n    return value;\n  }\n  put(key, value) {\n    if (this.cache.has(key)) this.cache.delete(key);\n    this.cache.set(key, value);\n    if (this.cache.size > this.capacity) {\n      this.cache.delete(this.cache.keys().next().value);\n    }\n  }\n}",
+    "tags": ["javascript", "data-structure", "cache"]
+  },
+  {
+    "id": "prog-098",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createObservable = (factory) => {\n  const subscribers = new Set();\n  let value = undefined;\n  const observable = {\n    subscribe: (callback) => {\n      subscribers.add(callback);\n      callback(value);\n      return () => subscribers.delete(callback);\n    },\n    set: (newValue) => {\n      value = newValue;\n      subscribers.forEach(cb => cb(value));\n    },\n    get: () => value\n  };\n  if (factory) value = factory(observable);\n  return observable;\n};",
+    "tags": ["javascript", "reactive", "observable"]
+  },
+  {
+    "id": "prog-099",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class PriorityQueue {\n  constructor(comparator = (a, b) => a < b) {\n    this.heap = [];\n    this.comparator = comparator;\n  }\n  push(value) {\n    this.heap.push(value);\n    this.bubbleUp(this.heap.length - 1);\n  }\n  pop() {\n    const min = this.heap[0];\n    const last = this.heap.pop();\n    if (this.heap.length > 0) {\n      this.heap[0] = last;\n      this.sinkDown(0);\n    }\n    return min;\n  }\n  bubbleUp(idx) {\n    while (idx > 0) {\n      const parentIdx = Math.floor((idx - 1) / 2);\n      if (this.comparator(this.heap[idx], this.heap[parentIdx])) {\n        [this.heap[idx], this.heap[parentIdx]] = [this.heap[parentIdx], this.heap[idx]];\n        idx = parentIdx;\n      } else break;\n    }\n  }\n  sinkDown(idx) {\n    while (true) {\n      let smallest = idx;\n      const left = 2 * idx + 1;\n      const right = 2 * idx + 2;\n      if (left < this.heap.length && this.comparator(this.heap[left], this.heap[smallest])) smallest = left;\n      if (right < this.heap.length && this.comparator(this.heap[right], this.heap[smallest])) smallest = right;\n      if (smallest !== idx) {\n        [this.heap[idx], this.heap[smallest]] = [this.heap[smallest], this.heap[idx]];\n        idx = smallest;\n      } else break;\n    }\n  }\n}",
+    "tags": ["javascript", "data-structure", "heap"]
+  },
+  {
+    "id": "prog-100",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class DoublyLinkedList {\n  constructor() {\n    this.head = null;\n    this.tail = null;\n    this.size = 0;\n  }\n  append(value) {\n    const node = { value, next: null, prev: null };\n    if (!this.head) {\n      this.head = this.tail = node;\n    } else {\n      this.tail.next = node;\n      node.prev = this.tail;\n      this.tail = node;\n    }\n    this.size++;\n  }\n  remove(value) {\n    let current = this.head;\n    while (current) {\n      if (current.value === value) {\n        if (current.prev) current.prev.next = current.next;\n        else this.head = current.next;\n        if (current.next) current.next.prev = current.prev;\n        else this.tail = current.prev;\n        this.size--;\n        return true;\n      }\n      current = current.next;\n    }\n    return false;\n  }\n}",
+    "tags": ["javascript", "data-structure", "linked-list"]
+  },
+  {
+    "id": "prog-101",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class EventEmitter {\n  constructor() {\n    this.events = new Map();\n  }\n  on(event, callback) {\n    if (!this.events.has(event)) {\n      this.events.set(event, new Set());\n    }\n    this.events.get(event).add(callback);\n    return () => this.events.get(event)?.delete(callback);\n  }\n  emit(event, ...args) {\n    const callbacks = this.events.get(event);\n    if (callbacks) {\n      callbacks.forEach(callback => {\n        try {\n          callback(...args);\n        } catch (error) {\n          console.error(`Error in event handler for ${event}:`, error);\n        }\n      });\n    }\n  }\n}",
+    "tags": ["javascript", "design-pattern", "events"]
+  },
+  {
+    "id": "prog-102",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class PubSub {\n  constructor() {\n    this.subscribers = {};\n  }\n  subscribe(topic, callback) {\n    if (!this.subscribers[topic]) {\n      this.subscribers[topic] = new Set();\n    }\n    this.subscribers[topic].add(callback);\n    return () => this.subscribers[topic].delete(callback);\n  }\n  publish(topic, data) {\n    const callbacks = this.subscribers[topic];\n    if (callbacks) {\n      callbacks.forEach(callback => callback(data));\n    }\n  }\n  unsubscribe(topic, callback) {\n    this.subscribers[topic]?.delete(callback);\n  }\n}",
+    "tags": ["javascript", "design-pattern", "pub-sub"]
+  },
+  {
+    "id": "prog-103",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createImmer = (producer) => {\n  return (state) => {\n    const draft = JSON.parse(JSON.stringify(state));\n    producer(draft);\n    return draft;\n  };\n};\n\nconst nextState = createImmer((state) => {\n  state.users.push({ id: 3, name: 'Bob' });\n  state.count += 1;\n})(previousState);",
+    "tags": ["javascript", "immutability", "state"]
+  },
+  {
+    "id": "prog-104",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "const createReducer = (initialState, handlers) => {\n  return (state = initialState, action) => {\n    const handler = handlers[action.type];\n    return handler ? handler(state, action) : state;\n  };\n};\n\nconst reducer = createReducer(\n  { count: 0 },\n  {\n    INCREMENT: (state, action) => ({ ...state, count: state.count + 1 }),\n    DECREMENT: (state, action) => ({ ...state, count: state.count - 1 }),\n    RESET: () => ({ count: 0 })\n  }\n);",
+    "tags": ["javascript", "redux", "state"]
+  },
+  {
+    "id": "prog-105",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class CommandManager {\n  constructor() {\n    this.history = [];\n    this.undone = [];\n  }\n  execute(command) {\n    command.execute();\n    this.history.push(command);\n    this.undone = [];\n  }\n  undo() {\n    const command = this.history.pop();\n    if (command) {\n      command.undo();\n      this.undone.push(command);\n    }\n  }\n  redo() {\n    const command = this.undone.pop();\n    if (command) {\n      command.execute();\n      this.history.push(command);\n    }\n  }\n}",
+    "tags": ["javascript", "design-pattern", "command"]
+  },
+  {
+    "id": "prog-106",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class Strategy {\n  constructor() {\n    this.strategies = {};\n  }\n  register(name, strategy) {\n    this.strategies[name] = strategy;\n  }\n  execute(name, ...args) {\n    const strategy = this.strategies[name];\n    if (!strategy) throw new Error(`Strategy ${name} not found`);\n    return strategy(...args);\n  }\n}",
+    "tags": ["javascript", "design-pattern", "strategy"]
+  },
+  {
+    "id": "prog-107",
+    "category": "programming",
+    "difficulty": "hard",
+    "text": "class Mediator {\n  constructor() {\n    this.components = new Map();\n  }\n  register(name, component) {\n    component.setMediator(this);\n    this.components.set(name, component);\n  }\n  notify(sender, event, data) {\n    this.components.forEach((component, name) => {\n      if (name !== sender) {\n        component.handle(event, data);\n      }\n    });\n  }\n}",
+    "tags": ["javascript", "design-pattern", "mediator"]
   }
 ]

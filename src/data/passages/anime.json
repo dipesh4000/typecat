@@ -1,122 +1,737 @@
 [
   {
-    "id": "anime-001",
+    "id": "ani-001",
     "category": "anime",
     "difficulty": "easy",
-    "text": "I'm going to be King of the Pirates! - Monkey D. Luffy, One Piece",
-    "source": "One Piece",
-    "tags": ["adventure", "shonen"]
+    "text": "I'm going to be King of the Pirates!",
+    "tags": ["one-piece", "adventure", "shonen"]
   },
   {
-    "id": "anime-002",
+    "id": "ani-002",
     "category": "anime",
     "difficulty": "easy",
-    "text": "Believe it! I never go back on my word, that is my nindo. - Naruto Uzumaki",
-    "source": "Naruto",
-    "tags": ["shonen", "ninja"]
+    "text": "Believe it! I never go back on my word, that is my nindo.",
+    "tags": ["naruto", "shonen", "ninja"]
   },
   {
-    "id": "anime-003",
+    "id": "ani-003",
     "category": "anime",
     "difficulty": "easy",
-    "text": "I am going to be the very best, like no one ever was. To catch them is my real test, to train them is my cause.",
-    "source": "Pokemon",
-    "tags": ["adventure", "shonen"]
+    "text": "The world isn't perfect. But it's there for us, doing the best it can.",
+    "tags": ["hunter-x-hunter", "philosophy"]
   },
   {
-    "id": "anime-004",
+    "id": "ani-004",
     "category": "anime",
     "difficulty": "easy",
-    "text": "The world isn't perfect. But it's there for us, doing the best it can, and that's what makes it so damn beautiful.",
-    "source": "Hunter x Hunter",
-    "tags": ["adventure", "philosophy"]
-  },
-  {
-    "id": "anime-005",
-    "category": "anime",
-    "difficulty": "medium",
     "text": "Whatever you lose, you'll find it again. But whatever you give away, you'll keep forever.",
-    "source": "Fairy Tail",
-    "tags": ["friendship", "adventure"]
+    "tags": ["fairy-tail", "friendship"]
   },
   {
-    "id": "anime-006",
-    "category": "anime",
-    "difficulty": "medium",
-    "text": "I will become the Hokage! That is my dream! I never go back on my word because that is my ninja way!",
-    "source": "Naruto",
-    "tags": ["shonen", "determination"]
-  },
-  {
-    "id": "anime-007",
-    "category": "anime",
-    "difficulty": "medium",
-    "text": "To know what you prefer instead of humbly saying Amen to what the world tells you you ought to prefer, is to have kept your soul alive.",
-    "source": "Mushishi",
-    "tags": ["philosophy", "life"]
-  },
-  {
-    "id": "anime-008",
-    "category": "anime",
-    "difficulty": "medium",
-    "text": "The moment you give up is the moment you let someone else win. But the moment you keep trying is the moment you win.",
-    "source": "Haikyuu",
-    "tags": ["sports", "determination"]
-  },
-  {
-    "id": "anime-009",
-    "category": "anime",
-    "difficulty": "hard",
-    "text": "The pain of being alone is completely out of this world, isn't it? I don't know why, but I understand your feelings so much.",
-    "source": "Naruto",
-    "tags": ["emotion", "loneliness"]
-  },
-  {
-    "id": "anime-010",
-    "category": "anime",
-    "difficulty": "hard",
-    "text": "I hate so many things about the way that you treat me. You never take anything seriously. You treat everything like a game.",
-    "source": "Fullmetal Alchemist",
-    "tags": ["drama", "philosophy"]
-  },
-  {
-    "id": "anime-011",
-    "category": "anime",
-    "difficulty": "hard",
-    "text": "If you only face forward, you cannot see what is behind you. But if you look back, you cannot move forward. So keep moving ahead.",
-    "source": "Attack on Titan",
-    "tags": ["action", "philosophy"]
-  },
-  {
-    "id": "anime-012",
-    "category": "anime",
-    "difficulty": "hard",
-    "text": "The thing I hate the most is not being able to protect the people I care about. That is why I will become stronger.",
-    "source": "My Hero Academia",
-    "tags": ["shonen", "heroism"]
-  },
-  {
-    "id": "anime-013",
-    "category": "anime",
-    "difficulty": "easy",
-    "text": "I'm not a hero because I want people to praise me. I'm a hero because I want to save people who are crying.",
-    "source": "My Hero Academia",
-    "tags": ["heroism", "inspiration"]
-  },
-  {
-    "id": "anime-014",
-    "category": "anime",
-    "difficulty": "medium",
-    "text": "The scariest thing about death is that it comes without warning. One day you are alive, and the next you are gone forever.",
-    "source": "One Piece",
-    "tags": ["adventure", "philosophy"]
-  },
-  {
-    "id": "anime-015",
+    "id": "ani-005",
     "category": "anime",
     "difficulty": "easy",
     "text": "Even if I am not strong enough, I will still fight. Because that is what it means to be a swordsman.",
-    "source": "Demon Slayer",
-    "tags": ["action", "determination"]
+    "tags": ["demon-slayer", "action", "determination"]
+  },
+  {
+    "id": "ani-006",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I'm not a hero because I want people to praise me. I'm a hero because I want to save people who are crying.",
+    "tags": ["my-hero-academia", "heroism"]
+  },
+  {
+    "id": "ani-007",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The moment you give up is the moment you let someone else win.",
+    "tags": ["haikyuu", "sports", "determination"]
+  },
+  {
+    "id": "ani-008",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "A lesson without pain is meaningless.",
+    "tags": ["fullmetal-alchemist", "philosophy"]
+  },
+  {
+    "id": "ani-009",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I will become the Hokage! That is my dream!",
+    "tags": ["naruto", "shonen", "determination"]
+  },
+  {
+    "id": "ani-010",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "People's lives don't end when they die. It ends when they lose faith.",
+    "tags": ["attack-on-titan", "philosophy"]
+  },
+  {
+    "id": "ani-011",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The scar you can't see is the one that hurts the most.",
+    "tags": ["demon-slayer", "emotion"]
+  },
+  {
+    "id": "ani-012",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "A swordsman who does not protect his friends is not a real swordsman.",
+    "tags": ["one-piece", "friendship"]
+  },
+  {
+    "id": "ani-013",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I refuse to let my past dictate my future.",
+    "tags": ["vinland-saga", "redemption"]
+  },
+  {
+    "id": "ani-014",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The real problem is not whether machines think but whether men do.",
+    "tags": ["steins-gate", "philosophy"]
+  },
+  {
+    "id": "ani-015",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "If you don't take risks, you can't create a future.",
+    "tags": ["one-piece", "adventure"]
+  },
+  {
+    "id": "ani-016",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I am atomic.",
+    "tags": ["solo-leveling", "action"]
+  },
+  {
+    "id": "ani-017",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "This world is cruel, but also very beautiful.",
+    "tags": ["attack-on-titan", "philosophy"]
+  },
+  {
+    "id": "ani-018",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "Whatever it takes, I will break through. That is my way!",
+    "tags": ["my-hero-academia", "heroism"]
+  },
+  {
+    "id": "ani-019",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The only thing we can do is keep moving forward.",
+    "tags": ["attack-on-titan", "determination"]
+  },
+  {
+    "id": "ani-020",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I'll make you believe in me, even if it kills you.",
+    "tags": ["jujutsu-kaisen", "action"]
+  },
+  {
+    "id": "ani-021",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "Knowledge is knowing a tomato is a fruit. Wisdom is not putting it in a fruit salad.",
+    "tags": ["death-note", "philosophy"]
+  },
+  {
+    "id": "ani-022",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I am the hero of this story. I don't need saving.",
+    "tags": ["one-punch-man", "heroism"]
+  },
+  {
+    "id": "ani-023",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "A society that has no sympathy for the weak will eventually crumble.",
+    "tags": ["tokyo-ghoul", "philosophy"]
+  },
+  {
+    "id": "ani-024",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The thing you're best at is living.",
+    "tags": ["spy-family", "comedy"]
+  },
+  {
+    "id": "ani-025",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "Even in the darkest moments, there is always a glimmer of light.",
+    "tags": ["made-in-abyss", "adventure"]
+  },
+  {
+    "id": "ani-026",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The only way to deal with an unfree world is to become so absolutely free that your very existence is an act of rebellion.",
+    "tags": ["code-geass", "philosophy"]
+  },
+  {
+    "id": "ani-027",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I will not let you destroy my world!",
+    "tags": ["dragon-ball", "action"]
+  },
+  {
+    "id": "ani-028",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "People aren't the same on the inside as they are on the outside.",
+    "tags": ["mob-psycho", "philosophy"]
+  },
+  {
+    "id": "ani-029",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I don't need a reason to help people.",
+    "tags": ["fullmetal-alchemist", "heroism"]
+  },
+  {
+    "id": "ani-030",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "If you keep relying on others, you'll never become strong.",
+    "tags": ["naruto", "determination"]
+  },
+  {
+    "id": "ani-031",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+    "tags": ["hunter-x-hunter", "philosophy"]
+  },
+  {
+    "id": "ani-032",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "You're not alone. You were never alone.",
+    "tags": ["frieren", "friendship"]
+  },
+  {
+    "id": "ani-033",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "The only thing I'm afraid of is losing the people I love.",
+    "tags": ["demon-slayer", "emotion"]
+  },
+  {
+    "id": "ani-034",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I will surpass you. That's the promise I made to myself.",
+    "tags": ["bleach", "determination"]
+  },
+  {
+    "id": "ani-035",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "Don't give up! The beginning is always the hardest!",
+    "tags": ["jujutsu-kaisen", "determination"]
+  },
+  {
+    "id": "ani-036",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I've never thought of myself as a hero. I just do what I think is right.",
+    "tags": ["my-hero-academia", "heroism"]
+  },
+  {
+    "id": "ani-037",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "There's no point in being scared. Fear is just a feeling.",
+    "tags": ["chainsaw-man", "action"]
+  },
+  {
+    "id": "ani-038",
+    "category": "anime",
+    "difficulty": "easy",
+    "text": "I refuse to let anyone else define who I am.",
+    "tags": ["tokyo-ghoul", "identity"]
+  },
+  {
+    "id": "ani-039",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I will become the Hokage! That is my dream! I never go back on my word because that is my ninja way!",
+    "tags": ["naruto", "shonen", "determination"]
+  },
+  {
+    "id": "ani-040",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "To know what you prefer instead of humbly saying Amen to what the world tells you you ought to prefer, is to have kept your soul alive.",
+    "tags": ["mushishi", "philosophy"]
+  },
+  {
+    "id": "ani-041",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The moment you give up is the moment you let someone else win. But the moment you keep trying is the moment you win.",
+    "tags": ["haikyuu", "sports", "determination"]
+  },
+  {
+    "id": "ani-042",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The scariest thing about death is that it comes without warning. One day you are alive, and the next you are gone forever.",
+    "tags": ["one-piece", "adventure", "philosophy"]
+  },
+  {
+    "id": "ani-043",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "There is no such thing as painless lesson. They simply do not exist. The pain of being alone is completely out of this world.",
+    "tags": ["naruto", "emotion", "loneliness"]
+  },
+  {
+    "id": "ani-044",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The world is a harsh place. But there are moments of beauty that make it worth living for.",
+    "tags": ["frieren", "philosophy"]
+  },
+  {
+    "id": "ani-045",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I don't want to conquer anything. I just think the guy with the most freedom in this ocean is the Pirate King!",
+    "tags": ["one-piece", "adventure"]
+  },
+  {
+    "id": "ani-046",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "We are not heroes. We are just people who refuse to give up. And that makes all the difference.",
+    "tags": ["vinland-saga", "determination"]
+  },
+  {
+    "id": "ani-047",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The moment you think you've won is the moment you've already lost. Always keep moving forward.",
+    "tags": ["fullmetal-alchemist", "philosophy"]
+  },
+  {
+    "id": "ani-048",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I don't care about being cool. I just want to be someone who can protect others.",
+    "tags": ["my-hero-academia", "heroism"]
+  },
+  {
+    "id": "ani-049",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The thing about life is that it's full of surprises. Some good, some bad. But you never know what's coming next.",
+    "tags": ["bocchi-the-rock", "life"]
+  },
+  {
+    "id": "ani-050",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I'm not running away anymore. I'm going to face this head-on. That's the only way I can move forward.",
+    "tags": ["attack-on-titan", "determination"]
+  },
+  {
+    "id": "ani-051",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "There are times when you just have to bite the bullet and keep going. That's what it means to be strong.",
+    "tags": ["demon-slayer", "determination"]
+  },
+  {
+    "id": "ani-052",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "It's not about how hard you can hit. It's about how hard you can get hit and keep moving forward.",
+    "tags": ["one-punch-man", "determination"]
+  },
+  {
+    "id": "ani-053",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I will find my own path. Even if it means walking alone. I will become the strongest I can be.",
+    "tags": ["solo-leveling", "determination"]
+  },
+  {
+    "id": "ani-054",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The world is full of monsters. But if we stick together, we can face anything. That's what friendship means.",
+    "tags": ["fairy-tail", "friendship"]
+  },
+  {
+    "id": "ani-055",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I know I'm not the strongest. But I refuse to let anyone else fight my battles for me.",
+    "tags": ["jujutsu-kaisen", "determination"]
+  },
+  {
+    "id": "ani-056",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The past is the past. You can't change it. But you can change your future by what you do today.",
+    "tags": ["steins-gate", "time-travel"]
+  },
+  {
+    "id": "ani-057",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I don't want to live a life where I'm always looking over my shoulder. I want to live freely.",
+    "tags": ["cowboy-bebop", "freedom"]
+  },
+  {
+    "id": "ani-058",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "There's no point in being afraid of the dark. Sometimes you have to step into it to find the light.",
+    "tags": ["made-in-abyss", "adventure"]
+  },
+  {
+    "id": "ani-059",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I'm going to be the greatest musician in the world. Even if it takes me a lifetime.",
+    "tags": ["bocchi-the-rock", "music"]
+  },
+  {
+    "id": "ani-060",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The only way to truly understand someone is to walk in their shoes. Until then, don't judge.",
+    "tags": ["ranking-of-kings", "empathy"]
+  },
+  {
+    "id": "ani-061",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I don't need anyone's permission to be who I am. I am the master of my own destiny.",
+    "tags": ["code-geass", "freedom"]
+  },
+  {
+    "id": "ani-062",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "You can't change the past, but you can always change the future. That's what makes us human.",
+    "tags": ["re-zero", "redemption"]
+  },
+  {
+    "id": "ani-063",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I may be small, but I have a big heart. And I will never give up on the people I love.",
+    "tags": ["ranking-of-kings", "determination"]
+  },
+  {
+    "id": "ani-064",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The bonds we form with others are what make us truly strong. Without them, we are nothing.",
+    "tags": ["naruto", "friendship"]
+  },
+  {
+    "id": "ani-065",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I'm not afraid to die. I'm afraid of dying without having truly lived.",
+    "tags": ["attack-on-titan", "philosophy"]
+  },
+  {
+    "id": "ani-066",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The world is full of cruelty. But it's also full of kindness. You just have to look for it.",
+    "tags": ["one-piece", "philosophy"]
+  },
+  {
+    "id": "ani-067",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I don't care about being popular. I just want to be the best version of myself.",
+    "tags": ["my-hero-academia", "self-improvement"]
+  },
+  {
+    "id": "ani-068",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "When you have nothing, you have nothing to lose. That's when you're truly free.",
+    "tags": ["chainsaw-man", "freedom"]
+  },
+  {
+    "id": "ani-069",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I don't believe in destiny. I believe in the choices we make. That's what defines us.",
+    "tags": ["steins-gate", "philosophy"]
+  },
+  {
+    "id": "ani-070",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The strongest warriors are not those who fight the hardest, but those who endure the longest.",
+    "tags": ["bleach", "determination"]
+  },
+  {
+    "id": "ani-071",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "I'm not special. I'm just someone who refuses to give up. That's all there is to it.",
+    "tags": ["solo-leveling", "determination"]
+  },
+  {
+    "id": "ani-072",
+    "category": "anime",
+    "difficulty": "medium",
+    "text": "The world doesn't owe you anything. You have to earn everything you want.",
+    "tags": ["vinland-saga", "hardship"]
+  },
+  {
+    "id": "ani-073",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The pain of being alone is completely out of this world, isn't it? I don't know why, but I understand your feelings so much. That's why I want to help you. Because I know what it's like to feel alone.",
+    "tags": ["naruto", "emotion", "loneliness"]
+  },
+  {
+    "id": "ani-074",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I hate so many things about the way that you treat me. You never take anything seriously. You treat everything like a game. But I know that deep down, you're just as scared as I am.",
+    "tags": ["fullmetal-alchemist", "drama", "philosophy"]
+  },
+  {
+    "id": "ani-075",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "If you only face forward, you cannot see what is behind you. But if you look back, you cannot move forward. So keep moving ahead. That is the only way to survive in this cruel world.",
+    "tags": ["attack-on-titan", "action", "philosophy"]
+  },
+  {
+    "id": "ani-076",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing I hate the most is not being able to protect the people I care about. That is why I will become stronger. I will become someone who can protect everyone, no matter what it takes.",
+    "tags": ["my-hero-academia", "shonen", "heroism"]
+  },
+  {
+    "id": "ani-077",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "In this world, winning is everything. The strong survive and the weak perish. That's the law of nature. But I refuse to accept that. I believe there's more to life than just power.",
+    "tags": ["dragon-ball", "philosophy"]
+  },
+  {
+    "id": "ani-078",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing about memories is that they fade. The more you try to hold onto them, the faster they slip away. But that's what makes them precious. Because they remind us of who we used to be.",
+    "tags": ["frieren", "emotion", "nostalgia"]
+  },
+  {
+    "id": "ani-079",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've been alone for so long that I've forgotten what it feels like to have someone by my side. But now that I've found you, I don't want to go back to that empty life. I want to stay with you forever.",
+    "tags": ["made-in-abyss", "emotion", "loneliness"]
+  },
+  {
+    "id": "ani-080",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The world is a stage, and we are all merely players. But unlike a play, there are no scripts. We have to write our own stories. And that's what makes life so beautiful and terrifying at the same time.",
+    "tags": ["cowboy-bebop", "philosophy"]
+  },
+  {
+    "id": "ani-081",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I never asked for this power. I never wanted to be different. But now that I have it, I'm going to use it to protect the people I love. That's my promise to myself.",
+    "tags": ["tokyo-ghoul", "identity", "determination"]
+  },
+  {
+    "id": "ani-082",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The true measure of a person is not how they act when things are easy, but how they act when things are at their hardest. That's when you see someone's real character.",
+    "tags": ["vinland-saga", "philosophy", "character"]
+  },
+  {
+    "id": "ani-083",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "We all have dreams. Some big, some small. But the size of the dream doesn't matter. What matters is how hard you're willing to work to make it a reality. That's what separates the dreamers from the doers.",
+    "tags": ["my-hero-academia", "dreams", "determination"]
+  },
+  {
+    "id": "ani-084",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've learned that life is full of pain. But I've also learned that pain is what makes us stronger. Without it, we would never grow. So I welcome the pain, because I know it will make me a better person.",
+    "tags": ["bleach", "philosophy", "growth"]
+  },
+  {
+    "id": "ani-085",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The world doesn't need more heroes. It needs more people who are willing to stand up for what's right, even when it's unpopular. That's true courage.",
+    "tags": ["one-punch-man", "heroism", "philosophy"]
+  },
+  {
+    "id": "ani-086",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've always believed that the key to happiness is not having everything you want, but wanting everything you have. It's a simple lesson, but one that's hard to master.",
+    "tags": ["spy-family", "philosophy", "happiness"]
+  },
+  {
+    "id": "ani-087",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "We're all searching for something. Some search for power, some for love, some for purpose. But in the end, what we're really searching for is ourselves. That's the journey of life.",
+    "tags": ["hunter-x-hunter", "philosophy", "journey"]
+  },
+  {
+    "id": "ani-088",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing about fear is that it's a choice. You can let it control you, or you can use it to make you stronger. I choose to use it. Because that's what heroes do.",
+    "tags": ["jujutsu-kaisen", "courage", "heroism"]
+  },
+  {
+    "id": "ani-089",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've made a lot of mistakes in my life. But I don't regret them. Because every mistake has taught me something. And that's how I've become the person I am today.",
+    "tags": ["chainsaw-man", "redemption", "growth"]
+  },
+  {
+    "id": "ani-090",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The world is full of injustices. But that doesn't mean we should give up. It means we should fight harder. Because if we don't, who will?",
+    "tags": ["code-geass", "justice", "determination"]
+  },
+  {
+    "id": "ani-091",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've always felt like an outsider. But I've come to realize that being different is not a weakness. It's a strength. Because it means I can see things others can't.",
+    "tags": ["mob-psycho", "identity", "strength"]
+  },
+  {
+    "id": "ani-092",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The hardest thing about growing up is realizing that the people you looked up to as heroes are just as flawed as everyone else. But that's okay. Because it means they're human too.",
+    "tags": ["re-zero", "growth", "philosophy"]
+  },
+  {
+    "id": "ani-093",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've learned that true strength isn't about how hard you can fight. It's about how much you can endure. And still keep going. That's what separates the strong from the truly powerful.",
+    "tags": ["naruto", "strength", "endurance"]
+  },
+  {
+    "id": "ani-094",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing about love is that it makes you vulnerable. But it also makes you stronger. Because when you have something to fight for, you'll never give up.",
+    "tags": ["demon-slayer", "love", "strength"]
+  },
+  {
+    "id": "ani-095",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've spent my whole life trying to be someone else. But I've finally realized that the only person I need to be is myself. And that's enough.",
+    "tags": ["solo-leveling", "identity", "self-acceptance"]
+  },
+  {
+    "id": "ani-096",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The world is a dangerous place. But it's also full of beauty. You just have to know where to look. And sometimes, you have to look past the darkness to find it.",
+    "tags": ["made-in-abyss", "adventure", "beauty"]
+  },
+  {
+    "id": "ani-097",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've always believed that everyone deserves a second chance. But I've also learned that some people don't want to change. And you can't force them to.",
+    "tags": ["death-note", "redemption", "philosophy"]
+  },
+  {
+    "id": "ani-098",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing about memories is that they're fragile. They can be forgotten, distorted, or lost forever. That's why we have to cherish them. Because once they're gone, they're gone forever.",
+    "tags": ["steins-gate", "memories", "nostalgia"]
+  },
+  {
+    "id": "ani-099",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've learned that the only person you can truly rely on is yourself. But that doesn't mean you have to be alone. You can still have friends and loved ones. Just don't expect them to save you.",
+    "tags": ["cowboy-bebop", "independence", "philosophy"]
+  },
+  {
+    "id": "ani-100",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The world is full of contradictions. But that's what makes it interesting. Because if everything was simple, life would be boring.",
+    "tags": ["tokyo-ghoul", "philosophy", "complexity"]
+  },
+  {
+    "id": "ani-101",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've always felt like I was born in the wrong world. But I've come to realize that the world isn't wrong. It's just different. And that's okay.",
+    "tags": ["evangelion", "identity", "acceptance"]
+  },
+  {
+    "id": "ani-102",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The thing about pain is that it's a reminder that we're alive. Because if we couldn't feel pain, we wouldn't know what it means to be human.",
+    "tags": ["fullmetal-alchemist", "pain", "humanity"]
+  },
+  {
+    "id": "ani-103",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've learned that the key to happiness is not having everything you want, but wanting everything you have. It's a simple lesson, but one that's hard to master.",
+    "tags": ["spy-family", "happiness", "gratitude"]
+  },
+  {
+    "id": "ani-104",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "The world is full of mysteries. But that's what makes it worth exploring. Because every mystery is an opportunity to learn something new about ourselves.",
+    "tags": ["frieren", "adventure", "mystery"]
+  },
+  {
+    "id": "ani-105",
+    "category": "anime",
+    "difficulty": "hard",
+    "text": "I've always believed that the true measure of a person is not how they act when things are easy, but how they act when things are at their hardest. That's when you see someone's real character.",
+    "tags": ["solo-leveling", "character", "philosophy"]
   }
 ]
