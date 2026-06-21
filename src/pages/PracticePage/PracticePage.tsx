@@ -158,7 +158,7 @@ export default function PracticePage() {
     setAnimationState('idle')
   }
 
-  const handleCategoryChange = (newCategory: typeof category) => {
+  const handleCategoryChange = (newCategory: typeof categories[number]['id']) => {
     if (newCategory === 'custom') {
       setCustomModalOpen(true)
       return
