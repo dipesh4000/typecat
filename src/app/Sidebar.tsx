@@ -285,24 +285,30 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
           {/* Character at Bottom with Hand Sprites */}
           <div className="p-3 border-t border-outline-variant">
-            <div className="relative mx-auto w-24 h-28 flex items-center justify-center">
-              <img
-                src={character.cover}
-                alt={character.name}
-                className="w-24 h-auto select-none pointer-events-none"
+            <div className="relative mx-auto w-24 h-28">
+              {/* Animated character image */}
+              <div
+                className="absolute inset-0 flex items-center justify-center"
                 style={{
                   animation: status === 'active' ? 'catFloat 4s ease-in-out infinite' :
                              status === 'paused' ? 'none' :
                              status === 'complete' ? 'catCelebrate 0.6s ease-out' :
                              'catFloat 4s ease-in-out infinite'
                 }}
-                draggable={false}
-              />
+              >
+                <img
+                  src={character.cover}
+                  alt={character.name}
+                  className="w-24 h-auto select-none pointer-events-none"
+                  draggable={false}
+                />
+              </div>
+              {/* Hand sprite — separate from animated container */}
               {handSprite && (
                 <img
                   src={handSprite}
                   alt=""
-                  className="absolute w-14 h-auto pointer-events-none drop-shadow-lg"
+                  className="absolute w-14 h-auto pointer-events-none drop-shadow-lg z-10"
                   style={{
                     left: `${spritePosition?.x ?? 50}%`,
                     top: `${spritePosition?.y ?? 50}%`,

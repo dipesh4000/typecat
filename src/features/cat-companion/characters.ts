@@ -6,7 +6,6 @@ export interface CharacterTheme {
 export interface Character {
   id: string
   name: string
-  nameCn: string
   cover: string
   hasRightKeys: boolean
   keyCount: { left: number; right: number }
@@ -17,7 +16,6 @@ export const characters: Character[] = [
   {
     id: 'classic',
     name: 'Classic Cat',
-    nameCn: '经典小键盘',
     cover: '/characters/classic/cover.png',
     hasRightKeys: true,
     keyCount: { left: 3, right: 4 },
@@ -51,7 +49,6 @@ export const characters: Character[] = [
   {
     id: 'xiaohei',
     name: 'Luo Xiaohei',
-    nameCn: '罗小黑',
     cover: '/characters/xiaohei/cover.png',
     hasRightKeys: false,
     keyCount: { left: 40, right: 0 },
@@ -85,7 +82,6 @@ export const characters: Character[] = [
   {
     id: 'elysia',
     name: 'Elysia',
-    nameCn: '爱莉希雅',
     cover: '/characters/elysia/cover.png',
     hasRightKeys: false,
     keyCount: { left: 25, right: 0 },
@@ -107,7 +103,6 @@ export const characters: Character[] = [
   {
     id: 'haohao',
     name: 'Red Panda',
-    nameCn: '小熊猫昊昊',
     cover: '/characters/haohao/cover.png',
     hasRightKeys: true,
     keyCount: { left: 28, right: 32 },
@@ -129,7 +124,6 @@ export const characters: Character[] = [
   {
     id: 'nailin',
     name: 'Nailin',
-    nameCn: '乃琳',
     cover: '/characters/nailin/cover.png',
     hasRightKeys: true,
     keyCount: { left: 28, right: 32 },
@@ -151,7 +145,6 @@ export const characters: Character[] = [
   {
     id: 'suxin',
     name: 'Suxin',
-    nameCn: '塑心',
     cover: '/characters/suxin/cover.png',
     hasRightKeys: false,
     keyCount: { left: 55, right: 0 },
@@ -173,7 +166,6 @@ export const characters: Character[] = [
   {
     id: 'anhe',
     name: 'Anhe',
-    nameCn: '安和昴',
     cover: '/characters/anhe/cover.png',
     hasRightKeys: false,
     keyCount: { left: 18, right: 0 },
@@ -195,7 +187,6 @@ export const characters: Character[] = [
   {
     id: 'guizhong',
     name: 'Guizhong',
-    nameCn: '归终',
     cover: '/characters/guizhong/cover.png',
     hasRightKeys: false,
     keyCount: { left: 39, right: 0 },
@@ -217,7 +208,6 @@ export const characters: Character[] = [
   {
     id: 'zimin',
     name: 'Zimin',
-    nameCn: '籽岷',
     cover: '/characters/zimin/cover.png',
     hasRightKeys: false,
     keyCount: { left: 15, right: 0 },

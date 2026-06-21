@@ -8,6 +8,8 @@ interface TypingState {
   pausedAt: number | null
   totalPausedTime: number
   keystrokes: Keystroke[]
+  correctChars: number
+  totalChars: number
   errors: number
   status: 'idle' | 'active' | 'paused' | 'complete'
   lastResult: SessionResult | null
@@ -21,13 +23,17 @@ interface TypingState {
   reset: () => void
 }
 
+let keystrokeBuffer: Keystroke[] = []
+
 const initialState = {
   passage: null,
   input: '',
   startedAt: null,
   pausedAt: null,
   totalPausedTime: 0,
-  keystrokes: [],
+  keystrokes: [] as Keystroke[],
+  correctChars: 0,
+  totalChars: 0,
   errors: 0,
   status: 'idle' as const,
   lastResult: null,
@@ -37,42 +43,46 @@ export const useTypingStore = create<TypingState>((set, get) => ({
   ...initialState,
 
   startSession: (passage) => {
+    keystrokeBuffer = []
     set({
       passage,
       input: '',
       startedAt: Date.now(),
       keystrokes: [],
+      correctChars: 0,
+      totalChars: 0,
       errors: 0,
       status: 'active',
     })
   },
 
   handleKeystroke: (char, expected, timestamp) => {
-    const { passage, input, keystrokes, errors } = get()
+    const { passage, input, correctChars, totalChars, errors } = get()
     if (!passage || input.length >= passage.text.length) return
 
     const correct = char === expected
+    keystrokeBuffer.push({ char, expected, timestamp, correct })
 
     set({
       input: input + char,
-      keystrokes: [
-        ...keystrokes,
-        { char, expected, timestamp, correct },
-      ],
+      correctChars: correct ? correctChars + 1 : correctChars,
+      totalChars: totalChars + 1,
       errors: correct ? errors : errors + 1,
     })
   },
 
   handleBackspace: () => {
-    const { input, keystrokes, errors } = get()
+    const { input, correctChars, totalChars, errors } = get()
     if (input.length === 0) return
 
-    const lastKeystroke = keystrokes[keystrokes.length - 1]
+    const lastKeystroke = keystrokeBuffer[keystrokeBuffer.length - 1]
     const wasError = lastKeystroke && !lastKeystroke.correct
+    keystrokeBuffer.pop()
 
     set({
       input: input.slice(0, -1),
-      keystrokes: keystrokes.slice(0, -1),
+      correctChars: wasError === false ? correctChars - 1 : correctChars,
+      totalChars: totalChars - 1,
       errors: wasError ? errors - 1 : errors,
     })
   },
@@ -95,14 +105,15 @@ export const useTypingStore = create<TypingState>((set, get) => ({
   },
 
   endSession: () => {
-    const { passage, keystrokes, startedAt, totalPausedTime } = get()
+    const { passage, startedAt, totalPausedTime, correctChars, totalChars } = get()
     if (!passage || !startedAt) {
       throw new Error('No active session')
     }
 
+    const keystrokes = keystrokeBuffer
+    keystrokeBuffer = []
+
     const duration = Date.now() - startedAt - totalPausedTime
-    const correctChars = keystrokes.filter((k) => k.correct).length
-    const totalChars = keystrokes.length
     const accuracy = totalChars > 0 ? correctChars / totalChars : 0
     const elapsedMinutes = duration / 60000
     const wpm = elapsedMinutes > 0 ? (correctChars / 5) / elapsedMinutes : 0
@@ -130,9 +141,12 @@ export const useTypingStore = create<TypingState>((set, get) => ({
       keystrokes,
     }
 
-    set({ status: 'complete', lastResult: result })
+    set({ status: 'complete', lastResult: result, keystrokes })
     return result
   },
 
-  reset: () => set(initialState),
+  reset: () => {
+    keystrokeBuffer = []
+    set(initialState)
+  },
 }))

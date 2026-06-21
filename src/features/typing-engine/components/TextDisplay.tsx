@@ -20,9 +20,6 @@ export function TextDisplay({ passage, input, showErrors, liveWPM = 0, liveAccur
     })
   }, [passage, input])
 
-  // Find current line for scrolling
-  const currentCharIndex = input.length
-
   return (
     <div className="h-full flex flex-col">
       {/* Live Stats Bar */}

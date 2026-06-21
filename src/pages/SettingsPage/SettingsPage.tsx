@@ -39,8 +39,7 @@ export default function SettingsPage() {
           </div>
           <div className="flex-1 text-center sm:text-left">
             <h3 className="text-lg font-bold text-on-surface">{currentCharacter.name}</h3>
-            <p className="text-sm text-on-surface-variant mb-3">{currentCharacter.nameCn}</p>
-            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-4 mt-2">
               <div className="text-center">
                 <p className="text-2xl font-bold text-primary">{level}</p>
                 <p className="text-xs text-on-surface-variant">Level</p>
@@ -79,7 +78,6 @@ export default function SettingsPage() {
                 <img src={char.cover} alt={char.name} className="w-full h-full object-cover" />
               </div>
               <span className="text-xs font-semibold text-on-surface">{char.name}</span>
-              <span className="text-[10px] text-on-surface-variant">{char.nameCn}</span>
             </button>
           ))}
         </div>

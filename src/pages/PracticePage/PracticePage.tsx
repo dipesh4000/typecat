@@ -190,20 +190,15 @@ export default function PracticePage() {
     if (!isActive || !passage) return
 
     const updateStats = () => {
-      const keystrokes = useTypingStore.getState().keystrokes
-      const startedAt = useTypingStore.getState().startedAt
-      const totalPausedTime = useTypingStore.getState().totalPausedTime
-      const currentStatus = useTypingStore.getState().status
+      const { startedAt, totalPausedTime, status: currentStatus, correctChars, totalChars } = useTypingStore.getState()
 
-      if (keystrokes.length === 0 || !startedAt || currentStatus !== 'active') {
+      if (totalChars === 0 || !startedAt || currentStatus !== 'active') {
         setLiveStats({ wpm: 0, accuracy: 100, correctChars: 0, totalChars: 0 })
         return
       }
 
       const elapsed = Date.now() - startedAt - totalPausedTime
       const elapsedMinutes = elapsed / 60000
-      const correctChars = keystrokes.filter(k => k.correct).length
-      const totalChars = keystrokes.length
       const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100
       const wpm = elapsedMinutes > 0.05 ? Math.round((correctChars / 5) / elapsedMinutes) : 0
 

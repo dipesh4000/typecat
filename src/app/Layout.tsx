@@ -73,28 +73,25 @@ export function Layout({ children }: LayoutProps) {
     <div className="h-screen bg-surface text-on-surface flex flex-col overflow-hidden transition-colors duration-200">
       {/* Top Nav */}
       <header className="w-full bg-surface border-b border-outline-variant z-50 flex-shrink-0 transition-colors duration-200">
-        <nav className="flex items-center h-14 px-4">
-          {/* Left: Menu + Logo */}
-          <div className="flex items-center gap-4 shrink-0">
+        <nav className="flex items-center h-14 px-6 relative">
+          {/* Left: Menu + Logo (always at viewport edge) */}
+          <div className="flex items-center shrink-0 z-10">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 lg:block hidden"
+              className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95"
             >
               {sidebarCollapsed ? 'menu_open' : 'menu'}
             </button>
-            <Link to="/" className="font-bold text-xl text-primary tracking-tight">TypeCat</Link>
+            <Link to="/" className="font-bold text-xl text-primary tracking-tight ml-3">TypeCat</Link>
           </div>
 
-          {/* Spacer pushes center to middle of remaining space */}
-          <div className="flex-1" />
-
-          {/* Center: Nav Links */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Center: Nav Links — centered in the content area */}
+          <div className={`hidden md:flex items-center gap-2 absolute left-1/2 top-1/2 -translate-y-1/2 transition-all duration-300 ${sidebarCollapsed ? 'lg:translate-x-[calc(-50%+32px)]' : 'lg:translate-x-[calc(-50%+128px)]'}`}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${
                   location.pathname === link.href
                     ? 'text-primary bg-primary/10'
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container'
@@ -105,11 +102,8 @@ export function Layout({ children }: LayoutProps) {
             ))}
           </div>
 
-          {/* Spacer equal to left */}
-          <div className="flex-1" />
-
-          {/* Right: Profile */}
-          <div className="flex items-center shrink-0">
+          {/* Right: Profile (always at viewport edge) */}
+          <div className="flex items-center shrink-0 ml-auto z-10">
             <button
               onClick={() => navigate('/settings')}
               aria-label="Settings"

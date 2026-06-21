@@ -162,49 +162,50 @@ export function CatKeyboard() {
         )}
       </div>
 
-      {/* Character Image with Hand Sprite */}
-      <div
-        className="relative mb-0"
-        style={{
-          animation: isIdle ? 'catFloat 4s ease-in-out infinite' :
-                     isTypingBounce ? 'catBounce 0.2s ease-out' :
-                     isError ? 'catShake 0.4s ease-in-out, errorFlash 0.4s ease-in-out' :
-                     isCelebrating ? 'catCelebrate 0.6s ease-out' :
-                     isSleeping ? 'catSleep 4s ease-in-out infinite' : 'none'
-        }}
-      >
-        <img
-          src={character.cover}
-          alt={character.name}
-          className="w-40 h-auto select-none pointer-events-none"
-          draggable={false}
-        />
+      {/* Character + Hand Sprite container (not animated itself) */}
+      <div className="relative mb-0 w-40 h-44">
+        {/* Character Image (animated separately) */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            animation: isIdle ? 'catFloat 4s ease-in-out infinite' :
+                       isTypingBounce ? 'catBounce 0.2s ease-out' :
+                       isError ? 'catShake 0.4s ease-in-out, errorFlash 0.4s ease-in-out' :
+                       isCelebrating ? 'catCelebrate 0.6s ease-out' :
+                       isSleeping ? 'catSleep 4s ease-in-out infinite' : 'none'
+          }}
+        >
+          <img
+            src={character.cover}
+            alt={character.name}
+            className="w-40 h-auto select-none pointer-events-none"
+            draggable={false}
+          />
+          {isError && (
+            <div className="absolute top-1 right-2 text-blue-400 text-xs animate-pulse">💧</div>
+          )}
+          {isCelebrating && (
+            <>
+              <div className="absolute -top-1 left-6 text-yellow-400 text-xs animate-bounce">✨</div>
+              <div className="absolute -top-1 right-6 text-yellow-400 text-xs animate-bounce" style={{ animationDelay: '0.15s' }}>✨</div>
+            </>
+          )}
+        </div>
 
-        {/* Hand sprite overlay — positioned per key with smooth transition */}
+        {/* Hand sprite overlay — NOT inside animated container, positioned per key */}
         {handSprite && (
           <img
             src={handSprite}
             alt=""
-            className="absolute w-20 h-auto pointer-events-none drop-shadow-lg"
+            className="absolute w-20 h-auto pointer-events-none drop-shadow-lg z-10"
             style={{
               left: `${spritePosition?.x ?? 50}%`,
               top: `${spritePosition?.y ?? 50}%`,
               transform: 'translate(-50%, -50%)',
-              transition: 'left 0.05s ease-out, top 0.05s ease-out',
+              transition: 'left 0.06s ease-out, top 0.06s ease-out',
             }}
             draggable={false}
           />
-        )}
-
-        {isError && (
-          <div className="absolute top-1 right-2 text-blue-400 text-xs animate-pulse">💧</div>
-        )}
-
-        {isCelebrating && (
-          <>
-            <div className="absolute -top-1 left-6 text-yellow-400 text-xs animate-bounce">✨</div>
-            <div className="absolute -top-1 right-6 text-yellow-400 text-xs animate-bounce" style={{ animationDelay: '0.15s' }}>✨</div>
-          </>
         )}
       </div>
 
