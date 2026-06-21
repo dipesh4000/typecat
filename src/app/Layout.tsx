@@ -73,9 +73,9 @@ export function Layout({ children }: LayoutProps) {
     <div className="h-screen bg-surface text-on-surface flex flex-col overflow-hidden transition-colors duration-200">
       {/* Top Nav */}
       <header className="w-full bg-surface border-b border-outline-variant z-50 flex-shrink-0 transition-colors duration-200">
-        <nav className="flex justify-between items-center h-14">
-          {/* Left: Logo + Menu */}
-          <div className="flex items-center gap-4 pl-4">
+        <nav className="flex items-center h-14 px-4">
+          {/* Left: Menu + Logo */}
+          <div className="flex items-center gap-4 shrink-0">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 lg:block hidden"
@@ -85,8 +85,11 @@ export function Layout({ children }: LayoutProps) {
             <Link to="/" className="font-bold text-xl text-primary tracking-tight">TypeCat</Link>
           </div>
 
+          {/* Spacer pushes center to middle of remaining space */}
+          <div className="flex-1" />
+
           {/* Center: Nav Links */}
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -102,8 +105,11 @@ export function Layout({ children }: LayoutProps) {
             ))}
           </div>
 
-          {/* Right: Actions */}
-          <div className="flex items-center gap-2 pr-4">
+          {/* Spacer equal to left */}
+          <div className="flex-1" />
+
+          {/* Right: Profile */}
+          <div className="flex items-center shrink-0">
             <button
               onClick={() => navigate('/settings')}
               aria-label="Settings"
