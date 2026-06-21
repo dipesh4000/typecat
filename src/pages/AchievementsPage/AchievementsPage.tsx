@@ -1,6 +1,6 @@
 import { useProgressionStore } from '../../stores/progressionStore'
 import { achievementDefs } from '../../shared/achievements'
-import { motion } from 'framer-motion'
+
 
 const categoryLabels: Record<string, string> = {
   speed: 'Speed',
@@ -106,14 +106,13 @@ export default function AchievementsPage() {
                 : null
 
               return (
-                <motion.div
+                <div
                   key={achievement.id}
-                  className={`flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-surface-container-lowest border rounded-lg transition-all cursor-pointer ${
+                  className={`flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-surface-container-lowest border rounded-lg transition-all ${
                     isUnlocked
                       ? 'border-primary ring-2 ring-primary ring-opacity-10'
                       : 'border-outline-variant opacity-60'
                   }`}
-                  whileHover={{ scale: 1.02 }}
                 >
                   <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center shrink-0 ${
                     isUnlocked ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'
@@ -135,7 +134,7 @@ export default function AchievementsPage() {
                   <span className="material-symbols-outlined text-on-surface-variant shrink-0">
                     {isUnlocked ? 'check_circle' : 'lock'}
                   </span>
-                </motion.div>
+                </div>
               )
             })}
           </div>

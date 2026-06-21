@@ -2,7 +2,7 @@ import { useStatsStore } from '../../stores/statsStore'
 import { useProgressionStore } from '../../stores/progressionStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { WPMChart, SessionHistory } from '../../features/stats/components/StatCard'
-import { motion } from 'framer-motion'
+
 
 const catEmojis: Record<number, string> = {
   1: '🐱',
@@ -135,13 +135,11 @@ export default function StatsPage() {
         <div className="md:col-span-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
             <div className="bg-secondary-container rounded-lg p-4 md:p-6 flex flex-col items-center text-center relative overflow-hidden group border border-outline-variant">
-              <motion.div
-                className="text-5xl md:text-6xl relative z-10 mb-3 md:mb-4"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.5 }}
+              <div
+                className="text-5xl md:text-6xl relative z-10 mb-3 md:mb-4 hover:scale-110 transition-transform duration-500"
               >
                 {catEmojis[level] || '🐱'}
-              </motion.div>
+              </div>
               <h5 className="text-sm font-bold text-on-secondary-container relative z-10">Level {level}</h5>
               <p className="text-xs text-on-secondary-container opacity-80 mb-2 relative z-10">
                 {xp} / {getXPForNextLevel()} XP

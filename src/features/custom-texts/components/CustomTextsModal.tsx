@@ -63,14 +63,14 @@ export function CustomTextsModal({ open, onClose, onStart }: CustomTextsModalPro
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center z-50">
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-t-xl md:rounded-xl p-4 max-w-lg w-full max-h-[85vh] md:max-h-[80vh] flex flex-col">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end md:items-center justify-center z-50" onClick={onClose}>
+      <div className="bg-surface-container-lowest border border-outline-variant rounded-t-xl md:rounded-xl p-4 max-w-lg w-full max-h-[85vh] md:max-h-[80vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-3">
           <h2 className="text-sm font-bold text-on-surface">
             {creating ? (editing ? 'Edit Text' : 'New Custom Text') : 'My Custom Texts'}
           </h2>
           <button
-            onClick={() => { setCreating(false); setEditing(null) }}
+            onClick={() => creating ? (setCreating(false), setEditing(null)) : onClose()}
             className="p-1 rounded hover:bg-surface-container transition-all"
           >
             <span className="material-symbols-outlined text-[18px]">
@@ -141,7 +141,11 @@ export function CustomTextsModal({ open, onClose, onStart }: CustomTextsModalPro
                     <button onClick={() => handleEdit(p)} className="p-1 rounded hover:bg-surface-container-high transition-all" title="Edit">
                       <span className="material-symbols-outlined text-[14px] text-on-surface-variant">edit</span>
                     </button>
-                    <button onClick={() => handleDelete(p.id)} className="p-1 rounded hover:bg-surface-container-high transition-all" title="Delete">
+                    <button onClick={() => {
+                      if (window.confirm(`Delete "${p.subcategory ?? 'Untitled'}"? This cannot be undone.`)) {
+                        handleDelete(p.id)
+                      }
+                    }} className="p-1 rounded hover:bg-surface-container-high transition-all" title="Delete">
                       <span className="material-symbols-outlined text-[14px] text-error">delete</span>
                     </button>
                   </div>

@@ -202,7 +202,9 @@ export default function SettingsPage() {
         <button
           onClick={() => {
             if (confirm('Are you sure? This will delete all your progress.')) {
-              localStorage.clear()
+              Object.keys(localStorage)
+                .filter(k => k.startsWith('typecat:'))
+                .forEach(k => localStorage.removeItem(k))
               window.location.reload()
             }
           }}

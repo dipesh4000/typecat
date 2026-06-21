@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { TextDisplay } from '../../features/typing-engine/components/TextDisplay'
 import { SimpleKeyboard } from '../../features/typing-engine/components/SimpleKeyboard'
 import { CustomTextsModal } from '../../features/custom-texts/components/CustomTextsModal'
@@ -55,16 +55,19 @@ export default function PracticePage() {
 
   const loadPassage = useCallback(
     (cat?: typeof category, diff?: typeof difficulty) => {
-      const catFilter = cat || category
+      const settings = useSettingsStore.getState()
+      const catFilter = cat || settings.category
       const passages = passageProvider.getPassages(
         catFilter === 'all' ? undefined : catFilter,
-        { difficulty: diff || difficulty }
+        { difficulty: diff || settings.difficulty }
       )
       if (passages.length > 0) {
         setPreviewPassage(passages[Math.floor(Math.random() * passages.length)])
+      } else {
+        setPreviewPassage(null)
       }
     },
-    [category, difficulty]
+    []
   )
 
   useEffect(() => {
@@ -76,6 +79,14 @@ export default function PracticePage() {
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        if (browseOpen) {
+          setBrowseOpen(false)
+          return
+        }
+        if (customModalOpen) {
+          setCustomModalOpen(false)
+          return
+        }
         if (status === 'active') {
           pauseSession()
         } else if (status === 'paused') {
@@ -103,7 +114,8 @@ export default function PracticePage() {
       setActiveKey(keyForCat)
       setTimeout(() => setActiveKey(null), 100)
 
-      const expected = passage.text[input.length]
+      const currentInput = useTypingStore.getState().input
+      const expected = passage.text[currentInput.length]
       const timestamp = performance.now()
 
       handleKeystroke(e.key, expected, timestamp)
@@ -117,7 +129,7 @@ export default function PracticePage() {
         setTimeout(() => setAnimationState('typing'), 500)
       }
     },
-    [status, passage, input, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey, pauseSession, resumeSession, playKeySound, playErrorSound]
+    [status, passage, browseOpen, customModalOpen, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey, pauseSession, resumeSession, playKeySound, playErrorSound]
   )
 
   useEffect(() => {
@@ -154,7 +166,6 @@ export default function PracticePage() {
   const handleNext = () => {
     setSessionXP(null)
     reset()
-    loadPassage()
     setAnimationState('idle')
   }
 
