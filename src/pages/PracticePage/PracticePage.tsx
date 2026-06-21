@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { TextDisplay } from '../../features/typing-engine/components/TextDisplay'
 import { SimpleKeyboard } from '../../features/typing-engine/components/SimpleKeyboard'
+import { CustomTextsModal } from '../../features/custom-texts/components/CustomTextsModal'
 import { useTypingStore } from '../../stores/typingStore'
 import { useCatStore } from '../../stores/catStore'
 import { onSessionComplete } from '../../stores'
@@ -14,6 +15,7 @@ const categories = [
   { id: 'english' as const, label: 'English', icon: 'translate' },
   { id: 'anime' as const, label: 'Anime', icon: 'movie' },
   { id: 'programming' as const, label: 'Code', icon: 'code' },
+  { id: 'custom' as const, label: 'Custom', icon: 'edit_note' },
 ]
 
 const difficulties = [
@@ -49,6 +51,7 @@ export default function PracticePage() {
   const [previewPassage, setPreviewPassage] = useState<Passage | null>(null)
   const [browseOpen, setBrowseOpen] = useState(false)
   const [sessionXP, setSessionXP] = useState<number | null>(null)
+  const [customModalOpen, setCustomModalOpen] = useState(false)
 
   const loadPassage = useCallback(
     (cat?: typeof category, diff?: typeof difficulty) => {
@@ -156,6 +159,10 @@ export default function PracticePage() {
   }
 
   const handleCategoryChange = (newCategory: typeof category) => {
+    if (newCategory === 'custom') {
+      setCustomModalOpen(true)
+      return
+    }
     setCategory(newCategory)
     loadPassage(newCategory, difficulty)
   }
@@ -457,6 +464,13 @@ export default function PracticePage() {
           </div>
         </div>
       )}
+
+      {/* Custom Texts Modal */}
+      <CustomTextsModal
+        open={customModalOpen}
+        onClose={() => setCustomModalOpen(false)}
+        onStart={handleStart}
+      />
     </div>
   )
 }

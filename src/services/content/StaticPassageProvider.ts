@@ -32,4 +32,8 @@ export const StaticPassageProvider: PassageProvider = {
   getPassageById(id: string): Passage | null {
     return allPassages.find((p) => p.id === id) ?? null
   },
+
+  addPassage() { throw new Error('Cannot add to static passages') },
+  updatePassage() { throw new Error('Cannot update static passages') },
+  removePassage() { throw new Error('Cannot remove static passages') },
 }

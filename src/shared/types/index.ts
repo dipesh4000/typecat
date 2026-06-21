@@ -1,6 +1,6 @@
 export interface Passage {
   id: string
-  category: 'english' | 'anime' | 'programming'
+  category: 'english' | 'anime' | 'programming' | 'custom'
   subcategory?: string
   difficulty: 'easy' | 'medium' | 'hard'
   text: string
