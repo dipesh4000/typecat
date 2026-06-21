@@ -207,7 +207,7 @@ export default function PracticePage() {
     updateStats()
     const interval = setInterval(updateStats, 500)
     return () => clearInterval(interval)
-  }, [isActive, passage, input])
+  }, [isActive, passage])
 
   const allPassages = passageProvider.getPassages(
     category === 'all' ? undefined : category,
@@ -260,24 +260,9 @@ export default function PracticePage() {
           <h3 className="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider">
             {status === 'idle' ? 'PRACTICE' : status === 'paused' ? 'PAUSED' : category.toUpperCase()}
           </h3>
-          {isActive && (
-            <div className="flex items-center gap-3 md:gap-4">
-              <span className="text-[10px] font-bold text-primary">
-                {liveStats.wpm} WPM
-              </span>
-              <span className="text-[10px] font-bold text-success">
-                {liveStats.accuracy}%
-              </span>
-              <span className="text-[10px] font-semibold text-on-surface-variant">
-                {Math.round(progress)}%
-              </span>
-            </div>
-          )}
-          {!isActive && (
-            <span className="text-[10px] font-semibold text-primary">
-              {Math.round(progress)}%
-            </span>
-          )}
+          <span className="text-[10px] font-semibold text-primary">
+            {Math.round(progress)}%
+          </span>
         </div>
         <div className="h-1.5 bg-surface-container-highest w-full rounded-full overflow-hidden">
           <div
@@ -332,7 +317,7 @@ export default function PracticePage() {
           {(status === 'active' || status === 'paused') && passage && (
             <div className="h-full flex flex-col">
               <div className="flex-1 min-h-0 overflow-y-auto">
-                <TextDisplay passage={passage.text} input={input} showErrors={true} />
+                <TextDisplay passage={passage.text} input={input} showErrors={true} liveWPM={liveStats.wpm} liveAccuracy={liveStats.accuracy} />
               </div>
             </div>
           )}
