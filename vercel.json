@@ -1,22 +1,49 @@
 {
   "headers": [
     {
+      "source": "/(.*\\.(?:m4a|mp3|wav|ogg|aac|webm|flac))",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Accept-Ranges",
+          "value": "bytes"
+        }
+      ]
+    },
+    {
       "source": "/(.*\\.m4a)",
       "headers": [
         {
           "key": "Content-Type",
           "value": "audio/mp4"
-        },
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.mp3)",
+      "headers": [
         {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "key": "Content-Type",
+          "value": "audio/mpeg"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.wav)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "audio/wav"
         }
       ]
     }
   ],
   "rewrites": [
     {
-      "source": "/((?!.*\\.m4a$).*)",
+      "source": "/((?!.*\\.(?:m4a|mp3|wav|ogg|aac|webm|flac)$).*)",
       "destination": "/index.html"
     }
   ]
