@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { TextDisplay } from '../../features/typing-engine/components/TextDisplay'
 import { SimpleKeyboard } from '../../features/typing-engine/components/SimpleKeyboard'
 import { CustomTextsModal } from '../../features/custom-texts/components/CustomTextsModal'
