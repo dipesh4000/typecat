@@ -1,5 +1,23 @@
 {
+  "headers": [
+    {
+      "source": "/(.*\\.m4a)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "audio/mp4"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!.*\\.m4a$).*)",
+      "destination": "/index.html"
+    }
   ]
 }
