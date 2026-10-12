@@ -4,6 +4,7 @@ import { Sidebar } from './Sidebar'
 import { useSettingsStore } from '../stores/settingsStore'
 import { applyCharacterTheme } from '../features/cat-companion/characters'
 import { AchievementToast } from '../features/progression/components/AchievementToast'
+import { AccountControls } from '../chain/Blockchain'
 
 interface LayoutProps {
   children: ReactNode
@@ -100,6 +101,7 @@ export function Layout({ children }: LayoutProps) {
             ))}
           </div>
 
+          <div className="ml-auto z-10"><AccountControls /></div>
           {/* Right: Profile (desktop) */}
           <div className="hidden md:flex items-center shrink-0 ml-auto z-10">
             <button

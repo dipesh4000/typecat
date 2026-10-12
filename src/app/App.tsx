@@ -1,7 +1,8 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Layout } from './Layout'
 import PracticePage from '../pages/PracticePage/PracticePage'
+import Leaderboard from '../chain/Leaderboard'
 
 const StatsPage = lazy(() => import('../pages/StatsPage/StatsPage'))
 const AchievementsPage = lazy(() => import('../pages/AchievementsPage/AchievementsPage'))
@@ -9,7 +10,6 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage/SettingsPage'))
 
 export function App() {
   return (
-    <BrowserRouter>
       <Layout>
         <Suspense>
           <Routes>
@@ -17,11 +17,11 @@ export function App() {
             <Route path="/stats" element={<StatsPage />} />
             <Route path="/achievements" element={<AchievementsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
-            <Route path="*" element={<PracticePage />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
       </Layout>
-    </BrowserRouter>
   )
 }
 
