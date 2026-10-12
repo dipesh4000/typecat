@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { characters, getCharacter } from './characters'
+import { characters, getCharacter, getCharacterKeySprite } from './characters'
 
 describe('characters', () => {
   it('has at least one character', () => {
@@ -11,6 +11,7 @@ describe('characters', () => {
       expect(char.id).toBeTruthy()
       expect(char.name).toBeTruthy()
       expect(char.cover).toBeTruthy()
+      expect(char.background).toBeTruthy()
       expect(typeof char.hasRightKeys).toBe('boolean')
       expect(char.keyCount).toBeDefined()
       expect(char.theme).toBeDefined()
@@ -23,6 +24,15 @@ describe('characters', () => {
     characters.forEach((char) => {
       expect((char as any).nameCn).toBeUndefined()
     })
+  })
+})
+
+describe('getCharacterKeySprite', () => {
+  it('uses each character actual sprite inventory and hand folder', () => {
+    expect(getCharacterKeySprite('haohao', 'a')).toContain('/left-keys/KeyA.png')
+    expect(getCharacterKeySprite('haohao', 'j')).toContain('/right-keys/KeyJ.png')
+    expect(getCharacterKeySprite('classic', 'a')).toBeNull()
+    expect(getCharacterKeySprite('zimin', ' ')).toContain('/left-keys/Space.png')
   })
 })
 

@@ -38,7 +38,8 @@ export default function PracticePage() {
   const resumeSession = useTypingStore((s) => s.resumeSession)
 
   const setAnimationState = useCatStore((s) => s.setAnimationState)
-  const setActiveKey = useCatStore((s) => s.setActiveKey)
+  const pressKey = useCatStore((s) => s.pressKey)
+  const releaseKey = useCatStore((s) => s.releaseKey)
   const registerActivity = useCatStore((s) => s.registerActivity)
 
   const category = useSettingsStore((s) => s.category)
@@ -99,9 +100,9 @@ export default function PracticePage() {
 
       if (e.key === 'Backspace') {
         e.preventDefault()
+        registerActivity()
         handleBackspace()
-        setActiveKey('backspace')
-        setTimeout(() => setActiveKey(null), 100)
+        pressKey('backspace')
         return
       }
 
@@ -111,8 +112,7 @@ export default function PracticePage() {
       registerActivity()
 
       const keyForCat = e.key === ' ' ? ' ' : e.key.toLowerCase()
-      setActiveKey(keyForCat)
-      setTimeout(() => setActiveKey(null), 100)
+      pressKey(keyForCat)
 
       const currentInput = useTypingStore.getState().input
       const expected = passage.text[currentInput.length]
@@ -129,13 +129,24 @@ export default function PracticePage() {
         setTimeout(() => setAnimationState('typing'), 500)
       }
     },
-    [status, passage, browseOpen, customModalOpen, handleKeystroke, handleBackspace, registerActivity, setAnimationState, setActiveKey, pauseSession, resumeSession, playKeySound, playErrorSound]
+    [status, passage, browseOpen, customModalOpen, handleKeystroke, handleBackspace, registerActivity, setAnimationState, pressKey, pauseSession, resumeSession, playKeySound, playErrorSound]
   )
 
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [onKeyDown])
+
+  useEffect(() => {
+    const onKeyUp = (e: KeyboardEvent) => releaseKey(e.key === 'Backspace' ? 'backspace' : e.key === ' ' ? ' ' : e.key.toLowerCase())
+    const clearKey = () => useCatStore.setState({ activeKey: null })
+    window.addEventListener('keyup', onKeyUp)
+    window.addEventListener('blur', clearKey)
+    return () => {
+      window.removeEventListener('keyup', onKeyUp)
+      window.removeEventListener('blur', clearKey)
+    }
+  }, [releaseKey])
 
   useEffect(() => {
     if (passage && status === 'active' && input.length >= passage.text.length) {

@@ -5,6 +5,7 @@ import { useSettingsStore } from '../stores/settingsStore'
 import { applyCharacterTheme } from '../features/cat-companion/characters'
 import { AchievementToast } from '../features/progression/components/AchievementToast'
 import { AccountControls } from '../chain/Blockchain'
+import { Brand } from '../shared/components/Brand'
 
 interface LayoutProps {
   children: ReactNode
@@ -73,7 +74,7 @@ export function Layout({ children }: LayoutProps) {
     <div className="h-screen bg-surface text-on-surface flex flex-col overflow-hidden transition-colors duration-200">
       {/* Top Nav */}
       <header className="w-full bg-surface border-b border-outline-variant z-50 flex-shrink-0 transition-colors duration-200">
-        <nav className="flex items-center gap-3 h-16 px-4 md:px-6 relative">
+        <nav className="grid grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 h-16 px-4 md:px-6">
           {/* Left: Menu + Logo */}
           <div className="flex items-center shrink-0 z-10">
             <button
@@ -84,11 +85,11 @@ export function Layout({ children }: LayoutProps) {
             >
               {sidebarCollapsed ? 'menu_open' : 'menu'}
             </button>
-            <Link to="/" className="flex items-center gap-2 font-bold text-lg md:text-xl text-on-surface tracking-tight lg:ml-3"><img src="/favicon.svg" alt="" width="30" height="30" />TypeCat</Link>
+            <Brand href="/" className="lg:ml-3" />
           </div>
 
           {/* Center: Nav Links (desktop only) */}
-          <div className="hidden md:flex items-center gap-1 mx-auto">
+          <div className="hidden md:flex items-center gap-1 justify-self-center">
             {navLinks.filter(l => l.href !== '/settings').map((link) => (
               <Link
                 key={link.href}
@@ -105,13 +106,13 @@ export function Layout({ children }: LayoutProps) {
             ))}
           </div>
 
-          <div className="ml-auto z-10"><AccountControls /></div>
-          {/* Right: Profile (desktop) */}
-          <div className="hidden md:flex items-center shrink-0 z-10">
+          <div className="justify-self-end flex items-center gap-3 min-w-0 z-10">
+            <div className="min-w-0"><AccountControls /></div>
+            {/* Right: Profile (desktop) */}
             <button
               onClick={() => navigate('/settings')}
               aria-label="Settings"
-              className="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center cursor-pointer active:scale-95 hover:ring-2 hover:ring-primary transition-all"
+              className="hidden md:flex w-9 h-9 rounded-full bg-secondary-container items-center justify-center cursor-pointer active:scale-95 hover:ring-2 hover:ring-primary transition-all shrink-0"
             >
               <span className="material-symbols-outlined text-on-secondary-container text-[20px]">
                 person
@@ -121,11 +122,11 @@ export function Layout({ children }: LayoutProps) {
         </nav>
       </header>
 
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-1 min-h-0 min-w-0">
         <Sidebar collapsed={sidebarCollapsed} />
 
         <main
-          className={`flex-1 overflow-y-auto transition-all duration-300 ${
+          className={`flex-1 min-w-0 overflow-x-hidden overflow-y-auto transition-all duration-300 ${
             sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'
           }`}
         >

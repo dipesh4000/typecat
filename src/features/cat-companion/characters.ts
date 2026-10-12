@@ -7,6 +7,7 @@ export interface Character {
   id: string
   name: string
   cover: string
+  background: string
   hasRightKeys: boolean
   keyCount: { left: number; right: number }
   theme: CharacterTheme
@@ -17,6 +18,7 @@ export const characters: Character[] = [
     id: 'classic',
     name: 'Classic Cat',
     cover: '/characters/classic/cover.png',
+    background: '/characters/classic/background.png',
     hasRightKeys: true,
     keyCount: { left: 3, right: 4 },
     theme: {
@@ -50,6 +52,7 @@ export const characters: Character[] = [
     id: 'xiaohei',
     name: 'Luo Xiaohei',
     cover: '/characters/xiaohei/cover.png',
+    background: '/characters/xiaohei/background.png',
     hasRightKeys: false,
     keyCount: { left: 40, right: 0 },
     theme: {
@@ -83,6 +86,7 @@ export const characters: Character[] = [
     id: 'elysia',
     name: 'Elysia',
     cover: '/characters/elysia/cover.png',
+    background: '/characters/elysia/background.png',
     hasRightKeys: false,
     keyCount: { left: 25, right: 0 },
     theme: {
@@ -104,6 +108,7 @@ export const characters: Character[] = [
     id: 'haohao',
     name: 'Red Panda',
     cover: '/characters/haohao/cover.png',
+    background: '/characters/haohao/background.png',
     hasRightKeys: true,
     keyCount: { left: 28, right: 32 },
     theme: {
@@ -125,6 +130,7 @@ export const characters: Character[] = [
     id: 'nailin',
     name: 'Nailin',
     cover: '/characters/nailin/cover.png',
+    background: '/characters/nailin/background.png',
     hasRightKeys: true,
     keyCount: { left: 28, right: 32 },
     theme: {
@@ -146,6 +152,7 @@ export const characters: Character[] = [
     id: 'suxin',
     name: 'Suxin',
     cover: '/characters/suxin/cover.png',
+    background: '/characters/suxin/background.png',
     hasRightKeys: false,
     keyCount: { left: 55, right: 0 },
     theme: {
@@ -167,6 +174,7 @@ export const characters: Character[] = [
     id: 'anhe',
     name: 'Anhe',
     cover: '/characters/anhe/cover.png',
+    background: '/characters/anhe/background.png',
     hasRightKeys: false,
     keyCount: { left: 18, right: 0 },
     theme: {
@@ -188,6 +196,7 @@ export const characters: Character[] = [
     id: 'guizhong',
     name: 'Guizhong',
     cover: '/characters/guizhong/cover.png',
+    background: '/characters/guizhong/background.png',
     hasRightKeys: false,
     keyCount: { left: 39, right: 0 },
     theme: {
@@ -209,6 +218,7 @@ export const characters: Character[] = [
     id: 'zimin',
     name: 'Zimin',
     cover: '/characters/zimin/cover.png',
+    background: '/characters/zimin/background.png',
     hasRightKeys: false,
     keyCount: { left: 15, right: 0 },
     theme: {
@@ -230,6 +240,34 @@ export const characters: Character[] = [
 
 export function getCharacter(id: string): Character {
   return characters.find((c) => c.id === id) || characters[0]
+}
+
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const digits = '0123456789'
+// These are the key overlays present in public/characters. Missing keys still animate the cover.
+const availableKeys: Record<string, string> = {
+  classic: 'R SHIFT',
+  xiaohei: `${letters}${digits} SPACE SHIFT`,
+  elysia: 'ABCDEFGQRSTVWXZ12345 SPACE SHIFT',
+  haohao: `${letters}${digits} SPACE SHIFT BACKSPACE`,
+  nailin: `${letters}${digits} SPACE SHIFT BACKSPACE`,
+  suxin: `${letters}${digits} SPACE SHIFT BACKSPACE`,
+  anhe: 'ACDEFQRSVWXZ SPACE SHIFT',
+  guizhong: `${letters}${digits} SHIFT`,
+  zimin: 'ADEQRSW1234567 SPACE',
+}
+
+const rightHandKeys = new Set('HIJKLMNOPYU67890'.split('').concat('BACKSPACE'))
+
+export function getCharacterKeySprite(characterId: string, key: string): string | null {
+  const character = getCharacter(characterId)
+  const normalized = key === ' ' ? 'SPACE' : key.toUpperCase()
+  const available = availableKeys[character.id]
+  if (!available || !(normalized.length === 1 ? available.replaceAll(' ', '').includes(normalized) : available.split(' ').includes(normalized))) return null
+
+  const filename = normalized === 'SPACE' ? 'Space' : normalized === 'SHIFT' ? 'Shift' : normalized === 'BACKSPACE' ? 'Backspace' : /^\d$/.test(normalized) ? `Num${normalized}` : `Key${normalized}`
+  const folder = character.hasRightKeys && rightHandKeys.has(normalized) ? 'right-keys' : 'left-keys'
+  return `/characters/${character.id}/${folder}/${filename}.png`
 }
 
 export function applyCharacterTheme(characterId: string, isDark: boolean) {

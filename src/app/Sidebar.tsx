@@ -1,10 +1,10 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useStatsStore } from '../stores/statsStore'
 import { useProgressionStore } from '../stores/progressionStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useTypingStore } from '../stores/typingStore'
 import { useCatStore } from '../stores/catStore'
-import { getCharacter } from '../features/cat-companion/characters'
+import { getCharacter, getCharacterKeySprite } from '../features/cat-companion/characters'
 
 const DAILY_GOAL = 5
 
@@ -45,57 +45,6 @@ function ProgressRing({ progress }: { progress: number }) {
   )
 }
 
-interface SpritePosition {
-  x: number
-  y: number
-}
-
-const sidebarKeyPositions: Record<string, SpritePosition> = {
-  '1': { x: 28, y: 10 }, '2': { x: 33, y: 10 }, '3': { x: 38, y: 10 },
-  '4': { x: 43, y: 10 }, '5': { x: 48, y: 10 }, '6': { x: 55, y: 10 },
-  '7': { x: 60, y: 10 }, '8': { x: 65, y: 10 }, '9': { x: 70, y: 10 },
-  '0': { x: 75, y: 10 },
-  'q': { x: 28, y: 28 }, 'w': { x: 33, y: 28 }, 'e': { x: 38, y: 28 },
-  'r': { x: 43, y: 28 }, 't': { x: 48, y: 28 }, 'y': { x: 55, y: 28 },
-  'u': { x: 60, y: 28 }, 'i': { x: 65, y: 28 }, 'o': { x: 70, y: 28 },
-  'p': { x: 75, y: 28 },
-  'a': { x: 28, y: 44 }, 's': { x: 33, y: 44 }, 'd': { x: 38, y: 44 },
-  'f': { x: 43, y: 44 }, 'g': { x: 48, y: 44 }, 'h': { x: 55, y: 44 },
-  'j': { x: 60, y: 44 }, 'k': { x: 65, y: 44 }, 'l': { x: 70, y: 44 },
-  'z': { x: 30, y: 58 }, 'x': { x: 35, y: 58 }, 'c': { x: 40, y: 58 },
-  'v': { x: 45, y: 58 }, 'b': { x: 55, y: 58 }, 'n': { x: 60, y: 58 },
-  'm': { x: 65, y: 58 },
-  ' ': { x: 50, y: 72 },
-  'shift': { x: 28, y: 58 },
-  'backspace': { x: 72, y: 10 },
-}
-
-function getSidebarKeySpritePath(characterId: string, key: string, hasRightKeys: boolean): string | null {
-  const upper = key.toUpperCase()
-  const keyMap: Record<string, string> = {
-    'A': 'KeyA', 'B': 'KeyB', 'C': 'KeyC', 'D': 'KeyD', 'E': 'KeyE',
-    'F': 'KeyF', 'G': 'KeyG', 'H': 'KeyH', 'I': 'KeyI', 'J': 'KeyJ',
-    'K': 'KeyK', 'L': 'KeyL', 'M': 'KeyM', 'N': 'KeyN', 'O': 'KeyO',
-    'P': 'KeyP', 'Q': 'KeyQ', 'R': 'KeyR', 'S': 'KeyS', 'T': 'KeyT',
-    'U': 'KeyU', 'V': 'KeyV', 'W': 'KeyW', 'X': 'KeyX', 'Y': 'KeyY',
-    'Z': 'KeyZ', ' ': 'Space', 'SHIFT': 'Shift', 'BACKSPACE': 'Backspace',
-    '1': 'Num1', '2': 'Num2', '3': 'Num3', '4': 'Num4', '5': 'Num5',
-    '6': 'Num6', '7': 'Num7', '8': 'Num8', '9': 'Num9', '0': 'Num0',
-  }
-  const spriteName = keyMap[upper]
-  if (!spriteName) return null
-  const rightHandKeys = new Set([
-    'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'KeyN', 'KeyM',
-    'KeyU', 'KeyI', 'KeyO', 'KeyP', 'KeyY',
-    'Num7', 'Num8', 'Num9', 'Num0',
-    'UpArrow', 'DownArrow', 'LeftArrow', 'RightArrow',
-    'Backspace', 'Return', 'Slash', 'SemiColon', 'Quote',
-    'LeftBracket', 'RightBracket', 'BackSlash', 'Comma', 'Dot', 'Minus', 'Equal',
-  ])
-  const side = hasRightKeys && rightHandKeys.has(spriteName) ? 'right-keys' : 'left-keys'
-  return `/characters/${characterId}/${side}/${spriteName}.png`
-}
-
 export function Sidebar({ collapsed }: SidebarProps) {
   const bestWPM = useStatsStore((s) => s.bestWPM)
   const getAverageAccuracy = useStatsStore((s) => s.getAverageAccuracy)
@@ -110,12 +59,11 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
   const [showSessionSummary, setShowSessionSummary] = useState(false)
   const [lastResult, setLastResult] = useState<{ wpm: number; accuracy: number; duration: number } | null>(null)
-  const [handSprite, setHandSprite] = useState<string | null>(null)
-  const [spritePosition, setSpritePosition] = useState<SpritePosition | null>(null)
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const activeKey = useCatStore((s) => s.activeKey)
+  const keyPressId = useCatStore((s) => s.keyPressId)
   const characterId = useSettingsStore((s) => s.characterId)
   const character = getCharacter(characterId)
+  const keySprite = activeKey ? getCharacterKeySprite(characterId, activeKey) : null
 
   const todaySessions = useMemo(() => {
     const today = new Date().toISOString().split('T')[0]
@@ -136,38 +84,6 @@ export function Sidebar({ collapsed }: SidebarProps) {
       return () => clearTimeout(timer)
     }
   }, [status, sessionHistory])
-
-  // Show hand sprite in sidebar when key is pressed
-  useEffect(() => {
-    if (activeKey) {
-      if (hideTimerRef.current) {
-        clearTimeout(hideTimerRef.current)
-        hideTimerRef.current = null
-      }
-      const sprite = getSidebarKeySpritePath(characterId, activeKey, character.hasRightKeys)
-      if (sprite) {
-        setHandSprite(sprite)
-        setSpritePosition(sidebarKeyPositions[activeKey] || { x: 50, y: 50 })
-      }
-    }
-  }, [activeKey, characterId, character.hasRightKeys])
-
-  useEffect(() => {
-    const handleKeyup = () => {
-      hideTimerRef.current = setTimeout(() => {
-        setHandSprite(null)
-        setSpritePosition(null)
-        hideTimerRef.current = null
-      }, 100)
-    }
-    window.addEventListener('keyup', handleKeyup)
-    return () => {
-      window.removeEventListener('keyup', handleKeyup)
-      if (hideTimerRef.current) {
-        clearTimeout(hideTimerRef.current)
-      }
-    }
-  }, [])
 
   const cycleTheme = () => {
     const next = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'
@@ -285,12 +201,13 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
           {/* Character at Bottom with Hand Sprites */}
           <div className="p-3 border-t border-outline-variant">
-            <div className="relative mx-auto w-24 h-28">
-              {/* Animated character image */}
+            <div className="relative mx-auto w-full h-28 overflow-hidden">
               <div
+                key={status === 'active' ? keyPressId : status}
                 className="absolute inset-0 flex items-center justify-center"
                 style={{
-                  animation: status === 'active' ? 'catFloat 4s ease-in-out infinite' :
+                  animation: status === 'active' && activeKey ? 'catTap 0.14s ease-out' :
+                             status === 'active' ? 'catFloat 4s ease-in-out infinite' :
                              status === 'paused' ? 'none' :
                              status === 'complete' ? 'catCelebrate 0.6s ease-out' :
                              'catFloat 4s ease-in-out infinite'
@@ -299,25 +216,11 @@ export function Sidebar({ collapsed }: SidebarProps) {
                 <img
                   src={character.cover}
                   alt={character.name}
-                  className="w-24 h-auto select-none pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-contain select-none pointer-events-none"
                   draggable={false}
                 />
+                {keySprite && <img src={keySprite} alt="" className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10 hand-sprite-enter" draggable={false} />}
               </div>
-              {/* Hand sprite — separate from animated container */}
-              {handSprite && (
-                <img
-                  src={handSprite}
-                  alt=""
-                  className="absolute w-14 h-auto pointer-events-none drop-shadow-lg z-10"
-                  style={{
-                    left: `${spritePosition?.x ?? 50}%`,
-                    top: `${spritePosition?.y ?? 50}%`,
-                    transform: 'translate(-50%, -50%)',
-                    transition: 'left 0.08s ease-out, top 0.08s ease-out',
-                  }}
-                  draggable={false}
-                />
-              )}
             </div>
             <p className="text-center text-[10px] font-medium text-on-surface-variant mt-1">{character.name}</p>
           </div>
@@ -354,6 +257,11 @@ export function Sidebar({ collapsed }: SidebarProps) {
         @keyframes catBounce {
           0% { transform: translateY(0) scale(1); }
           40% { transform: translateY(-8px) scale(1.05); }
+          100% { transform: translateY(0) scale(1); }
+        }
+        @keyframes catTap {
+          0% { transform: translateY(0) scale(1); }
+          45% { transform: translateY(1px) scale(0.985); }
           100% { transform: translateY(0) scale(1); }
         }
         @keyframes catCelebrate {

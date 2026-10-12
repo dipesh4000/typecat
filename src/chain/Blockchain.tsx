@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { PrivyProvider, usePrivy, useWallets } from '@privy-io/react-auth'
+import { PrivyProvider, useLoginWithOAuth, usePrivy, useWallets } from '@privy-io/react-auth'
 import { createWalletClient, custom, keccak256, stringToHex, type Address } from 'viem'
 import { ChainLayer, type Transaction } from './ChainLayer'
 import { abi, appId, chain, configured, explorer, game, publicClient, verifierUrl } from './config'
@@ -12,10 +12,11 @@ const AccountContext = createContext<ReactNode>(null)
 export function AccountControls() { return <>{useContext(AccountContext)}</> }
 export function Blockchain({ children }: { children: ReactNode }) {
   if (!appId) return <AuthGate ready authenticated={false}>{children}</AuthGate>
-  return <PrivyProvider appId={appId} config={{ loginMethods: ['email'], embeddedWallets: { ethereum: { createOnLogin: 'users-without-wallets' }, showWalletUIs: false }, defaultChain: chain, supportedChains: [chain] }}><Connected>{children}</Connected></PrivyProvider>
+  return <PrivyProvider appId={appId} config={{ loginMethods: ['email', 'google'], embeddedWallets: { ethereum: { createOnLogin: 'users-without-wallets' }, showWalletUIs: false }, defaultChain: chain, supportedChains: [chain] }}><Connected>{children}</Connected></PrivyProvider>
 }
 function Connected({ children }: { children: ReactNode }) {
   const { authenticated, login, logout, ready } = usePrivy()
+  const { initOAuth } = useLoginWithOAuth()
   const { wallets } = useWallets()
   const embedded = wallets.find(w => w.walletClientType === 'privy')
   const address = embedded?.address
@@ -30,6 +31,10 @@ function Connected({ children }: { children: ReactNode }) {
     let unsubscribe: (() => void) | undefined
     const fail = (e: unknown) => { if (!disposed) setError(transactionError(e)) }
     void (async () => {
+      const actualChainId = await publicClient.getChainId()
+      if (actualChainId !== chain.id) throw new Error(`RPC is on chain ${actualChainId}; TypeCat expects ${chain.name} (${chain.id}). Check VITE_RPC_URL.`)
+      const code = await publicClient.getBytecode({ address: game! })
+      if (!code || code === '0x') throw new Error(`No TypeCat contract at ${game} on ${chain.name} (${chain.id}). This address is deployed on Fuji; set VITE_GAME_ADDRESS to the Avalanche mainnet deployment address and redeploy.`)
       const wallet = embedded
       await wallet.switchChain(chain.id)
       const provider = await wallet.getEthereumProvider()
@@ -78,7 +83,7 @@ function Connected({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authenticated, address, attempt])
   const controls = <div className="flex items-center gap-2 text-xs"><span className="max-w-36 truncate text-on-surface-variant">{account ? `${account.slice(0, 6)}…${account.slice(-4)}` : error ? 'Chain setup failed' : configured ? 'Preparing account…' : 'Practice mode'}</span><button className="shrink-0 border border-outline-variant rounded-lg px-2 py-1.5" onClick={() => { setAccount(undefined); setTxs([]); setError(''); void logout() }}>Log out</button></div>
-  return <AuthGate ready={ready} authenticated={authenticated} onLogin={login}><AccountContext.Provider value={controls}>
+  return <AuthGate ready={ready} authenticated={authenticated} onLogin={login} onGoogleLogin={() => { void initOAuth({ provider: 'google' }) }}><AccountContext.Provider value={controls}>
     {children}
     <TransactionPanel transactions={txs} error={error} onDismiss={() => setError('')} onRetry={!account && !connecting && configured ? () => { setError(''); setConnecting(true); setAttempt(previous => previous + 1) } : undefined} explorer={explorer} network={chain.id === 43113 ? 'Fuji testnet' : 'Avalanche'} configured={configured} />
   </AccountContext.Provider></AuthGate>
