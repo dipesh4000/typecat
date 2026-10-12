@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { PrivyProvider, usePrivy, useWallets } from '@privy-io/react-auth'
-import { Link } from 'react-router-dom'
 import { createWalletClient, custom, keccak256, stringToHex, type Address } from 'viem'
 import { ChainLayer, type Transaction } from './ChainLayer'
 import { abi, appId, chain, configured, explorer, game, publicClient, verifierUrl } from './config'
 import { useTypingStore } from '../stores/typingStore'
 import { AuthGate } from './AuthGate'
+import { TransactionPanel } from './TransactionPanel'
+import { transactionError } from './errors'
 
 const AccountContext = createContext<ReactNode>(null)
 export function AccountControls() { return <>{useContext(AccountContext)}</> }
@@ -21,23 +22,27 @@ function Connected({ children }: { children: ReactNode }) {
   const [account, setAccount] = useState<Address>()
   const [error, setError] = useState('')
   const [txs, setTxs] = useState<Transaction[]>([])
+  const [attempt, setAttempt] = useState(0)
+  const [connecting, setConnecting] = useState(true)
   useEffect(() => {
     if (!configured || !authenticated || !embedded) return
     let disposed = false
     let unsubscribe: (() => void) | undefined
-    const fail = (e: unknown) => { if (!disposed) setError(e instanceof Error ? e.message : String(e)) }
+    const fail = (e: unknown) => { if (!disposed) setError(transactionError(e)) }
     void (async () => {
       const wallet = embedded
       await wallet.switchChain(chain.id)
       const provider = await wallet.getEthereumProvider()
       const layer = await ChainLayer.create(createWalletClient({ account: wallet.address as Address, chain, transport: custom(provider) }), wallet.address as Address, tx => {
-        if (!disposed) setTxs(prev => [tx, ...prev.filter(p => p.id !== tx.id)].slice(0, 5))
+        if (!disposed) setTxs(prev => [tx, ...prev.filter(p => p.id !== tx.id)].slice(0, 10))
       })
       if (disposed) return
       const registered = await publicClient.readContract({ address: game!, abi, functionName: 'registered', args: [layer.account] })
+      if (disposed) return
       if (!registered) await layer.write('Create player', 'registerPlayer')
       const lastDay = await publicClient.readContract({ address: game!, abi, functionName: 'lastCheckIn', args: [layer.account] })
       const block = await publicClient.getBlock()
+      if (disposed) return
       if (lastDay !== block.timestamp / 86400n) await layer.write('Daily check-in', 'dailyCheckIn')
       if (disposed) return
       setAccount(layer.account); setError('')
@@ -67,11 +72,14 @@ function Connected({ children }: { children: ReactNode }) {
           }
         })().catch(fail)
       })
-    })().catch(fail)
+    })().catch(fail).finally(() => { if (!disposed) setConnecting(false) })
     return () => { disposed = true; unsubscribe?.() }
     // Embedded wallet identity can change; reconnect only for a different owner.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authenticated, address])
-  const controls = <div className="flex items-center gap-3 text-xs"><Link to="/leaderboard">Leaderboard</Link>{!authenticated ? <button disabled={!ready} onClick={login}>Log in / Sign up</button> : <><span>{account ? `${account.slice(0, 6)}…${account.slice(-4)}` : configured ? 'Preparing account…' : 'Signed in · practice mode'}</span><button onClick={() => { setAccount(undefined); void logout() }}>Log out</button></>}</div>
-  return <AuthGate ready={ready} authenticated={authenticated} onLogin={login}><AccountContext.Provider value={controls}>{children}<div className="fixed right-3 bottom-16 z-50 max-w-sm space-y-1 text-xs" aria-live="polite">{error && <div className="bg-surface text-error p-3 border rounded">{error}<button className="ml-2" onClick={() => setError('')}>Dismiss</button></div>}{txs.map(tx => <div className="bg-surface border border-outline-variant rounded p-2" key={tx.id}>{tx.label} · {tx.state}{tx.hash && <a className="ml-2 underline" href={`${explorer}/tx/${tx.hash}`} target="_blank" rel="noreferrer">View transaction</a>}{tx.error && <p className="text-error">{tx.error}</p>}</div>)}</div></AccountContext.Provider></AuthGate>
+  }, [authenticated, address, attempt])
+  const controls = <div className="flex items-center gap-2 text-xs"><span className="max-w-36 truncate text-on-surface-variant">{account ? `${account.slice(0, 6)}…${account.slice(-4)}` : error ? 'Chain setup failed' : configured ? 'Preparing account…' : 'Practice mode'}</span><button className="shrink-0 border border-outline-variant rounded-lg px-2 py-1.5" onClick={() => { setAccount(undefined); setTxs([]); setError(''); void logout() }}>Log out</button></div>
+  return <AuthGate ready={ready} authenticated={authenticated} onLogin={login}><AccountContext.Provider value={controls}>
+    {children}
+    <TransactionPanel transactions={txs} error={error} onDismiss={() => setError('')} onRetry={!account && !connecting && configured ? () => { setError(''); setConnecting(true); setAttempt(previous => previous + 1) } : undefined} explorer={explorer} network={chain.id === 43113 ? 'Fuji testnet' : 'Avalanche'} configured={configured} />
+  </AccountContext.Provider></AuthGate>
 }

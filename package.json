@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && npm run verifier:check && npm run vercel:check && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "verifier": "tsx server/index.ts",
     "verifier:check": "tsc -p server/tsconfig.json",
+    "vercel:check": "tsx scripts/check-vercel.ts",
     "contracts:check": "tsx scripts/contracts.ts",
     "contracts:deploy": "tsx scripts/contracts.ts --deploy"
   },

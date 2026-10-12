@@ -7,6 +7,16 @@ import config from '../vercel.json' with { type: 'json' }
 
 afterEach(() => vi.unstubAllEnvs())
 describe('Vercel API routing', () => {
+  it('allows the production frontend origin without granting arbitrary sites access', async () => {
+    const allowed = await app.request('https://typecat-rust.vercel.app/api/health', { headers: { Origin: 'https://typecat-rust.vercel.app' } })
+    expect(allowed.headers.get('Access-Control-Allow-Origin')).toBe('https://typecat-rust.vercel.app')
+    const denied = await app.request('/api/health', { headers: { Origin: 'https://untrusted.example' } })
+    expect(denied.headers.get('Access-Control-Allow-Origin')).toBeNull()
+    const preflight = await app.request('/api/verify', { method: 'OPTIONS', headers: { Origin: 'https://typecat-rust.vercel.app', 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'content-type' } })
+    expect(preflight.status).toBe(204)
+    expect(preflight.headers.get('Access-Control-Allow-Origin')).toBe('https://typecat-rust.vercel.app')
+    expect(preflight.headers.get('Access-Control-Allow-Methods')).toContain('POST')
+  })
   it('serves JSON health without deployment secrets', async () => {
     vi.stubEnv('GAME_ADDRESS', '')
     vi.stubEnv('VERIFIER_PRIVATE_KEY', '')

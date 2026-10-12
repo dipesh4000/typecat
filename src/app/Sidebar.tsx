@@ -186,7 +186,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed left-0 top-14 bottom-0 hidden lg:flex flex-col bg-surface-container-low border-r border-outline-variant transition-all duration-300 z-40 ${
+      className={`fixed left-0 top-16 bottom-0 hidden lg:flex flex-col bg-surface-container-low border-r border-outline-variant transition-all duration-300 z-40 ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >

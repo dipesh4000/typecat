@@ -1,12 +1,6 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es2023",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "strict": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "noEmit": true,
     "allowImportingTsExtensions": true
   },
   "include": ["*.ts", "../api/*.ts"]

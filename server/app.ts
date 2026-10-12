@@ -4,7 +4,7 @@ import { bodyLimit } from 'hono/body-limit'
 import { createPublicClient, http, isAddress, keccak256, parseAbi, stringToHex, type Address, type Hex } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { avalanche, avalancheFuji } from 'viem/chains'
-import { score } from './scoring.ts'
+import { score } from './scoring.js'
 import english from '../src/data/passages/english.json' with { type: 'json' }
 import anime from '../src/data/passages/anime.json' with { type: 'json' }
 import programming from '../src/data/passages/programming.json' with { type: 'json' }

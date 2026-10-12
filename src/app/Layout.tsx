@@ -20,6 +20,7 @@ const navLinks = [
   { href: '/', label: 'Practice', icon: 'keyboard' },
   { href: '/stats', label: 'Stats', icon: 'bar_chart' },
   { href: '/achievements', label: 'Badges', icon: 'emoji_events' },
+  { href: '/leaderboard', label: 'Ranks', icon: 'leaderboard' },
   { href: '/settings', label: 'Settings', icon: 'settings' },
 ]
 
@@ -46,7 +47,7 @@ export function Layout({ children }: LayoutProps) {
 
   useEffect(() => {
     const root = document.documentElement
-    let isDark = false
+    let isDark: boolean
 
     if (theme === 'dark') {
       root.classList.add('dark')
@@ -72,25 +73,28 @@ export function Layout({ children }: LayoutProps) {
     <div className="h-screen bg-surface text-on-surface flex flex-col overflow-hidden transition-colors duration-200">
       {/* Top Nav */}
       <header className="w-full bg-surface border-b border-outline-variant z-50 flex-shrink-0 transition-colors duration-200">
-        <nav className="flex items-center h-14 px-4 md:px-6 relative">
+        <nav className="flex items-center gap-3 h-16 px-4 md:px-6 relative">
           {/* Left: Menu + Logo */}
           <div className="flex items-center shrink-0 z-10">
             <button
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+              aria-expanded={!sidebarCollapsed}
               className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 lg:block hidden"
             >
               {sidebarCollapsed ? 'menu_open' : 'menu'}
             </button>
-            <Link to="/" className="font-bold text-lg md:text-xl text-primary tracking-tight lg:ml-3">TypeCat</Link>
+            <Link to="/" className="flex items-center gap-2 font-bold text-lg md:text-xl text-on-surface tracking-tight lg:ml-3"><img src="/favicon.svg" alt="" width="30" height="30" />TypeCat</Link>
           </div>
 
           {/* Center: Nav Links (desktop only) */}
-          <div className={`hidden md:flex items-center gap-2 absolute left-1/2 top-1/2 -translate-y-1/2 transition-all duration-300 ${sidebarCollapsed ? 'lg:translate-x-[calc(-50%+32px)]' : 'lg:translate-x-[calc(-50%+128px)]'}`}>
+          <div className="hidden md:flex items-center gap-1 mx-auto">
             {navLinks.filter(l => l.href !== '/settings').map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${
+                aria-current={location.pathname === link.href ? 'page' : undefined}
+                className={`px-3 lg:px-5 py-2 rounded-lg text-sm font-medium transition-all ${
                   location.pathname === link.href
                     ? 'text-primary bg-primary/10'
                     : 'text-on-surface-variant hover:text-primary hover:bg-surface-container'
@@ -103,7 +107,7 @@ export function Layout({ children }: LayoutProps) {
 
           <div className="ml-auto z-10"><AccountControls /></div>
           {/* Right: Profile (desktop) */}
-          <div className="hidden md:flex items-center shrink-0 ml-auto z-10">
+          <div className="hidden md:flex items-center shrink-0 z-10">
             <button
               onClick={() => navigate('/settings')}
               aria-label="Settings"
@@ -125,20 +129,21 @@ export function Layout({ children }: LayoutProps) {
             sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'
           }`}
         >
-          <div className="max-w-[1024px] mx-auto px-4 md:px-6 py-3 md:py-4 pb-20 md:pb-4">
+          <div className="max-w-[1024px] mx-auto px-4 md:px-8 py-5 md:py-7 pb-20 md:pb-7">
             {children}
           </div>
         </main>
       </div>
 
       {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant z-50 flex items-center justify-around h-14">
+      <nav aria-label="Main navigation" className="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant z-50 flex items-center justify-around h-16 safe-area-bottom">
         {navLinks.map((link) => {
           const isActive = location.pathname === link.href
           return (
             <Link
               key={link.href}
               to={link.href}
+              aria-current={isActive ? 'page' : undefined}
               className={`flex flex-col items-center justify-center gap-0.5 flex-1 h-full transition-colors ${
                 isActive
                   ? 'text-primary'

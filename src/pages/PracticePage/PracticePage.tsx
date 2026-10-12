@@ -234,6 +234,12 @@ export default function PracticePage() {
 
   return (
     <div className="w-full h-full flex flex-col">
+      {status === 'idle' && (
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-on-surface-variant mb-1">YOUR PRACTICE CORNER</p><h1 className="text-2xl md:text-3xl font-semibold tracking-tight">A little better, every day.</h1><p className="text-sm text-on-surface-variant mt-2">Pick a passage. Find your rhythm. Make it yours.</p></div>
+          <img src="/favicon.svg" alt="" width="52" height="52" className="hidden sm:block -rotate-6" />
+        </div>
+      )}
       {/* Mode Selector */}
       {(status === 'idle' || status === 'complete') && (
         <div className="w-full mb-2 md:mb-3 flex-shrink-0">
@@ -293,7 +299,7 @@ export default function PracticePage() {
       {/* Main Content */}
       <div className="flex-1 min-h-0 flex flex-col">
         {/* Typing Area */}
-        <section className="flex-1 min-h-0 bg-surface-container-lowest border border-outline-variant rounded-lg md:rounded-xl p-3 md:p-4 shadow-sm overflow-hidden relative">
+        <section className="flex-1 min-h-[260px] bg-surface-container-lowest border border-outline-variant rounded-xl p-5 md:p-8 shadow-sm overflow-hidden relative">
           {/* Idle - Passage Preview */}
           {status === 'idle' && displayPassage && (
             <div className="h-full flex flex-col items-center justify-center">
@@ -302,7 +308,7 @@ export default function PracticePage() {
                   {displayPassage.category} • {displayPassage.difficulty}
                 </span>
               </div>
-              <div className="font-typing-font text-sm md:text-lg leading-relaxed text-on-surface-variant/50 mb-3 md:mb-4 max-w-xl text-center px-2">
+              <div className="typing-font text-sm md:text-lg leading-relaxed text-on-surface-variant/80 mb-5 md:mb-6 max-w-xl text-center px-2">
                 {displayPassage.text}
               </div>
               <div className="flex gap-2 md:gap-3">
