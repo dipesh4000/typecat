@@ -1,10 +1,10 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useStatsStore } from '../stores/statsStore'
 import { useProgressionStore } from '../stores/progressionStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useTypingStore } from '../stores/typingStore'
 import { useCatStore } from '../stores/catStore'
-import { getCharacter, getCharacterKeySprite } from '../features/cat-companion/characters'
+import { getCharacter } from '../features/cat-companion/characters'
 
 const DAILY_GOAL = 5
 
@@ -61,9 +61,21 @@ export function Sidebar({ collapsed }: SidebarProps) {
   const [lastResult, setLastResult] = useState<{ wpm: number; accuracy: number; duration: number } | null>(null)
   const activeKey = useCatStore((s) => s.activeKey)
   const keyPressId = useCatStore((s) => s.keyPressId)
+  const animationState = useCatStore((s) => s.animationState)
+  const reducedMotion = useSettingsStore((s) => s.reducedMotion)
+  const characterRef = useRef<HTMLDivElement>(null)
   const characterId = useSettingsStore((s) => s.characterId)
   const character = getCharacter(characterId)
-  const keySprite = activeKey ? getCharacterKeySprite(characterId, activeKey) : null
+
+  useEffect(() => {
+    if (!activeKey || status !== 'active' || reducedMotion || !characterRef.current) return
+    const hand = 'yuiophjklnm67890'.includes(activeKey) ? 1 : -1
+    characterRef.current.animate([
+      { transform: 'translateY(0) rotate(0deg)' },
+      { transform: `translateY(3px) rotate(${hand * 2}deg)`, offset: 0.38 },
+      { transform: 'translateY(0) rotate(0deg)' },
+    ], { duration: 190, easing: 'ease-out' })
+  }, [keyPressId, activeKey, status, reducedMotion])
 
   const todaySessions = useMemo(() => {
     const today = new Date().toISOString().split('T')[0]
@@ -199,18 +211,17 @@ export function Sidebar({ collapsed }: SidebarProps) {
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Character at Bottom with Hand Sprites */}
+          {/* Character at Bottom */}
           <div className="p-3 border-t border-outline-variant">
             <div className="relative mx-auto w-full h-28 overflow-hidden">
               <div
-                key={status === 'active' ? keyPressId : status}
-                className="absolute inset-0 flex items-center justify-center"
+                ref={characterRef}
+                className="absolute inset-0 flex items-center justify-center origin-bottom"
                 style={{
-                  animation: status === 'active' && activeKey ? 'catTap 0.14s ease-out' :
-                             status === 'active' ? 'catFloat 4s ease-in-out infinite' :
-                             status === 'paused' ? 'none' :
-                             status === 'complete' ? 'catCelebrate 0.6s ease-out' :
-                             'catFloat 4s ease-in-out infinite'
+                  animation: reducedMotion ? 'none' :
+                             status === 'complete' ? 'sidebarCelebrate 0.7s ease-out' :
+                             animationState === 'error' ? 'sidebarOops 0.35s ease-out' :
+                             status === 'paused' ? 'none' : 'sidebarBreathe 3.8s ease-in-out infinite'
                 }}
               >
                 <img
@@ -219,8 +230,8 @@ export function Sidebar({ collapsed }: SidebarProps) {
                   className="absolute inset-0 w-full h-full object-contain select-none pointer-events-none"
                   draggable={false}
                 />
-                {keySprite && <img src={keySprite} alt="" className="absolute inset-0 w-full h-full object-contain pointer-events-none z-10 hand-sprite-enter" draggable={false} />}
               </div>
+              {activeKey && status === 'active' && <span className="absolute right-1 top-0 rounded-md border border-outline-variant bg-surface-container-lowest/90 px-1.5 py-0.5 font-mono text-[9px] font-bold text-primary shadow-sm" aria-label={`Pressed ${activeKey === ' ' ? 'space' : activeKey}`}>{activeKey === ' ' ? 'SPACE' : activeKey.toUpperCase()}</span>}
             </div>
             <p className="text-center text-[10px] font-medium text-on-surface-variant mt-1">{character.name}</p>
           </div>
@@ -250,35 +261,9 @@ export function Sidebar({ collapsed }: SidebarProps) {
       )}
 
       <style>{`
-        @keyframes catFloat {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-4px) scale(1.01); }
-        }
-        @keyframes catBounce {
-          0% { transform: translateY(0) scale(1); }
-          40% { transform: translateY(-8px) scale(1.05); }
-          100% { transform: translateY(0) scale(1); }
-        }
-        @keyframes catTap {
-          0% { transform: translateY(0) scale(1); }
-          45% { transform: translateY(1px) scale(0.985); }
-          100% { transform: translateY(0) scale(1); }
-        }
-        @keyframes catCelebrate {
-          0%, 100% { transform: translateY(0) rotate(0) scale(1); }
-          15% { transform: translateY(-15px) rotate(-8deg) scale(1.1); }
-          30% { transform: translateY(-20px) rotate(0deg) scale(1.15); }
-          45% { transform: translateY(-15px) rotate(8deg) scale(1.1); }
-          60% { transform: translateY(-10px) rotate(-5deg) scale(1.05); }
-          75% { transform: translateY(-5px) rotate(5deg) scale(1.02); }
-        }
-        @keyframes handSpriteIn {
-          from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-          to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-        .hand-sprite-enter {
-          animation: handSpriteIn 0.08s ease-out;
-        }
+        @keyframes sidebarBreathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+        @keyframes sidebarOops { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-3deg); } 65% { transform: rotate(2deg); } }
+        @keyframes sidebarCelebrate { 0%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-7px) rotate(-3deg); } 65% { transform: translateY(-4px) rotate(3deg); } }
       `}</style>
     </aside>
   )
