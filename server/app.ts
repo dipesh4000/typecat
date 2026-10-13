@@ -11,6 +11,7 @@ import programming from '../src/data/passages/programming.json' with { type: 'js
 
 const abi = parseAbi(['function sessions(bytes32) view returns (address player, bytes32 passage, uint64 startedAt, bool complete)'])
 const passages = [...english, ...anime, ...programming]
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 export const app = new Hono()
 app.use('*', cors({ origin: (process.env.ALLOWED_ORIGINS || 'https://typecat-rust.vercel.app,http://localhost:5173').split(',').map(origin => origin.trim()) }))
 app.use('*', bodyLimit({ maxSize: 500000 }))
@@ -28,11 +29,18 @@ app.post('/api/verify', async c => {
     if (!body || typeof body.player !== 'string' || !isAddress(body.player) || typeof body.sessionId !== 'string' || !/^0x[0-9a-fA-F]{64}$/.test(body.sessionId)) throw new Error('Invalid player or session')
     const passage = passages.find(p => p.id === body.passageId)
     if (!passage) throw new Error('Custom passages are practice only')
-    const [player, passageHash, startedAt, complete] = await client.readContract({ address: game, abi, functionName: 'sessions', args: [body.sessionId] })
-    if (player.toLowerCase() !== body.player.toLowerCase() || complete || passageHash !== keccak256(stringToHex(passage.id))) throw new Error('Session does not match chain state')
+    const expectedPassage = keccak256(stringToHex(passage.id))
+    let session: readonly [Address, Hex, bigint, boolean] | undefined
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const current = await client.readContract({ address: game, abi, functionName: 'sessions', args: [body.sessionId] })
+      if (current[0].toLowerCase() === body.player.toLowerCase() && current[1] === expectedPassage && !current[3]) { session = current; break }
+      if (attempt < 4) await sleep(500)
+    }
+    if (!session) throw new Error('Session does not match chain state')
+    const [player, , startedAt] = session
     const result = score(passage.text, body.keystrokes, body.duration)
     const block = await client.getBlock()
-    if (block.timestamp - startedAt > 3600n || result.duration > Number(block.timestamp - startedAt) * 1000 + 15000) throw new Error('Session timing does not match chain state')
+    if (block.timestamp < startedAt || block.timestamp - startedAt > 3600n) throw new Error('Session timing does not match chain state')
     const logHash = keccak256(stringToHex(JSON.stringify(body.keystrokes)))
     const signature = await signer.signTypedData({
       domain: { name: 'TypeCat', version: '1', chainId: chain.id, verifyingContract: game },

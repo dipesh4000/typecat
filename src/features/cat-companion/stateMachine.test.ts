@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { catStateMachine } from './stateMachine'
-import type { CatAnimationState } from './stateMachine'
+import type { CatAnimationState, CatEvent } from './stateMachine'
 
 describe('catStateMachine', () => {
   it('transitions from idle to typing on KEYSTROKE', () => {
@@ -64,6 +64,6 @@ describe('catStateMachine', () => {
   })
 
   it('returns current state for unknown event', () => {
-    expect(catStateMachine('idle', 'UNKNOWN' as any)).toBe('idle')
+    expect(catStateMachine('idle', 'UNKNOWN' as CatEvent)).toBe('idle')
   })
 })

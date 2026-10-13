@@ -39,7 +39,10 @@ function Connected({ children }: { children: ReactNode }) {
       await wallet.switchChain(chain.id)
       const provider = await wallet.getEthereumProvider()
       const layer = await ChainLayer.create(createWalletClient({ account: wallet.address as Address, chain, transport: custom(provider) }), wallet.address as Address, tx => {
-        if (!disposed) setTxs(prev => [tx, ...prev.filter(p => p.id !== tx.id)].slice(0, 10))
+        if (!disposed) {
+          if (tx.state === 'queued') setError('')
+          setTxs(prev => [tx, ...prev.filter(p => p.id !== tx.id)].slice(0, 10))
+        }
       })
       if (disposed) return
       const registered = await publicClient.readContract({ address: game!, abi, functionName: 'registered', args: [layer.account] })

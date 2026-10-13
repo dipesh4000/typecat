@@ -26,20 +26,18 @@ export function CatKeyboard() {
   const animationState = useCatStore((s) => s.animationState)
   const characterId = useSettingsStore((s) => s.characterId)
 
-  const [message, setMessage] = useState('')
-  const [showMessage, setShowMessage] = useState(false)
+  const [hiddenMessageFor, setHiddenMessageFor] = useState('')
   const character = getCharacter(characterId)
   const keySprite = activeKey ? getCharacterKeySprite(characterId, activeKey) : null
   const isIdle = animationState === 'idle'
   const isError = animationState === 'error'
   const isCelebrating = animationState === 'celebrating'
   const isSleeping = animationState === 'sleeping'
+  const message = (stateMessages[animationState] || stateMessages.idle)[0]
+  const showMessage = hiddenMessageFor !== animationState
 
   useEffect(() => {
-    const msgs = stateMessages[animationState] || stateMessages.idle
-    setMessage(msgs[Math.floor(Math.random() * msgs.length)])
-    setShowMessage(true)
-    const timer = setTimeout(() => setShowMessage(false), 2500)
+    const timer = setTimeout(() => setHiddenMessageFor(animationState), 2500)
     return () => clearTimeout(timer)
   }, [animationState])
 

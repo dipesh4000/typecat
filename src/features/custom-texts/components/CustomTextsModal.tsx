@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { CustomPassageProvider } from '../../../services/content/CustomPassageProvider'
 import type { Passage } from '../../../shared/types'
 
@@ -9,23 +9,12 @@ interface CustomTextsModalProps {
 }
 
 export function CustomTextsModal({ open, onClose, onStart }: CustomTextsModalProps) {
-  const [passages, setPassages] = useState<Passage[]>([])
+  const [passages, setPassages] = useState<Passage[]>(() => CustomPassageProvider.getPassages())
   const [editing, setEditing] = useState<Passage | null>(null)
   const [creating, setCreating] = useState(false)
   const [name, setName] = useState('')
   const [text, setText] = useState('')
   const [difficulty, setDifficulty] = useState<Passage['difficulty']>('medium')
-
-  useEffect(() => {
-    if (open) {
-      setPassages(CustomPassageProvider.getPassages())
-      setEditing(null)
-      setCreating(false)
-      setName('')
-      setText('')
-      setDifficulty('medium')
-    }
-  }, [open])
 
   const handleSave = () => {
     if (!text.trim()) return

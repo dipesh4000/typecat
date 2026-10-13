@@ -9,7 +9,8 @@ interface AchievementToastProps {
 export function AchievementToast({ name, description, onDismiss }: AchievementToastProps) {
   const [phase, setPhase] = useState<'enter' | 'visible' | 'exit'>('enter')
   const dismissRef = useRef(onDismiss)
-  dismissRef.current = onDismiss
+
+  useEffect(() => { dismissRef.current = onDismiss }, [onDismiss])
 
   useEffect(() => {
     const enterTimer = setTimeout(() => setPhase('visible'), 300)

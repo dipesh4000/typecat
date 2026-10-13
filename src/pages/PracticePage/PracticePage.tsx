@@ -72,9 +72,9 @@ export default function PracticePage() {
   )
 
   useEffect(() => {
-    if (status === 'idle') {
-      loadPassage()
-    }
+    if (status !== 'idle') return
+    const timer = setTimeout(loadPassage, 0)
+    return () => clearTimeout(timer)
   }, [category, difficulty, status, loadPassage])
 
   const onKeyDown = useCallback(
@@ -149,12 +149,14 @@ export default function PracticePage() {
   }, [releaseKey])
 
   useEffect(() => {
-    if (passage && status === 'active' && input.length >= passage.text.length) {
+    if (!passage || status !== 'active' || input.length < passage.text.length) return
+    const timer = setTimeout(() => {
       const result = endSession()
       const xp = onSessionComplete(result)
       setSessionXP(xp.xpEarned)
       playCompleteSound()
-    }
+    }, 0)
+    return () => clearTimeout(timer)
   }, [passage, status, input, endSession, playCompleteSound])
 
   const handleStart = (passageToUse?: Passage) => {
@@ -494,11 +496,11 @@ export default function PracticePage() {
       )}
 
       {/* Custom Texts Modal */}
-      <CustomTextsModal
-        open={customModalOpen}
-        onClose={() => setCustomModalOpen(false)}
-        onStart={handleStart}
-      />
+      {customModalOpen && <CustomTextsModal
+          open
+          onClose={() => setCustomModalOpen(false)}
+          onStart={handleStart}
+        />}
     </div>
   )
 }

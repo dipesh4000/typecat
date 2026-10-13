@@ -57,8 +57,7 @@ export function Sidebar({ collapsed }: SidebarProps) {
   const toggleSound = useSettingsStore((s) => s.toggleSound)
   const status = useTypingStore((s) => s.status)
 
-  const [showSessionSummary, setShowSessionSummary] = useState(false)
-  const [lastResult, setLastResult] = useState<{ wpm: number; accuracy: number; duration: number } | null>(null)
+  const [hiddenSummary, setHiddenSummary] = useState<number | null>(null)
   const activeKey = useCatStore((s) => s.activeKey)
   const keyPressId = useCatStore((s) => s.keyPressId)
   const animationState = useCatStore((s) => s.animationState)
@@ -87,15 +86,13 @@ export function Sidebar({ collapsed }: SidebarProps) {
 
   const todayProgress = Math.min(todaySessions / DAILY_GOAL, 1)
 
+  const lastResult = sessionHistory[0] ?? null
+  const showSessionSummary = status === 'complete' && lastResult !== null && hiddenSummary !== lastResult.timestamp
   useEffect(() => {
-    if (status === 'complete' && sessionHistory.length > 0) {
-      const latest = sessionHistory[0]
-      setLastResult({ wpm: latest.wpm, accuracy: latest.accuracy, duration: latest.duration })
-      setShowSessionSummary(true)
-      const timer = setTimeout(() => setShowSessionSummary(false), 5000)
-      return () => clearTimeout(timer)
-    }
-  }, [status, sessionHistory])
+    if (!showSessionSummary || !lastResult) return
+    const timer = setTimeout(() => setHiddenSummary(lastResult.timestamp), 5000)
+    return () => clearTimeout(timer)
+  }, [showSessionSummary, lastResult])
 
   const cycleTheme = () => {
     const next = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'

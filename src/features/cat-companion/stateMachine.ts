@@ -5,7 +5,7 @@ interface CatState {
   lastActivityAt: number
 }
 
-type CatEvent = 'KEYSTROKE' | 'ERROR' | 'SESSION_COMPLETE' | 'INACTIVITY' | 'ACCURACY_STREAK'
+export type CatEvent = 'KEYSTROKE' | 'ERROR' | 'SESSION_COMPLETE' | 'INACTIVITY' | 'ACCURACY_STREAK'
 
 const transitions: Record<CatState['state'], Record<CatEvent, CatState['state']>> = {
   idle: {

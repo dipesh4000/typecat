@@ -1,7 +1,7 @@
 /* Paste into the TypeCat browser console after signing in. */
 (() => {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-  const state = { version: 'timing-fix-3', running: false, stopped: false, completed: 0, receipts: [] }
+  const state = { version: 'project-fix-5', running: false, stopped: false, completed: 0, receipts: [] }
 
   const panel = () => document.querySelector('aside[aria-label="Transaction activity"]')
   const button = label => [...document.querySelectorAll('button')].find(node => {
@@ -56,7 +56,7 @@
 
     // Waiting for the start receipt before typing incorrectly adds chain latency
     // to browser duration, which is what caused the timing mismatch.
-    const delay = Math.max(45, Math.ceil(6500 / text.length))
+    const delay = 200 // 5 characters per word = approximately 60 WPM
     for (const key of text) {
       if (state.stopped) throw new Error('Stopped by user')
       window.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }))
@@ -95,5 +95,5 @@
       }
     },
   }
-  console.log("Ready (timing-fix-3): typecatBatch.start('MAINNET 200 CYCLES', 200)")
+  console.log("Ready (project-fix-5, 60 WPM): typecatBatch.start('MAINNET 200 CYCLES', 200)")
 })()

@@ -22,7 +22,7 @@ describe('characters', () => {
 
   it('no character has nameCn field', () => {
     characters.forEach((char) => {
-      expect((char as any).nameCn).toBeUndefined()
+      expect('nameCn' in char).toBe(false)
     })
   })
 })
